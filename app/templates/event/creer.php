@@ -22,7 +22,7 @@
 			</div>
 			
 			<div class="form-group row">
-				<label for="date" class="col-sm-3 col-form-label">Dates</label>
+				<label for="datetime-local" class="col-sm-3 col-form-label">Dates</label>
 				<div class="col-sm-9">
 					<input type="date" class="form-control" id="date" name="date" placeholder="...">
 				</div>
