@@ -3,6 +3,7 @@
 namespace Controller;
 
 use \W\Controller\Controller;
+use \Manager\UtilisateurManager;
 
 class DefaultController extends Controller
 {
@@ -11,8 +12,11 @@ class DefaultController extends Controller
 	 * Page d'accueil par défaut
 	 */
 	public function home()
-	{
+	{	
+		session_start();
+
 		$this->show('default/home');
+
 	}
 
 	/**

@@ -21,6 +21,7 @@
 				<div class="nav pull-right">
 					<img src="assets/img/Anais1.jpg" alt="profile picture" class=" img-circle dropdown-toggle" data-toggle="dropdown" width="50" height="50"></a>
 					<ul class="dropdown-menu inverse-dropdown">
+						<li><a href="">Bonjour <?= $this->e($_SESSION['user']['infos']['nom']) ?> <?= $this->e($_SESSION['user']['infos']['prenom']) ?></a></li>
 						<li><a href="<?= $this->url('home')?>">Accueil</a></li>
 						<li><a href="<?= $this->url('profil')?>">Profil</a></li>
 						<li><a href="<?= $this->url('contact')?>">Nous contacter</a></li>

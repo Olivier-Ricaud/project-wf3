@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
+use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
 
 class UserController extends Controller
@@ -14,7 +15,27 @@ class UserController extends Controller
 	 */
 	public function login()
 	{
-		$this->show('user/login');
+		if ( isset($_POST['login']) ) {
+			$auth_manager = new AuthentificationManager();
+			$util_manager = new UtilisateurManager();
+
+
+			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) ) {
+				
+				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
+
+				$auth_manager->logUserIn($user);
+				// Inclus les données de la table utilisateur dans la variable $_SESSION.
+				$userInfos = $util_manager->find($_SESSION['user']['id']);
+				$_SESSION['user']['infos'] = $userInfos;
+
+				$this->redirectToRoute('home');
+			}
+
+		} else {
+
+			$this->show('user/login');
+		}
 	}
 
 	/**
@@ -33,7 +54,7 @@ class UserController extends Controller
 
 			$utilisateur = new UtilisateurManager();
 			$utilisateur->insert($_POST['form_register_util']);
-			$this->redirectToRoute('home');
+			$this->redirectToRoute('login');
 
 		} else {
 			$this->show('user/register');
