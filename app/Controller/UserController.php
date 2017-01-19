@@ -3,6 +3,7 @@
 namespace Controller;
 
 use \W\Controller\Controller;
+use \W\Manager\UserManager;
 
 class UserController extends Controller
 {
@@ -20,6 +21,8 @@ class UserController extends Controller
 	 */
 	public function register()
 	{
+		$manager = new UserManager();
+		$manager->insert($_POST['form_register']);
 		$this->show('user/register');
 	}
 
