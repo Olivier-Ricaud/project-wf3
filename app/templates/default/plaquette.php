@@ -33,8 +33,8 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<?= $this->url('inscription')?>"><span class="glyphicon glyphicon-user"></span> je m'inscris</a></li>
-						<li><a href="<?= $this->url('connexion')?>"><span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
+						<li><a href="<?= $this->url('register')?>"> <span class="glyphicon glyphicon-user"></span> je m'inscris</a></li>
+						<li><a href="<?= $this->url('login')?>"> <span class="glyphicon glyphicon-log-in"></span> Connexion</a></li>
 					</ul>
 				</div> <!-- End collapse navbar-->
 			</div> <!-- End container-fluid-->
@@ -65,12 +65,12 @@
 				</div>
 
 				<div class="col-xs-12">
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Je m'inscris</button>
+					<a href="<?= $this->url('register')?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Je m'inscris</button></a>
 				</div>
 
 				<div class="col-xs-12">
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Je me connecte</button>
-				</div>	
+					<a href="<?= $this->url('login')?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Je me connecte</button></a>
+				</div>
 			</div>	
 		</section>
 
@@ -78,17 +78,17 @@
 			<h2>Services</h2>
 
 			<div class="col-sm-4">
-				<h3><i class="fa fa-sign-in" aria-hidden="true"></i>Créer ou participer</h3>
+				<h3><i class="fa fa-sign-in" aria-hidden="true"></i> Créer ou participer</h3>
 				<p>Créer ou participe à un match de futsal.</p>
 			</div>
 
 			<div class="col-sm-4">
-				<h3><i class="fa fa-street-view" aria-hidden="true"></i></i>Localisation</h3>
+				<h3><i class="fa fa-street-view" aria-hidden="true"></i></i> Localisation</h3>
 				<p>Localise un événément qui est dans ta région.</p>
 			</div>
 
 			<div class="col-sm-4">
-				<h3><i class="fa fa-newspaper-o" aria-hidden="true"></i>Discutez</h3>
+				<h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> Discutez</h3>
 				<p>Chat avec les autres membres d'un événement pour vous organisez.</p>
 			</div>
 		</section>
@@ -124,7 +124,7 @@
 		<section id="contact" class="row">
 			<h2>Contact</h2>
 
-			<form class="col-xs-10 col-xs-offset-1">
+			<form class="col-xs-10 col-xs-offset-1" method="POST">
 				<fieldset class="col-md-6">
 					<div class="form-group row">
 						<label for="nom" class="col-xs-12 col-sm-2 col-form-label">Nom </label>
@@ -202,19 +202,20 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook fa-3x"></i></a>
-						<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus fa-3x"></i></a>          
-						<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter fa-3x"></i></a>              
-						<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin fa-3x"></i></a>
-						<a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble fa-3x"></i></a>
+						<a href="#" class="btn-social btn-outline"> <i class="fa fa-fw fa-facebook fa-3x"></i></a>
+						<a href="#" class="btn-social btn-outline"> <i class="fa fa-fw fa-google-plus fa-3x"></i></a>          
+						<a href="#" class="btn-social btn-outline"> <i class="fa fa-fw fa-twitter fa-3x"></i></a>              
+						<a href="#" class="btn-social btn-outline"> <i class="fa fa-fw fa-linkedin fa-3x"></i></a>
+						<a href="#" class="btn-social btn-outline"> <i class="fa fa-fw fa-dribbble fa-3x"></i></a>
 						<p>Copyright &copy; 2016 - Webforce3 Project</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</footer>
-
+	<!-- JQuery CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- BootStrap JS CDN -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="assets/js/script.js"></script>
 

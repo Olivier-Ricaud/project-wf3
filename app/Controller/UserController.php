@@ -3,8 +3,8 @@
 namespace Controller;
 
 use \W\Controller\Controller;
-use \W\Security\AuthentificationManager;
-use GUMP;
+use \Manager\UtilisateurManager;
+use \W\Manager\UserManager;
 
 class UserController extends Controller
 {
@@ -12,57 +12,34 @@ class UserController extends Controller
 	/**
 	 * Page de connexion
 	 */
-	public function connexion()
+	public function login()
 	{
-		$this->show('user/connexion');
+		$this->show('user/login');
 	}
 
 	/**
 	 * Page d'inscription
 	 */
-	public function inscription()
+	public function register()
 	{
-		$errors = [];
-		$form = [];
-		
-		if(isset($_POST['Signin'])) {
 
-			$gump = new GUMP();
-			$_POST['myform'] = $gump->sanitize($_POST['myform']); // You don't have to sanitize, but it's safest to do so.
-			$gump->validation_rules(array(
-				'nom'    => 'required|alpha_numeric|valid_name|min_len,2 |max_len,50',
-				'prenom'    => 'required|alpha_numeric|valid_name|min_len,2 |max_len,50',
-				'email'    => 'required|valid_email',
-				'sexe'    => 'exact_len,5|contains,Homme Femme',
-				'lieu'    => 'required',
-				'password'    => 'required|max_len,50|min_len,6',
-				'confirm_password'    => 'equalfield,password'
-			));
+		if ( isset($_POST['sign-up']) ) {
+			
+			$manager = new UserManager();
 
-			$gump->filter_rules(array(
-				'nom' => 'trim|sanitize_string',
-				'prenom'    => 'trim|sanitize_string',
-				'email'    => 'trim|sanitize_email',
-				'sexe'    => 'trim',
-				'lieu'    => 'trim',
-				'password'    => 'trim|base64_encode',
-				'confirm_password'    => 'trim'
-			));
+			$wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
+										// Hash le password pour crypter les données
+										'password' => password_hash($_POST['form_register_user']['password'], PASSWORD_DEFAULT)]);
+			$_POST['form_register_util']['user_id'] = $wuser['id'];
 
-			$validated_data = $gump->run($_POST['myform']);	
+			$utilisateur = new UtilisateurManager();
+			$utilisateur->insert($_POST['form_register_util']);
+			$this->redirectToRoute('home');
 
-			if($validated_data === false) {
-	    		//echo $gump->get_readable_errors(true);
-				$errors = $gump->get_errors_array();
-				$form = $_POST['myform'];
-			} else {
-	    		//print_r($validated_data); // validation successful
-				$manager = new PostManager();
-				$manager->insert($_POST['myform']);
-				$this->redirectToRoute('home');
-			}
+		} else {
+			$this->show('user/register');
 		}
-		$this->show('user/inscription');
+
 	}
 
 	/**

@@ -7,8 +7,8 @@
 		['GET', '/charte', 'Default#charte', 'charte'],
 		['GET', '/contact', 'Default#contact', 'contact'],
 
-		['GET|POST', '/connexion', 'user#connexion', 'connexion'],
-		['GET|POST', '/inscription', 'user#inscription', 'inscription'],
+		['GET|POST', '/login', 'user#login', 'login'],
+		['GET|POST', '/register', 'user#register', 'register'],
 		['GET', '/profil', 'user#profil', 'profil'],
 		['GET|POST', '/profil-editer', 'user#profil_editer', 'profil_editer'],
 
