@@ -9,7 +9,7 @@
 	</div> <!-- End of row h1-->
 	
 	<div class="row">
-		<form class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+		<form class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" method="POST">
 			
 			<div class="form-group row">
 				<label for="nom" class="col-sm-3 col-form-label">Nom </label>
@@ -48,7 +48,7 @@
 					<input type="text" class="form-control" id="lieu" name="form_register[departement]" list="departement">
 					<datalist id="departement">
 						<option value="75 - Paris"></option>
-						<option value="85 - Val-d-Oise"></option>
+						<option value="95 - Val-d-Oise"></option>
 					</datalist>
 				</div>	
 			</div> <!-- End form-group row-->
@@ -68,7 +68,7 @@
 			</div>
 			
 			<div class="col-sm-2 col-sm-offset-4">
-				<button type="submit" name="Signin" class="btn btn-primary">S'inscrire</button>
+				<button type="submit" name="sign-up" class="btn btn-primary">S'inscrire</button>
 			</div> 
 
 			<div class="col-sm-2 col-sm-offset-1">

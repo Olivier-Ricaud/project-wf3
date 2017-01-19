@@ -65,11 +65,11 @@
 				</div>
 
 				<div class="col-xs-12">
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Je m'inscris</button>
+					<a href="<?= $this->url('register')?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Je m'inscris</button></a>
 				</div>
 
 				<div class="col-xs-12">
-					<button class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Je me connecte</button>
+					<a href="<?= $this->url('login')?>"><button class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Je me connecte</button></a>
 				</div>
 			</div>	
 		</section>
@@ -124,7 +124,7 @@
 		<section id="contact" class="row">
 			<h2>Contact</h2>
 
-			<form class="col-xs-10 col-xs-offset-1">
+			<form class="col-xs-10 col-xs-offset-1" method="POST">
 				<fieldset class="col-md-6">
 					<div class="form-group row">
 						<label for="nom" class="col-xs-12 col-sm-2 col-form-label">Nom </label>

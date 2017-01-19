@@ -21,9 +21,22 @@ class UserController extends Controller
 	 */
 	public function register()
 	{
-		$manager = new UserManager();
-		$manager->insert($_POST['form_register']);
-		$this->show('user/register');
+		if ( isset($_POST['sign-up']) ) {
+
+			print_r($_POST['form_register']);
+			die;
+			$manager = new UserManager();
+			$wuser = $manager->insert($_POST['form_register']);
+			$manager_complement = new UtilisateurManager();
+			$wuser['id'];
+			$this->redirectToRoute('home');
+
+		} else {
+			$this->show('user/register');
+		}
+
+			
+
 	}
 
 	/**

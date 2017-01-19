@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-19 10:50:32 +0000
+# Generation Time: 2017-01-19 12:03:39 +0000
 # ************************************************************
 
 
@@ -121,21 +121,35 @@ CREATE TABLE `salles` (
 
 
 
-# Dump of table users
+# Dump of table utilisateurs
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `utilisateurs`;
 
-CREATE TABLE `users` (
+CREATE TABLE `utilisateurs` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `nom` varchar(50) DEFAULT NULL,
-  `prenom` varchar(50) DEFAULT NULL,
-  `pseudo` varchar(50) DEFAULT NULL,
-  `sexe` enum('Homme','Femme') DEFAULT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `nom` varchar(100) DEFAULT NULL,
+  `prenom` varchar(100) DEFAULT NULL,
   `departement` varchar(100) DEFAULT NULL,
+  `sexe` enum('Homme','Femme') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `utilisateurs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `wusers` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table wusers
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `wusers`;
+
+CREATE TABLE `wusers` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(300) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `niveau` enum('Débutant','Intermédiaire','Confirmé') DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
