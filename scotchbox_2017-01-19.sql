@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-19 10:50:32 +0000
+# Generation Time: 2017-01-19 11:13:39 +0000
 # ************************************************************
 
 
@@ -131,6 +131,7 @@ CREATE TABLE `users` (
   `nom` varchar(50) DEFAULT NULL,
   `prenom` varchar(50) DEFAULT NULL,
   `pseudo` varchar(50) DEFAULT NULL,
+  `password` varchar(300) DEFAULT NULL,
   `sexe` enum('Homme','Femme') DEFAULT NULL,
   `departement` varchar(100) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
