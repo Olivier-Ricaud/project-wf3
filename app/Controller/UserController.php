@@ -30,9 +30,9 @@ class UserController extends Controller
 			$gump = new GUMP();
 			$_POST['myform'] = $gump->sanitize($_POST['myform']); // You don't have to sanitize, but it's safest to do so.
 			$gump->validation_rules(array(
-				'nom'    => 'required|max_len,50|min_len,3',
-				'prenom'    => 'required|max_len,50|min_len,3',
-				'email'    => 'valid_email',
+				'nom'    => 'required|alpha_numeric|valid_name|min_len,2 |max_len,50',
+				'prenom'    => 'required|alpha_numeric|valid_name|min_len,2 |max_len,50',
+				'email'    => 'required|valid_email',
 				'sexe'    => 'exact_len,5|contains,Homme Femme',
 				'lieu'    => 'required',
 				'password'    => 'required|max_len,50|min_len,6',
