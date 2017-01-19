@@ -1,6 +1,7 @@
 <?php
 
+namespace Manager;
 
-class UtilisateurManager extends UserManager {
+class UtilisateurManager extends \W\Manager\Manager {
 	
 }
