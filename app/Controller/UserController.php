@@ -10,17 +10,17 @@ class UserController extends Controller
 	/**
 	 * Page de connexion
 	 */
-	public function connexion()
+	public function login()
 	{
-		$this->show('user/connexion');
+		$this->show('user/login');
 	}
 
 	/**
 	 * Page d'inscription
 	 */
-	public function inscription()
+	public function register()
 	{
-		$this->show('user/inscription');
+		$this->show('user/register');
 	}
 
 	/**
