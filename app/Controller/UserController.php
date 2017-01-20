@@ -42,7 +42,7 @@ class UserController extends Controller
 	* Déconnexion de l'utilisateur
 	*/
 	public function logout()
-	{
+	{	
 		$logout_user = new AuthentificationManager();
 		$logout_user->logUserOut();
 		$this->redirectToRoute('home');
@@ -99,6 +99,20 @@ class UserController extends Controller
 			$this->redirectToRoute('login');
 		}
 		
+	}
+
+	/**
+	 * Suppression d'utilisateur
+	 */
+	public function delete($id)
+	{				
+			$manager = new UserManager();
+			$manager->delete($id);
+
+			$utilisateur = new UtilisateurManager();
+			$utilisateur->delete($id);
+			$this->redirectToRoute('home');
+ 	
 	}
 
 }

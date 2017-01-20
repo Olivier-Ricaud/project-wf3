@@ -33,7 +33,7 @@
 		
 		<!-- SECTION FORMULAIRE DE MODIFICATION DES DONNEES UTILISATEUR -->
 		<section class="col-sm-9">
-			<form class="col-sm-10 col-sm-offset-1">
+			<form class="col-sm-10 col-sm-offset-1" method="POST" enctype="multipart/form-data">
 				<div class="form-group row">
 					<label for="nom" class="col-md-2 col-form-label">Nom </label>
 					<div class="col-md-10">
@@ -61,13 +61,6 @@
 						<input type="file" class="form-control-file" id="photo" name="photo" aria-describedby="Champ file pour insérer une photo de profil">
 					</div>
 					<small name="photo" class="form-text text-muted col-md-6 col-md-offset-2">Détails concernant la photo de profil</small>
-				</div>
-
-				<div class="form-group row">
-					<label for="date_naissance" class="col-md-2 col-form-label">Date de naissance </label>
-					<div class="col-md-10">
-						<input type="date" class="form-control" id="date_naissance" name="date_naissance" aria-describedby="Champ date de naissance de l'utilisateur">
-					</div>
 				</div>
 
 				<div class="form-group row">
@@ -132,7 +125,7 @@
 			  	</div>
 
 			  	<div class="col-md-4">
-			  		<button type="submit" class="btn btn-primary">Supprimer votre compte</button>
+			  		<a href="<?= $this->url('delete')?>"><button class="btn btn-primary">Supprimer votre compte</button></a>
 			  	</div>	
 			</form>
 		</section>
