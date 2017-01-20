@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
+use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
 use \W\Security\AuthentificationManager;
 use GUMP;
@@ -16,7 +17,37 @@ class UserController extends Controller
 	 */
 	public function login()
 	{
-		$this->show('user/login');
+		if ( isset($_POST['login']) ) {
+			$auth_manager = new AuthentificationManager();
+			$util_manager = new UtilisateurManager();
+
+
+			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) ) {
+				
+				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
+
+				$auth_manager->logUserIn($user);
+				// Inclus les données de la table utilisateur dans la variable $_SESSION.
+				$userInfos = $util_manager->find($_SESSION['user']['id']);
+				$_SESSION['user']['infos'] = $userInfos;
+
+				$this->redirectToRoute('recherche');
+			}
+
+		} else {
+
+			$this->show('user/login');
+		}
+	}
+
+	/**
+	* Déconnexion de l'utilisateur
+	*/
+	public function logout()
+	{
+		$logout_user = new AuthentificationManager();
+		$logout_user->logUserOut();
+		$this->redirectToRoute('home');
 	}
 
 	/**
@@ -89,7 +120,12 @@ class UserController extends Controller
 	 */
 	public function profil()
 	{
-		$this->show('user/profil');
+		if (isset($_SESSION['user'])) {
+			$this->show('user/profil');
+		} else  {
+
+			$this->redirectToRoute('login');
+		}
 	}
 
 	/**
@@ -97,7 +133,13 @@ class UserController extends Controller
 	 */
 	public function profil_editer()
 	{
-		$this->show('user/profil-editer');
+		if (isset($_SESSION['user'])) {
+			$this->show('user/profil-editer');
+		} else  {
+
+			$this->redirectToRoute('login');
+		}
+		
 	}
 
 }

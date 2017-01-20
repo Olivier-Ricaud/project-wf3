@@ -3,24 +3,36 @@
 namespace Controller;
 
 use \W\Controller\Controller;
+use \Manager\UtilisateurManager;
 
 class DefaultController extends Controller
 {
 
 	/**
-	 * Page d'accueil par défaut
+	 * Page d'accueil du site par defaut
 	 */
 	public function home()
-	{
-		$this->show('default/home');
+	{	
+
+		if (isset($_SESSION['user'])) {
+			$this->redirectToRoute('recherche');
+		} else  {
+			$this->show('default/home');
+		}
+		
 	}
 
 	/**
-	 * Page d'accueil par défaut
+	 * Page d'accueil du site pour un utilisateur connecté
 	 */
-	public function plaquette()
+	public function recherche()
 	{
-		$this->show('default/plaquette');
+		if (isset($_SESSION['user'])) {
+			$this->show('default/recherche');
+		} else  {
+
+			$this->redirectToRoute('login');
+		}
 	}
 
 	/**
@@ -44,7 +56,13 @@ class DefaultController extends Controller
 	 */
 	public function contact()
 	{
-		$this->show('default/contact');
+
+		if (isset($_SESSION['user'])) {
+			$this->show('default/contact');
+		} else  {
+			
+			$this->redirectToRoute('login');
+		}
 	}
 
 }
