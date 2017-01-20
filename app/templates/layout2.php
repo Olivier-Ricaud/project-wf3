@@ -21,16 +21,18 @@
 						<span class="icon-bar"></span> 
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#page-top">WeFive</a>
+					<a class="navbar-brand" href="<?= ($_SERVER['REQUEST_URI'] == '/') ? '#page-top' : $this->url('home')?> ">WeFive</a>
 				</div> <!-- EndNavbar header-->
-
+				
 				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li><a href="#accueil">Accueil</a></li>
-						<li><a href="#service">Fonctionnalités</a></li>
-						<li><a href="#equipe">Qui sommes-nous ?</a></li>
-						<li><a href="#contact">Contact</a></li>
-					</ul>
+					<?php if ($_SERVER['REQUEST_URI'] == '/' ): ?>
+						<ul class="nav navbar-nav">
+							<li><a href="#accueil">Accueil</a></li>
+							<li><a href="#service">Fonctionnalités</a></li>
+							<li><a href="#equipe">Qui sommes-nous ?</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					<?php endif; ?>
 
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="<?= $this->url('register')?>"> <span class="glyphicon glyphicon-user"></span> je m'inscris</a></li>
