@@ -14,21 +14,24 @@
 			<div class="form-group row">
 				<label for="nom" class="col-sm-3 col-form-label">Nom </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="nom" name="form_register_util[nom]"  placeholder="Votre nom...">
+					<input type="text" class="form-control" id="nom" name="form_register_util[nom]"  placeholder="Votre nom..." value="<?php echo(isset($_POST['form_register_util[nom]']))? htmlspecialchars($_POST['form_register_util[nom]']):'';?>" />
+        <?php echo $erreurs['nom']; ?>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="prenom" class="col-sm-3 col-form-label">Prenom </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="prenom" name="form_register_util[prenom]"  placeholder="Votre prenom...">
+					<input type="text" class="form-control" id="prenom" name="form_register_util[prenom]"  placeholder="Votre prenom..." value="<?php echo(isset($_POST['form_register_util[prenom]']))? htmlspecialchars($_POST['form_register_util[prenom]']):'';?>" />
+        <?php echo $erreurs['prenom']; ?>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="email" class="col-sm-3 col-form-label">Adresse E-mail </label>
 				<div class="col-sm-8">
-					<input type="email" class="form-control" id="email" name="form_register_user[email]" placeholder="Votre Email...">
+					<input type="email" class="form-control" id="email" name="form_register_user[email]" placeholder="Votre Email..." value="<?php echo(isset($_POST['form_register_util[email]']))? htmlspecialchars($_POST['form_register_util[email]']):'';?>" />
+        <?php echo $erreurs['email']; echo $erreurs['valeurMail'];?>
 				</div>
 			</div>
 
@@ -45,7 +48,8 @@
 			<div class="form-group row">
 				<label for="lieu" class="col-sm-3 col-form-label">Département </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="lieu" name="form_register_util[departement]" list="departement">
+					<input type="text" class="form-control" id="lieu" name="form_register_util[departement]" list="departement" value="<?php echo(isset($_POST['form_register_util[departement]']))? htmlspecialchars($_POST['form_register_util[departement]']):'';?>" />
+        <?php echo $erreurs['departement']; ?>
 					<datalist id="departement">
 						<option value="75 - Paris"></option>
 						<option value="95 - Val-d-Oise"></option>
@@ -56,14 +60,16 @@
 			<div class="form-group row">
 				<label for="password" class="col-sm-3 col-form-label">Mot de Passe </label>
 				<div class="col-sm-8">
-					<input type="password" class="form-control" id="password" name="form_register_user[password]" aria-describedby="Champ mot de passe de l'utilisateur" placeholder="Votre mot de passe...">
+					<input type="password" class="form-control" id="password" name="form_register_user[password]" aria-describedby="Champ mot de passe de l'utilisateur" placeholder="Votre mot de passe..." value="<?php echo(isset($_POST['form_register_util[password]']))? htmlspecialchars($_POST['form_register_util[password]']):'';?>" />
+        <?php echo $erreurs['password']; ?>
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="confirm_password" class="col-sm-3 col-form-label">Confirmation</label>
 				<div class="col-sm-8">
-					<input type="password" class="form-control" id="confirm_password" name="form_register_user[confirm_password]" placeholder="Confirmation de votre mot de passe... ">
+					<input type="password" class="form-control" id="confirm_password" name="form_register_user[confirm_password]" placeholder="Confirmation de votre mot de passe... " value="<?php echo(isset($_POST['form_register_util[confirm_password]']))? htmlspecialchars($_POST['form_register_util[confirm_password]']):'';?>" />
+        <?php echo $erreurs['confirm_password']; ?>
 				</div>
 			</div>
 			

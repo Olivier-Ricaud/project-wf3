@@ -75,8 +75,8 @@ class UserController extends Controller
 	 */
 	public function register()
 	{
-		$errors = [];
-		$form = [];
+			$erreurs = [];
+		
 
 		if ( isset($_POST['sign-up']) ) {
 
@@ -84,50 +84,45 @@ class UserController extends Controller
 			$gumpUser = new GUMP();
 			$manager = new UserManager();
 
+
 			// Validation et Filtrage
+			if(empty($_POST['form_register_util[nom]'])) {
 
-			// nom, prenom, departement
+			            $erreurs['nom'] = 'le champ nom obligatoire';
 
-			$_POST['form_register_util'] = $gumpUtil->sanitize($_POST['form_register_util']);
+	        } elseif(empty($_POST['form_register_util[prenom]'])) {
 
-			$gumpUtil->validation_rules(array(
-				// 'nom'                 => 'min_len,2|max_len,50',	// Bug GUMP!
-				// 'prenom'              => 'min_len,2|max_len,50', // Bug GUMP!
-				'sexe'                => 'required|exact_len,5|contains_list,Homme;Femme',
-				'departement'         => 'required|max_len,50'
-			));
+	            $erreurs['prenom'] = 'le champ prenom obligatoire';
 
-			$gumpUtil->filter_rules(array(
-				'nom'                 => 'sanitize_string|whole_number',
-				'prenom'              => 'sanitize_string|whole_number',
-			));
+	        }
+	        elseif(empty($_POST['form_register_util[email]'])){
 
-			$validated_dataUtil = $gumpUtil->run($_POST['form_register_util']);
+	            $erreurs['email'] = 'le champ email obligatoire';
 
+	        }
+	        elseif(!empty($_POST['form_register_util[email]']) && !preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#',$_POST['form_register_util[email]'])){
 
-			// email, password, confirm_password
+	            $erreurs['valeurMail'] = 'Email invalide';
 
-			$_POST['form_register_user'] = $gumpUser->sanitize($_POST['form_register_user']); 
+	        }
+	        elseif(empty($_POST['form_register_util[departement]'])){
+	           
+	            $erreurs['departement'] = 'le champ département obligatoire';
 
-			$gumpUser->validation_rules(array(
-				'email'               => 'required|valid_email',
-				'password'            => 'max_len,50|min_len,6',
-				'confirm_password'    => 'equalsfield,password'
-			));
+	        }
+	        elseif(empty($_POST['form_register_util[password]'])){
+	           
+	            $erreurs['password'] = 'le champ mot de passe obligatoire';
 
-			$gumpUser->filter_rules(array(
-				'email'               => 'sanitize_email',
-				'password'            => 'base64_encode',
-				'confirm_password'    => 'base64_encode'
-			));
+	        }
+	        elseif(empty($_POST['form_register_util[confirm_password]'])){
+	           
+	            $erreurs['confirm_password'] = 'le champ de confirmation du mot de passe obligatoire';
 
-			$validated_dataUser = $gumpUser->run($_POST['form_register_user']); // email, password, confirm_password
-
-			// Si Validation non Ok
-
-			if( $validated_dataUtil && $validated_dataUser ) {
-
-				$wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
+	        }
+	        else {
+	            
+	            $wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
 											// Hash le password pour crypter les données
 											'password' => password_hash($_POST['form_register_user']['password'], PASSWORD_DEFAULT)]);
 				$_POST['form_register_util']['user_id'] = $wuser['id'];
@@ -135,11 +130,8 @@ class UserController extends Controller
 				$utilisateur = new UtilisateurManager();
 				$utilisateur->insert($_POST['form_register_util']);
 				$this->redirectToRoute('home');
-			} else {
-				echo "Util = ".$gumpUtil->get_readable_errors(true);
-				echo "User = ".$gumpUser->get_readable_errors(true);
-			}
-			// Fin Validation et Filtrage	
+
+	        }
 
 		} else {
 			$this->show('user/register');
