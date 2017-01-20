@@ -6,7 +6,6 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
-use \W\Security\AuthentificationManager;
 use GUMP;
 
 class UserController extends Controller
@@ -20,9 +19,25 @@ class UserController extends Controller
 		if ( isset($_POST['login']) ) {
 			$auth_manager = new AuthentificationManager();
 			$util_manager = new UtilisateurManager();
+			$gump = new GUMP();
 
+			// Validation et Filtrage
 
-			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) ) {
+			$_POST['form_login'] = $gump->sanitize($_POST['form_login']); // You don't have to sanitize, but it's safest to do so.
+			$gump->validation_rules(array(
+				'email'               => 'required|valid_email',
+				'password'            => 'required|max_len,50|min_len,6'
+			));
+
+			$gump->filter_rules(array(
+				'email'               => 'sanitize_email',
+				'confirm_password'    => 'base64_encode'
+			));
+
+			$validated_data = $gump->run($_POST['form_login']);
+
+			// Si Filtrage Ok
+			if ( ($validated_data == true) AND ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
 				
 				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
 
@@ -32,7 +47,12 @@ class UserController extends Controller
 				$_SESSION['user']['infos'] = $userInfos;
 
 				$this->redirectToRoute('recherche');
+			} else {
+
+				echo $gump->get_readable_errors(true);
 			}
+
+			// Fin Validation et Filtrage
 
 		} else {
 
@@ -60,44 +80,53 @@ class UserController extends Controller
 
 		if ( isset($_POST['sign-up']) ) {
 
-			$gump = new GUMP();
+			$gumpUtil = new GUMP();
+			$gumpUser = new GUMP();
 			$manager = new UserManager();
 
 			// Validation et Filtrage
 
-			$_POST['form_register_util'] = $gump->sanitize($_POST['form_register_util']); // You don't have to sanitize, but it's safest to do so.
-			$gump->validation_rules(array(
-				'nom'                 => 'required|alpha_numeric|valid_name|max_len,50',
-				'prenom'              => 'required|alpha_numeric|valid_name|max_len,50',
-				'email'               => 'valid_email',
+			// nom, prenom, departement
+
+			$_POST['form_register_util'] = $gumpUtil->sanitize($_POST['form_register_util']);
+
+			$gumpUtil->validation_rules(array(
+				// 'nom'                 => 'min_len,2|max_len,50',	// Bug GUMP!
+				// 'prenom'              => 'min_len,2|max_len,50', // Bug GUMP!
 				'sexe'                => 'required|exact_len,5|contains_list,Homme;Femme',
-				'lieu'                => 'alpha_dash|min_len,5|max_len,50',
+				'departement'         => 'required|max_len,50'
+			));
+
+			$gumpUtil->filter_rules(array(
+				'nom'                 => 'sanitize_string|whole_number',
+				'prenom'              => 'sanitize_string|whole_number',
+			));
+
+			$validated_dataUtil = $gumpUtil->run($_POST['form_register_util']);
+
+
+			// email, password, confirm_password
+
+			$_POST['form_register_user'] = $gumpUser->sanitize($_POST['form_register_user']); 
+
+			$gumpUser->validation_rules(array(
+				'email'               => 'required|valid_email',
 				'password'            => 'max_len,50|min_len,6',
 				'confirm_password'    => 'equalsfield,password'
 			));
 
-			$gump->filter_rules(array(
-				'nom'                 => 'sanitize_string|whole_number',
-				'prenom'              => 'sanitize_string|whole_number',
+			$gumpUser->filter_rules(array(
 				'email'               => 'sanitize_email',
-				// 'sexe'                => 'santize_string',
-				// 'lieu'                => 'sanitize_string|whole_number',
 				'password'            => 'base64_encode',
 				'confirm_password'    => 'base64_encode'
 			));
 
-			$validated_data = $gump->run($_POST['form_register_util']);
+			$validated_dataUser = $gumpUser->run($_POST['form_register_user']); // email, password, confirm_password
 
-			// Si validation non Ok
-			if($validated_data === false) {
-			    echo $gump->get_readable_errors(true);
-			} else {
-			    print_r($validated_data); // validation successful
+			// Si Validation non Ok
 
-			    echo "Successful Validation\n\n";
-				
-				print_r($_POST); // You can now use POST data safely
-				
+			if( $validated_dataUtil && $validated_dataUser ) {
+
 				$wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
 											// Hash le password pour crypter les données
 											'password' => password_hash($_POST['form_register_user']['password'], PASSWORD_DEFAULT)]);
@@ -106,6 +135,9 @@ class UserController extends Controller
 				$utilisateur = new UtilisateurManager();
 				$utilisateur->insert($_POST['form_register_util']);
 				$this->redirectToRoute('home');
+			} else {
+				echo "Util = ".$gumpUtil->get_readable_errors(true);
+				echo "User = ".$gumpUser->get_readable_errors(true);
 			}
 			// Fin Validation et Filtrage	
 

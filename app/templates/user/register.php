@@ -14,21 +14,21 @@
 			<div class="form-group row">
 				<label for="nom" class="col-sm-3 col-form-label">Nom </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="nom" name="form_register_util[nom]" aria-describedby="Champ nom de l'utilisateur" placeholder="Votre nom...">
+					<input type="text" class="form-control" id="nom" name="form_register_util[nom]"  placeholder="Votre nom...">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="prenom" class="col-sm-3 col-form-label">Prenom </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="prenom" name="form_register_util[prenom]" aria-describedby="Champ email de l'utilisateur" placeholder="Votre prenom...">
+					<input type="text" class="form-control" id="prenom" name="form_register_util[prenom]"  placeholder="Votre prenom...">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="email" class="col-sm-3 col-form-label">Adresse E-mail </label>
 				<div class="col-sm-8">
-					<input type="email" class="form-control" id="email" name="form_register_user[email]" aria-describedby="Champ email de l'utilisateur" placeholder="Votre Email...">
+					<input type="email" class="form-control" id="email" name="form_register_user[email]" placeholder="Votre Email...">
 				</div>
 			</div>
 
