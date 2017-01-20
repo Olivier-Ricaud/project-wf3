@@ -125,7 +125,7 @@
 			  	</div>
 
 			  	<div class="col-md-4">
-			  		<a href="<?= $this->url('delete')?>"><button class="btn btn-primary">Supprimer votre compte</button></a>
+			  		<a href="<?= $this->url('delete', ['id' => $_SESSION['user']['id']])?>"><button class="btn btn-primary">Supprimer votre compte</button></a>
 			  	</div>	
 			</form>
 		</section>

@@ -10,7 +10,7 @@
 		['GET|POST', '/login', 'user#login', 'login'],
 		['GET|POST', '/logout', 'user#logout', 'logout'],
 		['GET|POST', '/register', 'user#register', 'register'],
-		['GET|POST', '/delete', 'user#delete', 'delete'],
+		['GET|POST', '/delete/[i:id]', 'user#delete', 'delete'],
 		['GET', '/profil', 'user#profil', 'profil'],
 		['GET|POST', '/profil-editer', 'user#profil_editer', 'profil_editer'],
 
