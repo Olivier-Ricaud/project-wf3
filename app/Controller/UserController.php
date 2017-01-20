@@ -29,7 +29,7 @@ class UserController extends Controller
 				$userInfos = $util_manager->find($_SESSION['user']['id']);
 				$_SESSION['user']['infos'] = $userInfos;
 
-				$this->redirectToRoute('home');
+				$this->redirectToRoute('recherche');
 			}
 
 		} else {

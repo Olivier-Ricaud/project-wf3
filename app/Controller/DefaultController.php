@@ -9,22 +9,23 @@ class DefaultController extends Controller
 {
 
 	/**
-	 * Page d'accueil par défaut
+	 * Page d'accueil du site par defaut
 	 */
 	public function home()
 	{	
-		session_start();
 
 		$this->show('default/home');
 
 	}
 
 	/**
-	 * Page d'accueil par défaut
+	 * Page d'accueil du site pour un utilisateur connecté
 	 */
-	public function plaquette()
+	public function recherche()
 	{
-		$this->show('default/plaquette');
+		session_start();
+
+		$this->show('default/recherche');
 	}
 
 	/**

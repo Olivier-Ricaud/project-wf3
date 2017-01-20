@@ -2,7 +2,7 @@
 	
 	$w_routes = array(
 		['GET|POST', '/', 'Default#home', 'home'],
-		['GET', '/plaquette', 'Default#plaquette', 'plaquette'],
+		['GET|POST', '/recherche', 'Default#recherche', 'recherche'],
 		['GET', '/cgu', 'Default#cgu', 'cgu'],
 		['GET', '/charte', 'Default#charte', 'charte'],
 		['GET', '/contact', 'Default#contact', 'contact'],
