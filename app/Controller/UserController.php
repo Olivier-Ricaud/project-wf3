@@ -39,6 +39,16 @@ class UserController extends Controller
 	}
 
 	/**
+	* Déconnexion de l'utilisateur
+	*/
+	public function logout()
+	{
+		$logout_user = new AuthentificationManager();
+		$logout_user->logUserOut();
+		$this->redirectToRoute('home');
+	}
+
+	/**
 	 * Page d'inscription
 	 */
 	public function register()
@@ -69,7 +79,12 @@ class UserController extends Controller
 	 */
 	public function profil()
 	{
-		$this->show('user/profil');
+		if (isset($_SESSION['user'])) {
+			$this->show('user/profil');
+		} else  {
+
+			$this->redirectToRoute('login');
+		}
 	}
 
 	/**
@@ -77,7 +92,13 @@ class UserController extends Controller
 	 */
 	public function profil_editer()
 	{
-		$this->show('user/profil-editer');
+		if (isset($_SESSION['user'])) {
+			$this->show('user/profil-editer');
+		} else  {
+
+			$this->redirectToRoute('login');
+		}
+		
 	}
 
 }

@@ -14,8 +14,12 @@ class DefaultController extends Controller
 	public function home()
 	{	
 
-		$this->show('default/home');
-
+		if (isset($_SESSION['user'])) {
+			$this->redirectToRoute('recherche');
+		} else  {
+			$this->show('default/home');
+		}
+		
 	}
 
 	/**
@@ -23,9 +27,12 @@ class DefaultController extends Controller
 	 */
 	public function recherche()
 	{
-		session_start();
+		if (isset($_SESSION['user'])) {
+			$this->show('default/recherche');
+		} else  {
 
-		$this->show('default/recherche');
+			$this->redirectToRoute('login');
+		}
 	}
 
 	/**
@@ -49,7 +56,13 @@ class DefaultController extends Controller
 	 */
 	public function contact()
 	{
-		$this->show('default/contact');
+
+		if (isset($_SESSION['user'])) {
+			$this->show('default/contact');
+		} else  {
+			
+			$this->redirectToRoute('login');
+		}
 	}
 
 }

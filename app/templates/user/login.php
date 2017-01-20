@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Connexion']) ?>
+<?php $this->layout('layout2', ['title' => 'Connexion']) ?>
 
 <?php $this->start('main_content') ?>
 <main class="container-fluid">

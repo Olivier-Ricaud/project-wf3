@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'inscription']) ?>
+<?php $this->layout('layout2', ['title' => 'inscription']) ?>
 
 <?php $this->start('main_content') ?>
 <main class="container-fluid">
