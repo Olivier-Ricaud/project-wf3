@@ -90,10 +90,36 @@ class UserController extends Controller
 	/**
 	 * Page d'édition du profil
 	 */
-	public function profil_editer()
+	public function profilEditer($id)
 	{
 		if (isset($_SESSION['user'])) {
-			$this->show('user/profil-editer');
+			
+			if(isset($_POST['update'])) {
+
+				$_POST['form_update_user']['password'] = password_hash($_POST['form_update_user']['password'], PASSWORD_DEFAULT);
+				$manager = new UserManager();
+				$manager->update($_POST['form_update_user'],$id);
+
+				$utilisateur = new UtilisateurManager();
+				$utilisateur->update($_POST['form_update_util'],$id);
+
+				// Enregistrement du fichier dans un dossier
+				// Le nom du fichier de l'avatar sera l'id de l'utilisateur
+  				$nom = $_SESSION['user']['id'];
+  				// extrait le nom de l'extension du fichier du nom du fichier upload par l'utilisateur
+				$extension_upload = strtolower( substr( strrchr($_FILES['avatar']['name'], '.') ,1) );
+				$destination = 'assets/avatars/'.$nom.'.'.$extension_upload;
+				$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'],$destination);
+
+				// Rafraichi la session utilisateur pour récupérer les données modifiées
+				$auth_manager = new AuthentificationManager();
+				$auth_manager->refreshUser();
+				$userInfos = $utilisateur->find($_SESSION['user']['id']);
+				$_SESSION['user']['infos'] = $userInfos;
+			}
+
+			$this->show('user/profil-editer', ['id' => $_SESSION['user']['id']]);
+
 		} else  {
 
 			$this->redirectToRoute('login');
@@ -105,12 +131,13 @@ class UserController extends Controller
 	 * Suppression d'utilisateur
 	 */
 	public function delete($id)
-	{				
+	{		
 			$manager = new UserManager();
 			$manager->delete($id);
 
 			$utilisateur = new UtilisateurManager();
 			$utilisateur->delete($id);
+
 			$this->redirectToRoute('home');
  	
 	}

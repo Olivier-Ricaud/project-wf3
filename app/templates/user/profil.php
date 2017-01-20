@@ -18,14 +18,13 @@
 				</div>
 				
 				<div class="panel-body">
-					 <img src="assets/img/Anais1.jpg" alt="photo de profil" class="img-circle" data-toggle="dropdown" width="150" height="150">
-					 <p><i class="fa fa-user" aria-hidden="true"></i> Pseudo</p>
-					 <p>Nom / Prénom</p>
-					 <p><i class="fa fa-map-marker" aria-hidden="true"></i> Lieu</p>
-					 <p>Niveau de joueur</p>
-					 <p>Sexe / Age</p>
+					 <img src="<?= $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') ?>" alt="photo de profil" class="img-circle" data-toggle="dropdown" width="150" height="150">
+					 <p><i class="fa fa-user" aria-hidden="true"></i> <?= $this->e($_SESSION['user']['username']) ?> </p>
+					 <p><?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></p>
+					 <p><i class="fa fa-map-marker" aria-hidden="true"></i> <?= $this->e($_SESSION['user']['infos']['departement']) ?></p>
+					 <p><?= $this->e($_SESSION['user']['infos']['niveau']) ?></p>
 					 <p><a href="<?= $this->url('profil')?>">Mes événements</a></p>
-					 <p><a href="<?= $this->url('profil_editer')?>">Editer mon profil</a></p>
+					 <p><a href="<?= $this->url('profil_editer', ['id' => $_SESSION['user']['id']])?>">Editer mon profil</a></p>
 				</div>
 			</div> <!-- End div panel-->		
 		</aside>

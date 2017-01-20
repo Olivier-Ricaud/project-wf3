@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-20 10:41:51 +0000
+# Generation Time: 2017-01-20 16:16:53 +0000
 # ************************************************************
 
 
@@ -133,6 +133,7 @@ CREATE TABLE `utilisateurs` (
   `prenom` varchar(100) DEFAULT NULL,
   `departement` varchar(100) DEFAULT NULL,
   `sexe` enum('Homme','Femme') DEFAULT NULL,
+  `niveau` enum('Débutant','Intermédiaire','Confirmé') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `utilisateurs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `wusers` (`id`) ON DELETE CASCADE
@@ -141,10 +142,10 @@ CREATE TABLE `utilisateurs` (
 LOCK TABLES `utilisateurs` WRITE;
 /*!40000 ALTER TABLE `utilisateurs` DISABLE KEYS */;
 
-INSERT INTO `utilisateurs` (`id`, `user_id`, `nom`, `prenom`, `departement`, `sexe`)
+INSERT INTO `utilisateurs` (`id`, `user_id`, `nom`, `prenom`, `departement`, `sexe`, `niveau`)
 VALUES
-	(1,1,'PIUSSAN','Thomas','95 - Val-d-Oise','Homme'),
-	(2,2,'anais','liu','75 - Paris','Femme');
+	(1,1,'PIUSSAN','Thomas','95 - Val-d-Oise','Homme',NULL),
+	(3,3,'Liu','Anais','75 - Paris','Homme','Débutant');
 
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -169,7 +170,7 @@ LOCK TABLES `wusers` WRITE;
 INSERT INTO `wusers` (`id`, `username`, `password`, `email`)
 VALUES
 	(1,NULL,'$2y$10$rUkVLnpLwoeC5BHkTQYC6u.4rMhKuh9kF4naZJWyhGkcbagVZ9WMy','thomas.piussan@gmail.com'),
-	(2,NULL,'$2y$10$1pnVC8Cw39tfUSfrKJqwr.xFTHGjkv8AA9MsNv9JK/dzbZ9wrP48O','anais.liu@gmail.com');
+	(3,'Dada','$2y$10$5LJ1dANMDTTsZMe/59aJ8Oi9OgcVwXOObzSxbpsS8NLjuXcQOZIz2','Anais.liu@gmail.com');
 
 /*!40000 ALTER TABLE `wusers` ENABLE KEYS */;
 UNLOCK TABLES;
