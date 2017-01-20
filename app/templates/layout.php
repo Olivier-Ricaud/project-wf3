@@ -10,7 +10,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 	<!-- Extension bootStrap pour gérer l'event click sur les row d'une table & améliorer les inputs files -->
-	<link rel="stylesheet" href="assets/css/jasny-bootstrap.min.css">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/jasny-bootstrap.min.css') ?>">
 
 </head>
 
@@ -19,9 +19,9 @@
 		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="nav pull-right">
-					<img src="assets/img/Anais1.jpg" alt="profile picture" class=" img-circle dropdown-toggle" data-toggle="dropdown" width="50" height="50"></a>
+					<img src="<?= $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') ?>" alt="profile picture" class=" img-circle dropdown-toggle" data-toggle="dropdown" width="50" height="50"></a>
 					<ul class="dropdown-menu inverse-dropdown">
-						<li><a href="">Bonjour <?= $this->e($_SESSION['user']['infos']['nom']) ?> <?= $this->e($_SESSION['user']['infos']['prenom']) ?></a></li>
+						<li><a href="#">Bonjour <?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></a></li>
 						<li><a href="<?= $this->url('home')?>">Accueil</a></li>
 						<li><a href="<?= $this->url('profil')?>">Profil</a></li>
 						<li><a href="<?= $this->url('contact')?>">Nous contacter</a></li>
@@ -87,7 +87,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Extension bootStrap pour gérer l'event click sur les row d'une table & améliorer les inputs files -->
-	<script src="assets/js/jasny-bootstrap.min.js"></script>
+	<script src="<?= $this->assetUrl('js/jasny-bootstrap.min.js')?>"></script>
 
 </body>
 </html>

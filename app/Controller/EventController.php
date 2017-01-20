@@ -26,7 +26,7 @@ class EventController extends Controller
 	/**
 	 * Page de feuille de match
 	 */
-	public function feuille_match()
+	public function feuilleMatch()
 	{
 		$this->show('event/feuille-de-match');
 	}
