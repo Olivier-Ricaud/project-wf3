@@ -5,6 +5,13 @@
 	<div class="row">
 		<div class="col-sm-9 col-sm-offset-2">
 			<h1>Inscription</h1>
+			<?php if (!empty($erreurs)): ?>
+				<ul class="alert alert-danger">
+					<?php foreach ($erreurs as $erreur): ?>
+						<li> <?= $erreur ?> </li>
+					<? endforeach; ?>
+				</ul>
+			<? endif; ?>
 		</div>
 	</div> <!-- End of row h1-->
 	
@@ -14,21 +21,21 @@
 			<div class="form-group row">
 				<label for="nom" class="col-sm-3 col-form-label">Nom </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="nom" name="form_register_util[nom]" placeholder="Votre nom...">
+					<input type="text" class="form-control" id="nom" name="form_register_util[nom]"  placeholder="Votre nom..." value="<?php if(isset($_POST['form_register_util']['nom'])) echo $_POST['form_register_util']['nom'] ; ?>">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="prenom" class="col-sm-3 col-form-label">Prenom </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="prenom" name="form_register_util[prenom]" placeholder="Votre prenom...">
+					<input type="text" class="form-control" id="prenom" name="form_register_util[prenom]"  placeholder="Votre prenom..." value="<?php if(isset($_POST['form_register_util']['prenom'])) echo $_POST['form_register_util']['prenom'] ; ?>">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="email" class="col-sm-3 col-form-label">Adresse E-mail </label>
 				<div class="col-sm-8">
-					<input type="email" class="form-control" id="email" name="form_register_user[email]" placeholder="Votre Email...">
+					<input type="email" class="form-control" id="email" name="form_register_user[email]" placeholder="Votre Email..." value="<?php if(isset($_POST['form_register_user']['email'])) echo $_POST['form_register_user']['email'] ; ?>">
 				</div>
 			</div>
 
@@ -56,14 +63,14 @@
 			<div class="form-group row">
 				<label for="password" class="col-sm-3 col-form-label">Mot de Passe </label>
 				<div class="col-sm-8">
-					<input type="password" class="form-control" id="password" name="form_register_user[password]"placeholder="Votre mot de passe...">
+					<input type="password" class="form-control" id="password" name="form_register_user[password]" aria-describedby="Champ mot de passe de l'utilisateur" placeholder="Votre mot de passe..." >
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="confirm_password" class="col-sm-3 col-form-label">Confirmation</label>
 				<div class="col-sm-8">
-					<input type="password" class="form-control" id="confirm_password" name="form_register_user[confirm_password]" placeholder="Confirmation de votre mot de passe... ">
+					<input type="password" class="form-control" id="confirm_password" name="form_register_user[confirm_password]" placeholder="Confirmation de votre mot de passe... " >
 				</div>
 			</div>
 			
