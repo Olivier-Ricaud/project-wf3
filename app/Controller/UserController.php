@@ -6,7 +6,6 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
-use GUMP;
 
 class UserController extends Controller
 {
