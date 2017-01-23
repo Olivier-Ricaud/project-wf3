@@ -80,6 +80,7 @@ class UserController extends Controller
 			
 
 			// Validation et Filtrage [form_register_util]
+			
 			if( empty( $_POST['form_register_util']['nom']) || (strlen($_POST['form_register_util']['nom']) <3) || (strlen($_POST['form_register_util']['nom']) > 100) || !preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['nom']) ) {
 				
 	            $erreurs[] = 'Le champ "nom" doit être valide (entre 3 et 100 caractères).';
