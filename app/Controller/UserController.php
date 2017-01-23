@@ -19,25 +19,18 @@ class UserController extends Controller
 		if ( isset($_POST['login']) ) {
 			$auth_manager = new AuthentificationManager();
 			$util_manager = new UtilisateurManager();
-			$gump = new GUMP();
+
+			$erreurs = [];
 
 			// Validation et Filtrage
 
-			$_POST['form_login'] = $gump->sanitize($_POST['form_login']); // You don't have to sanitize, but it's safest to do so.
-			$gump->validation_rules(array(
-				'email'               => 'required|valid_email',
-				'password'            => 'required|max_len,50|min_len,6'
-			));
+			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) == 0 ) {
 
-			$gump->filter_rules(array(
-				'email'               => 'sanitize_email',
-				'confirm_password'    => 'base64_encode'
-			));
-
-			$validated_data = $gump->run($_POST['form_login']);
+				$erreurs[] = "Votre email ou votre mot de passe n'est pas valide.";
+			}
 
 			// Si Filtrage Ok
-			if ( ($validated_data == true) AND ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
+			if ( ( empty($erreurs) ) AND ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
 				
 				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
 
@@ -47,16 +40,15 @@ class UserController extends Controller
 				$_SESSION['user']['infos'] = $userInfos;
 
 				$this->redirectToRoute('recherche');
-			} else {
+			} 
 
-				echo $gump->get_readable_errors(true);
-			}
+			$this->show('user/login', ['erreurs' => $erreurs]);
 
 			// Fin Validation et Filtrage
 
 		} else {
 
-			$this->show('user/login');
+			$this->show('user/login', ['erreurs' => $erreurs]);
 		}
 	}
 
@@ -75,52 +67,57 @@ class UserController extends Controller
 	 */
 	public function register()
 	{
-			$erreurs = [];
+		$erreurs = [];
+		if ( isset($_POST['sign-up']) ) {
 		
 
-		if ( isset($_POST['sign-up']) ) {
-
-			$gumpUtil = new GUMP();
-			$gumpUser = new GUMP();
 			$manager = new UserManager();
+			
 
+			// Validation et Filtrage [form_register_util]
+			if( empty( $_POST['form_register_util']['nom']) || (strlen($_POST['form_register_util']['nom']) <3) || (strlen($_POST['form_register_util']['nom']) > 100) || !preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['nom']) ) {
+				
+	            $erreurs[] = 'Le champ "nom" doit être valide (entre 3 et 100 caractères).';
+	   
+	        }
 
-			// Validation et Filtrage
-			if(empty($_POST['form_register_util[nom]'])) {
+	        if( empty($_POST['form_register_util']['prenom']) || (strlen($_POST['form_register_util']['prenom']) <3) || (strlen($_POST['form_register_util']['prenom']) > 100) || !preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['prenom'])) {
+				
+	            $erreurs[] = 'Le champ "prénom" doit être valide (entre 3 et 100 caractères).';
+	        }
 
-			            $erreurs['nom'] = 'le champ nom obligatoire';
+	        if( empty($_POST['form_register_util']['departement']) || (strlen($_POST['form_register_util']['departement']) <3) || (strlen($_POST['form_register_util']['departement']) > 100)) {
 
-	        } elseif(empty($_POST['form_register_util[prenom]'])) {
+	            $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
+	        } 
 
-	            $erreurs['prenom'] = 'le champ prenom obligatoire';
+	        if( $_POST['form_register_util']['sexe'] != 'Homme' || $_POST['form_register_util']['sexe'] != 'Femme')  {
+
+	            $erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
+	        }
+
+	        // Validation et Filtrage [form_register_user]
+
+	        if (empty($_POST['form_register_user']['email']) ||  strlen($_POST['form_register_user']['email']) > 255 || !filter_var($_POST['form_register_user']['email'], FILTER_VALIDATE_EMAIL)) {
+
+	        	$erreurs[] = "Votre email n'est pas valide.";
+
+	        } 
+	        elseif ($manager->emailExists($_POST['form_register_user']['email'])) {
+
+	        	$erreurs[] = "Cet email existe déja.";
 
 	        }
-	        elseif(empty($_POST['form_register_util[email]'])){
 
-	            $erreurs['email'] = 'le champ email obligatoire';
-
+	        if (empty($_POST['form_register_user']['password']) || strlen($_POST['form_register_user']['password']) > 300) {
+	        	$erreurs[] = "Champ mot de passe requis.";
 	        }
-	        elseif(!empty($_POST['form_register_util[email]']) && !preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#',$_POST['form_register_util[email]'])){
 
-	            $erreurs['valeurMail'] = 'Email invalide';
-
+	        if ($_POST['form_register_user']['confirm_password'] != $_POST['form_register_user']['password']) {
+	        	$erreurs[] = "Le mot de passe ne correspond pas.";
 	        }
-	        elseif(empty($_POST['form_register_util[departement]'])){
-	           
-	            $erreurs['departement'] = 'le champ département obligatoire';
-
-	        }
-	        elseif(empty($_POST['form_register_util[password]'])){
-	           
-	            $erreurs['password'] = 'le champ mot de passe obligatoire';
-
-	        }
-	        elseif(empty($_POST['form_register_util[confirm_password]'])){
-	           
-	            $erreurs['confirm_password'] = 'le champ de confirmation du mot de passe obligatoire';
-
-	        }
-	        else {
+	        
+	       if ( empty($erreurs)) {
 	            
 	            $wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
 											// Hash le password pour crypter les données
@@ -133,11 +130,14 @@ class UserController extends Controller
 
 	        }
 
-		} else {
-			$this->show('user/register');
-		}
+	        $this->show('user/register', ['erreurs' => $erreurs]);
+	        // Fin Validation et Filtrage
 
-	}
+        } else {
+			$this->show('user/register',['erreurs' => $erreurs]);
+		}
+	} 
+	
 
 	/**
 	 * Page d'accueil du profil

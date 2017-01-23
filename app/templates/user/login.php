@@ -5,6 +5,13 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Connexion</h1>
+			<?php if (!empty($erreurs)): ?>
+				<ul class="alert alert-danger">
+					<?php foreach ($erreurs as $erreur): ?>
+						<li> <?= $erreur ?> </li>
+					<? endforeach; ?>
+				</ul>
+			<? endif; ?>
 		</div>
 	</div> <!-- End of row h1-->
 	
