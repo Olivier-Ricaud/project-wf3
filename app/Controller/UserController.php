@@ -26,7 +26,12 @@ class UserController extends Controller
 
 			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) == 0 ) {
 
-				$erreurs[] = "Votre email ou votre mot de passe n'est pas valide.";
+				$erreurs[] = "Mauvais email ou mot de passe.";
+			} 
+
+			if (empty($_POST['form_login']['email']) || empty($_POST['form_login']['password'])) {
+				
+				$erreurs[] = "Tous les champs sont requis";
 			}
 
 			// Si Filtrage Ok
