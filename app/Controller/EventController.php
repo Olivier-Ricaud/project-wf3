@@ -19,7 +19,7 @@ class EventController extends Controller
 			
 			if ( isset($_POST['create']) ) {
 
-				$manager = new UserManager();
+				$event_manager = new EventManager();
 
 				// Date
 				$whatDate = strtotime($_POST['form_event']['date']);
@@ -32,6 +32,9 @@ class EventController extends Controller
 				// Salle
 				$salle = $_POST['form_event']['salle_id'];
 				$depreg = preg_match('/^[a-zA-Z0-9\s-]+$/', $salle);
+				//Rechercher toutes les salles pour les insérer dans le formulaire de création
+				$salle_manager = new SalleManager();
+				$salles = $salle_manager->findAll();
 				
 				// Description
 				$htmlScTa = htmlspecialchars($_POST['form_event']['description']);
@@ -90,6 +93,13 @@ class EventController extends Controller
 				 	$_POST['form_event']['sexe'] == 'Femme'))  {
 
 				    $erreurs[] = 'Le champ "sexe" doit correspondre aux choix proposées.';
+				}
+
+				if ( empty($erreurs) ) {
+
+					$event_manager->insert($_POST['form_event']);
+					$this->redirectToRoute('detail');
+
 				}
 
 				$this->show('event/creer', ['erreurs' => $erreurs]);
