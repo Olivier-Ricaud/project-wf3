@@ -6,7 +6,6 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
-use GUMP;
 
 class UserController extends Controller
 {
@@ -29,13 +28,15 @@ class UserController extends Controller
 				$erreurs[] = "Mauvais email ou mot de passe.";
 			} 
 
-			if (empty($_POST['form_login']['email']) || empty($_POST['form_login']['password'])) {
+			if (empty($_POST['form_login']['email']) ||
+				empty($_POST['form_login']['password'])) {
 				
 				$erreurs[] = "Tous les champs sont requis";
 			}
 
 			// Si Filtrage Ok
-			if ( ( empty($erreurs) ) AND ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
+			if ( ( empty($erreurs) ) AND
+				 ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
 				
 				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
 
@@ -81,30 +82,41 @@ class UserController extends Controller
 
 			// Validation et Filtrage [form_register_util]
 			
-			if( empty( $_POST['form_register_util']['nom']) || (strlen($_POST['form_register_util']['nom']) <3) || (strlen($_POST['form_register_util']['nom']) > 100) || !preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['nom']) ) {
+			if( empty( $_POST['form_register_util']['nom']) ||
+				 (strlen($_POST['form_register_util']['nom']) <3) ||
+				 (strlen($_POST['form_register_util']['nom']) > 100) ||
+				 !preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['nom']) ) {
 				
 	            $erreurs[] = 'Le champ "nom" doit être valide (entre 3 et 100 caractères).';
 	   
 	        }
 
-	        if( empty($_POST['form_register_util']['prenom']) || (strlen($_POST['form_register_util']['prenom']) <3) || (strlen($_POST['form_register_util']['prenom']) > 100) || !preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['prenom'])) {
+	        if( empty($_POST['form_register_util']['prenom']) ||
+	         	(strlen($_POST['form_register_util']['prenom']) <3) ||
+	          	(strlen($_POST['form_register_util']['prenom']) > 100) ||
+	          	!preg_match('/^[a-zA-Z_]+$/', $_POST['form_register_util']['prenom'])) {
 				
 	            $erreurs[] = 'Le champ "prénom" doit être valide (entre 3 et 100 caractères).';
 	        }
 
-	        if( empty($_POST['form_register_util']['departement']) || (strlen($_POST['form_register_util']['departement']) <3) || (strlen($_POST['form_register_util']['departement']) > 100)) {
+	        if( empty($_POST['form_register_util']['departement']) ||
+	        	(strlen($_POST['form_register_util']['departement']) <3) ||
+	        	(strlen($_POST['form_register_util']['departement']) > 100)) {
 
 	            $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
 	        } 
 
-	        if( $_POST['form_register_util']['sexe'] != 'Homme' || $_POST['form_register_util']['sexe'] != 'Femme')  {
+	        if( $_POST['form_register_util']['sexe'] != 'Homme' ||
+	        	$_POST['form_register_util']['sexe'] != 'Femme')  {
 
 	            $erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
 	        }
 
 	        // Validation et Filtrage [form_register_user]
 
-	        if (empty($_POST['form_register_user']['email']) ||  strlen($_POST['form_register_user']['email']) > 255 || !filter_var($_POST['form_register_user']['email'], FILTER_VALIDATE_EMAIL)) {
+	        if (empty($_POST['form_register_user']['email']) ||
+	        	 strlen($_POST['form_register_user']['email']) > 255 ||
+	        	 !filter_var($_POST['form_register_user']['email'], FILTER_VALIDATE_EMAIL)) {
 
 	        	$erreurs[] = "Votre email n'est pas valide.";
 
@@ -115,7 +127,8 @@ class UserController extends Controller
 
 	        }
 
-	        if (empty($_POST['form_register_user']['password']) || strlen($_POST['form_register_user']['password']) > 300) {
+	        if (empty($_POST['form_register_user']['password']) ||
+	        	strlen($_POST['form_register_user']['password']) > 300) {
 	        	$erreurs[] = "Champ mot de passe requis.";
 	        }
 
