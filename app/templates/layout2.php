@@ -8,7 +8,7 @@
 	
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="<?= $this->assetUrl('css/style.css') ?>">
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar">
@@ -86,7 +86,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Extension bootStrap pour gérer l'event click sur les row d'une table & améliorer les inputs files -->
-	<script src="assets/js/jasny-bootstrap.min.js"></script>
 
 </body>
 </html>

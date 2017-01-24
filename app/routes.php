@@ -15,10 +15,8 @@
 		['GET|POST', '/profil-editer/[i:id]', 'user#profilEditer', 'profil_editer'],
 
 		['GET|POST', '/creer', 'event#creer', 'creer'],
+		['GET|POST', '/salle-detail/[i:id]', 'event#salleDetail', 'salle_detail'],
 		['GET|POST', '/detail/[i:id]', 'event#detail', 'detail'],
 		['GET', '/feuille-de-match', 'event#feuilleMatch', 'feuille_match'],
-
-
-
 
 	);

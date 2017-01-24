@@ -35,13 +35,27 @@ class EventController extends Controller
 	}
 
 	/**
+	 * Fonction du détail des salles dans la page création d'événement en Ajax
+	 */
+	public function salleDetail($id)
+	{
+		$salle_manager = new SalleManager();
+		$salle = $salle_manager->find($id); 
+
+		$this->show('event/salle-detail', ['salle' => $salle]);
+
+	}
+
+	/**
 	 * Page de détail d'événement
 	 */
 	public function detail($id)
 	{
+		// Requete pour aller chercher les données de l'événenement
 		$event_manager = new EventManager();
 		$event = $event_manager->find($id);
 
+		// Requete pour aller chercher les données de la salle correspondant à l'événement
 		$salle_manager = new SalleManager();
 		$salle = $salle_manager->find($event['salle_id']);
 

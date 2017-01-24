@@ -88,6 +88,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!-- Extension bootStrap pour gérer l'event click sur les row d'une table & améliorer les inputs files -->
 	<script src="<?= $this->assetUrl('js/jasny-bootstrap.min.js')?>"></script>
+	<script src="<?= $this->assetUrl('js/detail-salle.js')?>"></script>
 
 </body>
 </html>

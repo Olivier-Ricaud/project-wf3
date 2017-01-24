@@ -46,21 +46,17 @@
 				</div>
 			</div>
 
-			<!-- Lieu et Tarif -->
+			<!-- Salle et données -->
 			<div class="form-group row">
-				<label for="salle" class="col-xs-1 col-sm-3 col-form-label">Salle</label>
-				<div class="col-xs-7 col-sm-6">
-					<select class="form-control" id="salle" name="form_event[salle_id]">
-						<option value="0">Choisissez votre salle...</option>
+				<label for="salle" class="col-sm-3 col-form-label">Salle</label>
+				<div class="col-sm-9">
+					<select class="form-control" id="salle" name="form_event[salle_id]" onchange="showSalle(this.value)">
+						<option value="">Choisissez votre salle...</option>
 						<?php foreach($salles as $salle): ?>
 							<option value="<?= $this->e($salle['id']) ?>"><?= $this->e($salle['nom']).' - '.$this->e($salle['ville'])?></option>
 						<?php endforeach; ?>
 					</select>
-				</div>
-				
-				<label for="tarif" class="col-xs-1 col-form-label">Tarif max / personne </label>
-				<div class="col-xs-3 col-sm-2">
-					<input type="text" class="form-control" id="tarif" placeholder="...">
+					<div id="txtSalle"><b>Salle info will be listed here...</b></div>
 				</div>
 			</div> <!-- End row -->
 			
