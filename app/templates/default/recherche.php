@@ -112,50 +112,26 @@
 	<div class="row">
 		<section class="col-sm-10 col-sm-offset-1">
 			<h2>Liste des résultats</h2>
+			
+			<?php if(isset($_POST['search'])): ?>
+				<?php foreach ($events as $event): ?>	
 				<figure class="col-sm-10 col-sm-offset-1">
 					<div class="row">
-						<a href="<?= $this->url('detail')?>">
+						<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
 							<div class="col-xs-6">
 								<img src="assets/img/arena3.png" alt="image de l'event">
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
-							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p><?= $this->e($event['titre']) ?></p>
+							<p><?= $this->e($event['date']) ?></p>
+							<p><?= $this->e($event['sexe']) ?></p>
+							<p><?= $this->e($event['niveau']) ?></p>
 						</div> 
 					</div>
 				</figure>
-
-				<figure class="col-sm-10 col-sm-offset-1">
-					<div class="row">
-						<a href="<?= $this->url('detail')?>">
-							<div class="col-xs-6">
-								<img src="assets/img/terrainExterieur.jpg" alt="image de l'event">
-							</div>
-						</a>
-						<div class="col-xs-6">
-							<p>titre de l'événement</p>
-							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
-						</div> 
-					</div>
-				</figure>
-
-				<figure class="col-sm-10 col-sm-offset-1">
-					<div class="row">
-						<a href="<?= $this->url('detail')?>">
-							<div class="col-xs-6">
-								<img src="assets/img/arena3.png" alt="image de l'event">
-							</div>
-						</a>
-						<div class="col-xs-6">
-							<p>titre de l'événement</p>
-							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
-						</div> 
-					</div>
-				</figure>
+				<?php endforeach; ?>
+			<?php endif; ?>
 		</section>
 	</div> <!-- End row Liste événement(s) -->
 

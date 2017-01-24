@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
+use \Manager\EventManager; 
 
 class DefaultController extends Controller
 {
@@ -28,21 +29,24 @@ class DefaultController extends Controller
 	public function recherche()
 	{
 		if (isset($_SESSION['user'])) {
-
-			$erreurs = [];
+		
+			// $erreurs = [];
 
 			if ( isset($_POST['search']) ) {
 				
+				$event_manager = new EventManager;
+				$events = $event_manager->findAll();
 
 				// Filtre et Validation
 
 				// Departement
-				if( empty($_POST['formRecherche']['departement']) ||
-					(strlen($_POST['formRecherche']['departement']) <3) ||
-					(strlen($_POST['formRecherche']['departement']) > 100)) {
+				// if( empty($_POST['formRecherche']['departement']) ||
+				// 	(strlen($_POST['formRecherche']['departement']) <3) ||
+				// 	(strlen($_POST['formRecherche']['departement']) > 100)) {
 
-				    $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
-				} 
+				//     $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
+				// } 
+
 
 
 				
@@ -50,7 +54,7 @@ class DefaultController extends Controller
 
 
 
-				$this->show('default/recherche');
+				$this->show('default/recherche', ['events' => $events]);
 			}
 
 
