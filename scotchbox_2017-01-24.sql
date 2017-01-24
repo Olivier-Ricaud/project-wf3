@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-23 15:03:10 +0000
+# Generation Time: 2017-01-24 16:27:58 +0000
 # ************************************************************
 
 
@@ -91,10 +91,20 @@ CREATE TABLE `joueurs` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `event_id` int(11) DEFAULT NULL,
-  `equipe_id` int(11) DEFAULT NULL,
+  `equipe_id` tinyint(2) DEFAULT NULL,
+  `statut_id` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `joueurs` WRITE;
+/*!40000 ALTER TABLE `joueurs` DISABLE KEYS */;
+
+INSERT INTO `joueurs` (`id`, `user_id`, `event_id`, `equipe_id`, `statut_id`)
+VALUES
+	(12,3,4,NULL,1);
+
+/*!40000 ALTER TABLE `joueurs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table resultats
@@ -135,12 +145,35 @@ LOCK TABLES `salles` WRITE;
 
 INSERT INTO `salles` (`id`, `nom`, `departement`, `ville`, `adresse`, `cp`, `tarif`, `site_web`, `photo`)
 VALUES
-	(1,'LE FIVE','Ile-de-France','Paris','32, rue Moussorgski',75018,14,'http://paris.lefive.fr/',NULL),
-	(2,'URBAN SOCCER','Ile-de-France','Paris','22, Rue Notre Dame des Champs',75006,8,'http://www.bfive.fr/',NULL),
-	(3,'GO PARK PONTOISE','Val d\'Oise','Pontoise','25, route de Ménandon ',95300,10,'http://www.gopark.fr/',NULL),
-	(4,'KAISER PARK BEAUCHAMP','Val d\'Oise','Beauchamp','15, rue Denis Papin ',95250,8,'http://www.kaiserpark.fr/',NULL);
+	(1,'LE FIVE','Paris','Paris','32, rue Moussorgski',75018,14,'http://paris.lefive.fr/',NULL),
+	(2,'URBAN SOCCER','Paris','Paris','22, Rue Notre Dame des Champs',75006,8,'http://www.bfive.fr/',NULL),
+	(3,'GO PARK PONTOISE','Val-d-Oise','Pontoise','25, route de Ménandon ',95300,10,'http://www.gopark.fr/',NULL),
+	(4,'KAISER PARK BEAUCHAMP','Val-d-Oise','Beauchamp','15, rue Denis Papin ',95250,8,'http://www.kaiserpark.fr/',NULL);
 
 /*!40000 ALTER TABLE `salles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table statuts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `statuts`;
+
+CREATE TABLE `statuts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `statut` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `statuts` WRITE;
+/*!40000 ALTER TABLE `statuts` DISABLE KEYS */;
+
+INSERT INTO `statuts` (`id`, `statut`)
+VALUES
+	(1,'En attente'),
+	(2,'Confirmé');
+
+/*!40000 ALTER TABLE `statuts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

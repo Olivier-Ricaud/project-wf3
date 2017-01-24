@@ -73,6 +73,12 @@
 			<div class="col-md-6">
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
+
+				<?php if ($retirer == false):?>
+				<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+				<?php else: ?>
+				<a href="" class="btn btn-danger" >Retirer</a>
+				<?php endif; ?>
 			</div>
 
 			<div class="col-md-6">
@@ -90,32 +96,28 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Username</th>
-						<th>Level</th>
-						<th>Gender</th>
+						<th>Joueur</th>
+						<th>Niveau</th>
+						<th>Genre</th>
+						<th>Statut</th>
 						<th>Edit (Admin)</th>
 					</tr>
 				</thead>
+
 				<tbody>
+					<?php foreach ($joueurs as $joueur): ?>
 					<tr>
 						<td>1</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<!-- Bouton START -->
+						<td><?= $this->e($joueur['prenom']).' '.$this->e($joueur['nom'])?></td>
+						<td><?= $this->e($joueur['niveau'])?></td>
+						<td><?= $this->e($joueur['sexe'])?></td>
+						<td><?= $this->e($joueur['statut'])?></td>
 						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
+							<a href="" class="btn btn-primary">Confirmer</a>
 							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-						<!-- Bouton END -->	
+						</td>	
 					</tr> 
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
