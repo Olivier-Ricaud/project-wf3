@@ -5,6 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Manager\EventManager;
 use \Manager\SalleManager;
+use \Manager\JoueurManager;
 
 
 class EventController extends Controller
@@ -130,19 +131,52 @@ class EventController extends Controller
 
 	/**
 	 * Page de détail d'événement
+	  * @param id de l'événement souhaité
 	 */
 	public function detail($id)
 	{
-		// Requete pour aller chercher les données de l'événenement
-		$event_manager = new EventManager();
-		$event = $event_manager->find($id);
+		if (isset($_SESSION['user'])) {
 
-		// Requete pour aller chercher les données de la salle correspondant à l'événement
-		$salle_manager = new SalleManager();
-		$salle = $salle_manager->find($event['salle_id']);
+			// Requete pour aller chercher les données de l'événenement
+			$event_manager = new EventManager();
+			$event = $event_manager->find($id);
 
-		$this->show('event/detail', [ ['id' => $event['id']], 'event' => $event, 'salle' => $salle ]);
+			// Requete pour aller chercher les données de la salle correspondant à l'événement
+			$salle_manager = new SalleManager();
+			$salle = $salle_manager->find($event['salle_id']);
+
+			$joueurs_manager = new JoueurManager();
+			$joueurs = $joueurs_manager->infosJoueurs($id);
+
+			// Gérer l'apparition du boutton d'inscription ou de désinscription à un événénement
+			$retirer = false;
+			if ( $joueurs_manager->joueurExist($_SESSION['user']['id'],$event['id'] ) ) {
+				$retirer = true;
+			}
+
+			$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer ]);
+		} else {
+			$this->redirectToRoute('login');
+		}
 	}
+
+	/**
+	 * Page de détail d'événement : Fonction de participation à un événenement.
+	 * @param id de l'événement actuellement affiché dans le navigateur
+	 */
+	public function participer($id)
+	{
+
+		$joueur_manager = new JoueurManager();
+
+		$retirer = false;
+			
+		$joueur = $joueur_manager->insert([ 'user_id' => $_SESSION['user']['id'], 'event_id' => $id, 'statut_id' => 1 ]);
+
+		$this->redirectToRoute('detail', [ 'id' => $id]);
+
+	}
+
 
 	/**
 	 * Page de feuille de match
