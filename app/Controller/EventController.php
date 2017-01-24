@@ -18,6 +18,10 @@ class EventController extends Controller
 		if (isset($_SESSION['user'])) {
 
 			$erreurs = [];
+
+			//Rechercher toutes les salles pour les insérer dans le formulaire de création
+			$salle_manager = new SalleManager();
+			$salles = $salle_manager->findAll();
 			
 			if ( isset($_POST['create']) ) {
 
@@ -33,10 +37,7 @@ class EventController extends Controller
 
 				// Salle
 				$salle = $_POST['form_event']['salle_id'];
-				$depreg = preg_match('/^[a-zA-Z0-9\s-]+$/', $salle);
-				//Rechercher toutes les salles pour les insérer dans le formulaire de création
-				$salle_manager = new SalleManager();
-				$salles = $salle_manager->findAll();
+				$depreg = preg_match('/^[0-9]+$/', $salle);
 				
 				// Description
 				$htmlScTa = htmlspecialchars($_POST['form_event']['description']);
@@ -62,6 +63,7 @@ class EventController extends Controller
 				if (!$hourReg) {
 					$erreurs[] = "L'heure entré n'est pas valide.";
 				}
+				
 				// Salle
 				if (!$depreg || strlen($salle) > 100) {
 					$erreurs[] = "Le champ salle n'est pas valide.";
@@ -104,10 +106,10 @@ class EventController extends Controller
 
 				}
 
-				$this->show('event/creer', ['erreurs' => $erreurs]);
+				$this->show('event/creer', ['erreurs' => $erreurs, 'salles' => $salles]);
 			}
 
-			$this->show('event/creer', ['erreurs' => $erreurs]);
+			$this->show('event/creer', ['erreurs' => $erreurs, 'salles' => $salles]);
 		} else  {
 
 			$this->redirectToRoute('login');
@@ -115,13 +117,27 @@ class EventController extends Controller
 	}
 
 	/**
+	 * Fonction du détail des salles dans la page création d'événement en Ajax
+	 */
+	public function salleDetail($id)
+	{
+		$salle_manager = new SalleManager();
+		$salle = $salle_manager->find($id); 
+
+		$this->show('event/salle-detail', ['salle' => $salle]);
+
+	}
+
+	/**
 	 * Page de détail d'événement
 	 */
 	public function detail($id)
 	{
+		// Requete pour aller chercher les données de l'événenement
 		$event_manager = new EventManager();
 		$event = $event_manager->find($id);
 
+		// Requete pour aller chercher les données de la salle correspondant à l'événement
 		$salle_manager = new SalleManager();
 		$salle = $salle_manager->find($event['salle_id']);
 

@@ -1,11 +1,11 @@
-<?php $this->layout('layout', ['title' => 'Détail d\'événement']) ?>
+<?php $this->layout('layout', [ 'title' => $this->e($event['titre']) ]) ?>
 
 <?php $this->start('main_content') ?>
 <main class="container-fluid">
 	<section class="row">
 			<div class="imgBackground">
 				<img src="assets/img/futsal2.jpg" alt="exemple"> 
-				<h1 class="title">Titre de l'événement</h1>
+				<h1 class="title"><?= $this->e($event['titre']) ?></h1>
 			</div>
 	</section>
 
@@ -13,50 +13,57 @@
 	<section class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-map-marker" aria-hidden="true"></i> lieu</div>
-					<div class="panel-body">chez moi</div>
+					<div class="panel-heading"><i class="fa fa-map-marker" aria-hidden="true"></i>Lieu</div>
+					<div class="panel-body"><?= $this->e($salle['adresse']) ?></div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-calendar" aria-hidden="true"></i> date</div>
-					<div class="panel-body">12/12/2016</div>
+					<div class="panel-heading"><i class="fa fa-calendar" aria-hidden="true"></i> Date</div>
+					<div class="panel-body"><?= $this->e($event['date']) ?></div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-users" aria-hidden="true"></i> nombre de joueurs inscrits</div>
+					<div class="panel-heading"><i class="fa fa-users" aria-hidden="true"></i> Nombre de joueurs inscrits</div>
 					<div class="panel-body">10</div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading">sexe des joueurs recherché</div>
-					<div class="panel-body">Mixte</div>
+					<div class="panel-heading"> Sexe des joueurs recherchés</div>
+					<div class="panel-body"><?= $this->e($event['sexe']) ?></div>
 				</div>
 			</div>
 
-			<div class="col-xs-6 col-md-4">
+			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-eur" aria-hidden="true"></i> tarif</div>
 					<div class="panel-body">10€</div>
 				</div>
 			</div>
 
-			<div class="col-xs-6 col-md-4">
+			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> durée</div>
-					<div class="panel-body">1 heures</div>
+					<div class="panel-body"><?= $this->e($event['duree']) ?></div>
 				</div>
 			</div>
 
-			<div class="col-xs-6 col-md-4">
+			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading">niveau recomendé</div>
-					<div class="panel-body">Amateur</div>
+					<div class="panel-heading">Niveau recomendé</div>
+					<div class="panel-body"><?= $this->e($event['niveau']) ?></div>
+				</div>
+			</div>
+
+			<div class="col-xs-6 col-md-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">Site internet de la salle</div>
+					<div class="panel-body"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
 				</div>
 			</div>
 	</section>
@@ -64,8 +71,8 @@
 	<!-- DESCRIPTION ET MAP -->
 	<section class="row">
 			<div class="col-md-6">
-				<h2>Example body text</h2>
-				<p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod nemo similique doloremque fuga nesciunt rerum illum, tenetur illo nobis dolor molestias nihil ea tempora necessitatibus, expedita dolorum omnis, aspernatur ad.</p>
+				<h2>Description</h2>
+				<p><?= $this->e($event['description']) ?></p>
 			</div>
 
 			<div class="col-md-6">
@@ -109,169 +116,6 @@
 						</td>
 						<!-- Bouton END -->	
 					</tr> 
-
-					<tr>
-						<td>2</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							Status <span class="caret"></span></button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">En attente</a></li>
-								<li><a href="#">Validée</a></li>
-							</ul>
-						</div>
-						<a href="#" class="btn btn-danger">Retirer</a></td>
-					</tr>
-					
-					<tr>
-								
-						<td>3</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>4</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>5</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-						
-					<tr>
-						<td>6</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>7</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>8</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>9</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>10</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
 				</tbody>
 			</table>
 		</div>

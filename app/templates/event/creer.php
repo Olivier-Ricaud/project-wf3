@@ -15,6 +15,7 @@
 			<? endif; ?>
         </div>
     </div> <!-- End of row h1-->
+    
     <div class="row">
         <!-- Formulaire de création d'événement -->
         <form class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2" method="POST" >
@@ -48,19 +49,17 @@
             </div>
             <!-- Lieu et Tarif -->
             <div class="form-group row">
-                <label for="salle" class="col-xs-1 col-sm-3 col-form-label">Salle</label>
-                <div class="col-xs-7 col-sm-6">
-                    <input list="salle" type="text" class="form-control" id="salle" name="form_event[salle_id]" placeholder="..." value="<?php if(isset($_POST['form_event']['salle_id'])) echo $_POST['form_event']['salle_id'] ; ?>">
-                    <datalist id="salle">
-                        <?php foreach($salles as $salle): ?>
-                            <option value="<?= $this->e($salle['nom']) ?>"><?= $this->e($salle['nom']).' - '.$this->e($salle['ville'])?></option>
-                        <?php endforeach; ?>
-                    </datalist>
-                </div>
-                
-                <label for="tarif" class="col-xs-1 col-form-label">Tarif max par personne</label>
-                <div class="col-xs-3 col-sm-2">
-                    <input type="text" class="form-control" id="tarif" name="tarif" placeholder="...">
+                <label for="salle" class="col-sm-3 col-form-label">Salle</label>
+                <div class="col-sm-9">
+	               <select class="form-control" id="salle" name="form_event[salle_id]" onchange="showSalle(this.value)">
+   						<option value="">Choisissez votre salle...</option>
+   						
+   						<?php foreach($salles as $salle): ?>		
+   							<option value="<?= $this->e($salle['id'])?>"> <?= $this->e($salle['nom']).' - '.$this->e($salle['ville'])?></option>
+   						<?php endforeach; ?>
+	               	</select>
+
+	               	<div id="txtSalle"><b>Salle info will be listed here...</b></div>
                 </div>
             </div> <!-- End row -->
             
@@ -102,6 +101,5 @@
             </div> 
         </form>
     </div> <!-- End row -->
->>>>>>> filtreCreation
 </main>
 <?php $this->stop('main_content') ?>
