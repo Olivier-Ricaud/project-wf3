@@ -45,18 +45,18 @@ class DefaultController extends Controller
 				// Filtre et Validation
 
 				// Departement
-				// if( empty($_POST['formRecherche']['departement']) ||
-				// 	(strlen($_POST['formRecherche']['departement']) <3) ||
-				// 	(strlen($_POST['formRecherche']['departement']) > 100)) {
+				if( empty($_GET['departement']) ||
+					(strlen($_GET['departement']) <3) ||
+					(strlen($_GET['departement']) > 100)) {
 
-				//     $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
-				// } 
+				    $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
+				} 
 
-
-
-				
-
-
+				// Date
+				if ($_GET['date_debut'] > $_GET['date_fin'] ||
+					 date('U' ,$_GET['date_debut']) < time()) {
+					$erreurs[] = 'Les champs de dates ne sont pas valides';
+				}
 
 
 				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs]);

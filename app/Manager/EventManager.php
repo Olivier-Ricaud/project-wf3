@@ -51,11 +51,11 @@ class EventManager extends \W\Manager\Manager {
 			$sql .= "AND e.duree='$duree' " ;
 
 		}
-		
+		if ( !(empty($departement) && empty($d_date) && empty($f_date)) ){
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
 		return $sth->fetchAll();
+		}
 	}
-
 }
