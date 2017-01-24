@@ -3,7 +3,9 @@
 namespace Controller;
 
 use \W\Controller\Controller;
-use \W\Manager\UserManager;
+use \Manager\EventManager;
+use \Manager\SalleManager;
+
 
 class EventController extends Controller
 {
