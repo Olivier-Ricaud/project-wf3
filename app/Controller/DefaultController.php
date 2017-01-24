@@ -30,7 +30,7 @@ class DefaultController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 		
-			// $erreurs = [];
+			$erreurs = [];
 
 			if ( isset($_GET['search']) ) {
 				
@@ -59,7 +59,7 @@ class DefaultController extends Controller
 
 
 
-				$this->show('default/recherche', ['events' => $events]);
+				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs]);
 			}
 
 

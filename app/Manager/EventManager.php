@@ -22,52 +22,36 @@ class EventManager extends \W\Manager\Manager {
 
 		$sql = "SELECT * FROM events e INNER JOIN salles s ON e.salle_id = s.id WHERE ";
 
-		if (!empty($departement)){
+		if (!empty($departement) && preg_match('/^[a-zA-Z0-9-]+$/', $departement)){
 
-			htmlspecialchars($departement);
-			preg_match('/^[a-zA-Z0-9-]+$/', $departement);
 			$sql .= "s.departement='$departement' ";
 			
 		}
 
-		if (!empty($d_Date) || !empty($f_Date)) {
-			
-			// echo "veuillez remplir les 2 champ"
+		if (!empty($d_Date) && !empty($f_Date) && preg_match('/^[0-9-]+$/', $d_Date) && preg_match('/^[0-9-]+$/', $f_Date)){
 
-			if (!empty($d_Date) && !empty($f_Date)){
-
-				htmlspecialchars($d_Date);
-				htmlspecialchars($f_Date);
-				preg_match('/^[0-9-]+$/', $d_Date);
-				preg_match('/^[0-9-]+$/', $f_Date);
 				$sql .= "AND (date BETWEEN '$d_Date' AND '$f_Date') " ;	
-			}
 		}
 
-		if (!empty($niveau)) {
 
-			htmlspecialchars($niveau);
-			preg_match('/^[a-zA-Z]+$/', $niveau);
+		if (!empty($niveau) && preg_match('/^[a-zA-Z]+$/', $niveau)) {
+
 			$sql .= "AND e.niveau='$niveau' " ;
 
 		}
 
-		if (!empty($sexe)) {
+		if (!empty($sexe) && preg_match('/^[a-zA-Z]+$/', $sexe)) {
 
-			htmlspecialchars($sexe);
-			preg_match('/^[a-zA-Z]+$/', $sexe);
 			$sql .= "AND e.sexe='$sexe' " ;
 
 		}
 
-		if (!empty($duree)) {
+		if (!empty($duree) && preg_match('/^[0-9:]+$/', $duree)) {
 
-			htmlspecialchars($duree);
-			preg_match('/^[0-9:]+$/', $duree);
 			$sql .= "AND e.duree='$duree' " ;
 
 		}
-		print_r($sql);
+		
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 

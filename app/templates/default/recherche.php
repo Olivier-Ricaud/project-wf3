@@ -4,8 +4,13 @@
 <main class="container-fluid">
 	<div class="row">
 		<h1>Recherche d'Evénements</h1>
-		<br>
-		<?php var_dump($events); ?>
+        <?php if (!empty($erreurs)): ?>
+			<ul class="alert alert-danger">
+				<?php foreach ($erreurs as $erreur): ?>
+					<li> <?= $erreur ?> </li>
+				<? endforeach; ?>
+			</ul>
+		<? endif; ?>
 	</div>
 
 		<!-- Formulaire -->
