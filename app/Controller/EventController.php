@@ -21,14 +21,19 @@ class EventController extends Controller
 
 				$manager = new UserManager();
 
+				// Date
 				$whatDate = strtotime($_POST['form_event']['date']);
 				$TimeReg = preg_match('/^[0-9-]+$/', $whatDate);
 
+				// Heure
 				$hour = $_POST['form_event']['heure'];
 				$hourReg = preg_match('/^[0-9:]+$/', $hour);
 
-				$tarif = $_POST['tarif'];
-
+				// Salle
+				$salle = $_POST['form_event']['salle_id'];
+				$depreg = preg_match('/^[a-zA-Z0-9\s-]+$/', $salle);
+				
+				// Description
 				$htmlScTa = htmlspecialchars($_POST['form_event']['description']);
 
 				// Validation et Filtrage [form_event]
@@ -52,17 +57,14 @@ class EventController extends Controller
 				if (!$hourReg) {
 					$erreurs[] = "L'heure entré n'est pas valide.";
 				}
-				// Lieu
-
-				// Tarif
-				// !is_int($tarif) || 
-				if ($tarif < 0 || $tarif > 50) {
-					$erreurs[] = "Le tarif entré n'est pas valide.";
-				} 
+				// Salle
+				if (!$depreg || strlen($salle) > 100) {
+					$erreurs[] = "Le champ salle n'est pas valide.";
+				}
 
 				// Durée
-				if( !$_POST['duree'] == '01:00' ||
-					 !$_POST['duree'] == '02:00')  {
+				if( ! ($_POST['duree'] == '01:00' ||
+					 $_POST['duree'] == '02:00'))  {
 
 				    $erreurs[] = 'Le champ "durée" doit correspondre aux choix proposés.';
 				}
@@ -83,9 +85,9 @@ class EventController extends Controller
 				}
 
 				// Sexe
-				if( !$_POST['form_event']['sexe'] == 'Mixte' ||
+				if( ! ($_POST['form_event']['sexe'] == 'Mixte' ||
 					 $_POST['form_event']['sexe'] == 'Homme' || 
-				 	$_POST['form_event']['sexe'] == 'Femme')  {
+				 	$_POST['form_event']['sexe'] == 'Femme'))  {
 
 				    $erreurs[] = 'Le champ "sexe" doit correspondre aux choix proposées.';
 				}

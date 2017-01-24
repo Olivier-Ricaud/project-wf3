@@ -5,8 +5,6 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-2">
             <h1>Création d'événement</h1>
-            <?php var_dump($_POST['form_event']) ?>
-            <!-- <?php  $whatDate ?> -->
             <?php if (!empty($erreurs)): ?>
 				<ul class="alert alert-danger">
 					<?php foreach ($erreurs as $erreur): ?>
@@ -51,7 +49,7 @@
             <div class="form-group row">
                 <label for="salle" class="col-xs-1 col-sm-3 col-form-label">Salle</label>
                 <div class="col-xs-7 col-sm-6">
-                    <input list="salle" type="text" class="form-control" id="salle" name="form_event[salle_id]" placeholder="...">
+                    <input list="salle" type="text" class="form-control" id="salle" name="form_event[salle_id]" placeholder="..." value="<?php if(isset($_POST['form_event']['salle_id'])) echo $_POST['form_event']['salle_id'] ; ?>">
                     <datalist id="salle">
                         <?php foreach($salles as $salle): ?>
                             <option value="<?= $this->e($salle['nom']) ?>"><?= $this->e($salle['nom']).' - '.$this->e($salle['ville'])?></option>
@@ -60,7 +58,7 @@
                 </div>
                 
                 <label for="tarif" class="col-xs-1 col-form-label">Tarif max par personne</label>
-                <div class="col-xs-3 col-sm-2">)
+                <div class="col-xs-3 col-sm-2">
                     <input type="text" class="form-control" id="tarif" name="tarif" placeholder="...">
                 </div>
             </div> <!-- End row -->
@@ -88,9 +86,10 @@
                 <label for="sexe" class="col-sm-3 col-form-label">Sexe recherché</label>
                 <div class="col-sm-9">
                     <select class="form-control" id="sexe" name="form_event[sexe]">
-                        <option>Mixte</option>
-                        <option>Homme</option>
-                        <option>Femme</option>
+                    	<option value="<?php if(isset($_POST['form_event']['sexe'])) echo $_POST['form_event']['sexe'] ; ?>"><?php if(isset($_POST['form_event']['sexe'])) echo $_POST['form_event']['sexe'] ; ?></option>
+                        <option value="Mixte">Mixte</option>
+                        <option value="Homme">Homme</option>
+                        <option value="Femme">Femme</option>
                     </select>              
                 </div>
             </div>
