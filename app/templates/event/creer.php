@@ -102,6 +102,5 @@
             </div> 
         </form>
     </div> <!-- End row -->
->>>>>>> filtreCreation
 </main>
 <?php $this->stop('main_content') ?>

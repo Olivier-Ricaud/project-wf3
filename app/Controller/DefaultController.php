@@ -28,6 +28,32 @@ class DefaultController extends Controller
 	public function recherche()
 	{
 		if (isset($_SESSION['user'])) {
+
+			$erreurs = [];
+
+			if ( isset($_POST['search']) ) {
+				
+
+				// Filtre et Validation
+
+				// Departement
+				if( empty($_POST['formRecherche']['departement']) ||
+					(strlen($_POST['formRecherche']['departement']) <3) ||
+					(strlen($_POST['formRecherche']['departement']) > 100)) {
+
+				    $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
+				} 
+
+
+				
+
+
+
+
+				$this->show('default/recherche');
+			}
+
+
 			$this->show('default/recherche');
 		} else  {
 

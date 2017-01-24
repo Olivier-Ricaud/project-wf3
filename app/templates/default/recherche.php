@@ -9,7 +9,7 @@
 		<!-- Formulaire -->
 	<div class="row">
 		<section class="col-md-5">
-			<form class="form-horizontal" id="formRecherche">
+			<form class="form-horizontal" id="formRecherche" method="POST">
 				<div class="form-group row">
 					<label for="lieu" class="col-sm-4 col-form-label">Département </label>
 					<div class="col-sm-8">

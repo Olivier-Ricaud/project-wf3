@@ -18,6 +18,10 @@ class EventController extends Controller
 		if (isset($_SESSION['user'])) {
 
 			$erreurs = [];
+
+			//Rechercher toutes les salles pour les insérer dans le formulaire de création
+			$salle_manager = new SalleManager();
+			$salles = $salle_manager->findAll();
 			
 			if ( isset($_POST['create']) ) {
 
@@ -34,9 +38,6 @@ class EventController extends Controller
 				// Salle
 				$salle = $_POST['form_event']['salle_id'];
 				$depreg = preg_match('/^[a-zA-Z0-9\s-]+$/', $salle);
-				//Rechercher toutes les salles pour les insérer dans le formulaire de création
-				$salle_manager = new SalleManager();
-				$salles = $salle_manager->findAll();
 				
 				// Description
 				$htmlScTa = htmlspecialchars($_POST['form_event']['description']);
@@ -104,10 +105,10 @@ class EventController extends Controller
 
 				}
 
-				$this->show('event/creer', ['erreurs' => $erreurs]);
+				$this->show('event/creer', [ ['erreurs' => $erreurs], ['salles' => $salles]]);
 			}
 
-			$this->show('event/creer', ['erreurs' => $erreurs]);
+			$this->show('event/creer', [ ['erreurs' => $erreurs], ['salles' => $salles]]);
 		} else  {
 
 			$this->redirectToRoute('login');
