@@ -4,19 +4,22 @@
 <main class="container-fluid">
 	<div class="row">
 		<h1>Recherche d'Evénements</h1>
+		<br>
+		<?php var_dump($events); ?>
 	</div>
 
 		<!-- Formulaire -->
 	<div class="row">
 		<section class="col-md-5">
-			<form class="form-horizontal" id="formRecherche" method="POST">
+			<form class="form-horizontal" id="formRecherche" method="GET">
 				<div class="form-group row">
 					<label for="lieu" class="col-sm-4 col-form-label">Département </label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="lieu" name="lieu" list="departement">
+						<input type="text" class="form-control" id="lieu" name="departement" list="departement">
 						<datalist id="departement">
-							<option value="75 - Paris"></option>
-							<option value="95 - Val-d-Oise"></option>
+							<option value="<?php if(isset($_GET['departement'])) echo $_GET['departement'] ; ?>"><?php if(isset($_GET['departement'])) echo $_GET['departement'] ; ?></option>
+							<option value="Paris">75 - Paris</option>
+							<option value="Val-d-Oise">95 - Val-d-Oise</option>
 						</datalist>
 					</div>	
 				</div>
@@ -24,8 +27,8 @@
 				<div class="form-group row">
 					<label for="date" class="col-sm-4 col-form-label">Dates</label>
 					<div class="col-sm-8">
-						<input type="date" class="form-control" name="date_debut" placeholder="...">
-						<input type="date" class="form-control" name="date_fin" placeholder="...">
+						<input type="date" class="form-control" name="date_debut" placeholder="..." value="<?php if(isset($_GET['date_debut'])) echo $_GET['date_debut'] ; ?>">
+						<input type="date" class="form-control" name="date_fin" placeholder="..." value="<?php if(isset($_GET['date_fin'])) echo $_GET['date_fin'] ; ?>">
 					</div>
 				</div>
 
@@ -33,9 +36,11 @@
 					<label for="niveau" class="col-sm-4 col-form-label">Niveau</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="niveau" name="niveau">
-							<option>Débutant</option>
-							<option>Intermédiaire</option>
-							<option>Confirmé</option>
+							<option value="<?php if(isset($_GET['niveau'])) echo $_GET['niveau'] ; ?>"><?php if(isset($_GET['niveau'])) echo $_GET['niveau'] ; ?></option>
+							<option value="Débutant">Débutant</option>
+							<option value="Intermédiaire">Intermédiaire</option>
+							<option value="Confirmé">Confirmé</option>
+							<option value="Tout niveaux">Tout niveaux</option>
 						</select>		  		 
 					</div>
 				</div>
@@ -44,9 +49,10 @@
 					<label for="sexe" class="col-sm-4 col-form-label">Sexe</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="sexe" name="sexe">
-							<option>Homme</option>
-							<option>Femme</option>
-							<option>Mixte</option>
+							<option value="<?php if(isset($_GET['sexe'])) echo $_GET['sexe'] ; ?>"><?php if(isset($_GET['sexe'])) echo $_GET['sexe'] ; ?></option>
+							<option value="Homme">Homme</option>
+							<option value="Femme">Femme</option>
+							<option value="Mixte">Mixte</option>
 						</select>		  		 
 					</div>
 				</div>
@@ -55,8 +61,9 @@
 					<label for="duree" class="col-sm-4 col-form-label">Durée</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="duree" name="duree">
-							<option>1h</option>
-							<option>2h</option>
+							<option value="<?php if(isset($_GET['duree'])) echo $_GET['duree'] ; ?>"><?php if(isset($_GET['duree'])) echo $_GET['duree'] ; ?></option>
+							<option value="01:00">1h</option>
+							<option value="02:00">2h</option>
 						</select>		  		 
 					</div>
 				</div>
@@ -113,7 +120,7 @@
 		<section class="col-sm-10 col-sm-offset-1">
 			<h2>Liste des résultats</h2>
 			
-			<?php if(isset($_POST['search'])): ?>
+			<?php if(isset($_GET['search'])): ?>
 				<?php foreach ($events as $event): ?>	
 				<figure class="col-sm-10 col-sm-offset-1">
 					<div class="row">

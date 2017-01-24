@@ -7,7 +7,6 @@
 			<h1>Connexion</h1>
 			<?php if (!empty($erreurs)): ?>
 				<ul class="alert alert-danger">
-					<?php echo $_POST['form_login']['email'] ?>
 					<?php foreach ($erreurs as $erreur): ?>
 						<li> <?= $erreur ?> </li>
 					<? endforeach; ?>

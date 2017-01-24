@@ -32,10 +32,15 @@ class DefaultController extends Controller
 		
 			// $erreurs = [];
 
-			if ( isset($_POST['search']) ) {
+			if ( isset($_GET['search']) ) {
 				
 				$event_manager = new EventManager;
-				$events = $event_manager->findAll();
+				$events = $event_manager->findEvents($_GET['departement'],
+					$_GET['date_debut'],
+					$_GET['date_fin'],
+					$_GET['niveau'],
+					$_GET['sexe'],
+					$_GET['duree']);
 
 				// Filtre et Validation
 

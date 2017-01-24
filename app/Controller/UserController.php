@@ -110,8 +110,8 @@ class UserController extends Controller
 	        } 
 
 	        // Sexe
-	        if( $_POST['form_register_util']['sexe'] != 'Homme' ||
-	        	$_POST['form_register_util']['sexe'] != 'Femme')  {
+	        if( ! ($_POST['form_register_util']['sexe'] == 'Homme' ||
+	        	$_POST['form_register_util']['sexe'] == 'Femme'))  {
 
 	            $erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
 	        }
