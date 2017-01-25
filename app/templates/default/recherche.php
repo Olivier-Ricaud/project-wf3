@@ -3,7 +3,7 @@
 <?php $this->start('main_content') ?>
 <main class="container-fluid">
 	<div class="row">
-		<h1>Recherche d'Evénements</h1>
+		<h1>Recherche d'événements</h1>
 	</div>
 
 		<!-- Formulaire -->
@@ -75,7 +75,7 @@
 				<!-- Premier Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="list-group-item-heading">Résultats des Derniers Matchs :</h4>
+						<h4 class="list-group-item-heading">Résultats des derniers matchs :</h4>
 					</div>
 					
 					<table class="table table-striped table-hover">
@@ -92,7 +92,7 @@
 				<!-- Deuxième Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="list-group-item-heading">Prochain(s) Rdv(s) :</h4>
+						<h4 class="list-group-item-heading">Prochain(s) rdv(s) :</h4>
 					</div>
 				
 					<table class="table table-striped table-hover">
@@ -120,9 +120,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -135,9 +135,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -150,9 +150,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>

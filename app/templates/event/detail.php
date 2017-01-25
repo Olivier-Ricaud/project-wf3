@@ -34,7 +34,7 @@
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading">sexe des joueurs recherché</div>
+					<div class="panel-heading"><i class="fa fa-venus-mars" aria-hidden="true"></i> sexe des joueurs recherchés</div>
 					<div class="panel-body">Mixte</div>
 				</div>
 			</div>
@@ -49,13 +49,13 @@
 			<div class="col-xs-6 col-md-4">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> durée</div>
-					<div class="panel-body">1 heures</div>
+					<div class="panel-body">1 heure</div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-4">
 				<div class="panel panel-default">
-					<div class="panel-heading">niveau recomendé</div>
+					<div class="panel-heading"><i class="fa fa-futbol-o" aria-hidden="true"></i> niveau recommandé</div>
 					<div class="panel-body">Amateur</div>
 				</div>
 			</div>
@@ -109,168 +109,6 @@
 						</td>
 						<!-- Bouton END -->	
 					</tr> 
-
-					<tr>
-						<td>2</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							Status <span class="caret"></span></button>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">En attente</a></li>
-								<li><a href="#">Validée</a></li>
-							</ul>
-						</div>
-						<a href="#" class="btn btn-danger">Retirer</a></td>
-					</tr>
-					
-					<tr>
-								
-						<td>3</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>4</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>5</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-						
-					<tr>
-						<td>6</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>7</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-					
-					<tr>
-						<td>8</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>9</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
-
-					<tr>
-						<td>10</td>
-						<td><a href="#">Alex</a></td>
-						<td>Intermediaire</td>
-						<td>M</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-								Status <span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">En attente</a></li>
-									<li><a href="#">Validée</a></li>
-								</ul>
-							</div>
-							<a href="#" class="btn btn-danger">Retirer</a>
-						</td>
-					</tr>
 
 				</tbody>
 			</table>

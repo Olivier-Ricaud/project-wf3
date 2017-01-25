@@ -42,9 +42,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -57,9 +57,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -72,9 +72,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -95,9 +95,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -110,9 +110,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>
@@ -125,9 +125,9 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p>titre de l'événement</p>
+							<p>Titre de l'événement</p>
 							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
+							<p>Nombre de joueurs inscrits 1/10</p>
 						</div> 
 					</div>
 				</figure>

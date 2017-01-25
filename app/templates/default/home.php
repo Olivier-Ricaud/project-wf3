@@ -44,12 +44,12 @@
 
 		<div class="col-sm-4">
 			<h3><i class="fa fa-street-view" aria-hidden="true"></i></i> Localisation</h3>
-			<p>Localise un événément qui est dans ta région.</p>
+			<p>Localise un événement qui est dans ta région.</p>
 		</div>
 
 		<div class="col-sm-4">
-			<h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> Discutez</h3>
-			<p>Chat avec les autres membres d'un événement pour vous organisez.</p>
+			<h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> Discuter</h3>
+			<p>Chat avec les autres membres d'un événement pour vous organiser.</p>
 		</div>
 	</section>
 
@@ -57,25 +57,25 @@
 		<h2>L'équipe</h2>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/bart.jpg') ?>" alt="photo de profil de l'equipe">
 			<p>Olivier Ricaud</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> Profil LinkedIn</a>
 		</div>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/naruto.png') ?>" alt="photo de profil de l'equipe">
 			<p>Alexandre Hak</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> Profil LinkedIn</a>
 		</div>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/mario.png') ?>" alt="photo de profil de l'equipe">
 			<p>Julien Lombard</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> Profil LinkedIn</a>
 		</div>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/fry.png') ?>" alt="photo de profil de l'equipe">
 			<p>Thomas Piussan</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> ProfilLinkedIn</a>
 		</div>
@@ -94,7 +94,7 @@
 				</div>
 
 				<div class="form-group row">
-					<label for="prenom" class="col-xs-12 col-sm-2 col-form-label">Prenom </label>
+					<label for="prenom" class="col-xs-12 col-sm-2 col-form-label">Prénom </label>
 					<div class="col-xs-12 col-sm-8">
 						<input type="text" class="form-control" id="prenom" name="prenom" aria-describedby="Champ prenom de l'utilisateur" placeholder="Votre prenom...">
 					</div>
