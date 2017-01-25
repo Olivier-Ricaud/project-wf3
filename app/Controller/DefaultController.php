@@ -5,6 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \Manager\EventManager; 
+use \Manager\SalleManager; 
 
 class DefaultController extends Controller
 {
