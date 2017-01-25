@@ -124,7 +124,10 @@
 	<div class="row">
 		<section class="col-sm-10 col-sm-offset-1">
 			<h2>Liste des résultats</h2>
-			
+
+			<?php  echo '<pre>';
+			var_dump($events);
+			echo'</pre>' ?>
 			<?php if(isset($_GET['search'])): ?>
 				<?php foreach ($events as $event): ?>	
 				<figure class="col-sm-10 col-sm-offset-1">
@@ -139,6 +142,7 @@
 							<p>Date : <?= $this->e($event['date']) ?></p>
 							<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
 							<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
+							<p>Joueurs inscrits : <?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'/ 10' ?></p>
 						</div> 
 					</div>
 				</figure>
