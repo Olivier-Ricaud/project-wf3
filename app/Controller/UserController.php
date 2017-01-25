@@ -106,10 +106,10 @@ class UserController extends Controller
 	            $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
 	        } 
 
-	        if( $_POST['form_register_util']['sexe'] != 'Homme' ||
-	        	$_POST['form_register_util']['sexe'] != 'Femme')  {
+	        if( ! ($_POST['form_register_util']['sexe'] == 'Homme' ||
+                $_POST['form_register_util']['sexe'] == 'Femme')) {
 
-	            $erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
+	        	$erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
 	        }
 
 	        // Validation et Filtrage [form_register_user]
@@ -145,7 +145,7 @@ class UserController extends Controller
 
 				$utilisateur = new UtilisateurManager();
 				$utilisateur->insert($_POST['form_register_util']);
-				$this->redirectToRoute('home');
+				$this->redirectToRoute('login');
 
 	        }
 

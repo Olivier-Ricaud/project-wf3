@@ -14,7 +14,8 @@ class JoueurManager extends \W\Manager\Manager {
 			INNER JOIN wusers w ON j.user_id = w.id 
 			INNER JOIN utilisateurs u ON w.id = u.user_id 
 			INNER JOIN statuts s ON s.id = j.statut_id 
-			WHERE j.event_id= $id";
+			WHERE j.event_id= $id
+			LIMIT 0,10";
 
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
@@ -43,6 +44,25 @@ class JoueurManager extends \W\Manager\Manager {
 	    }
 
 	    return false;
+	}
+
+	/**
+	 * Efface un joueur d'un événément en fonction de son identifiant
+	 * @param mixed $userId L'identifiant de l'utilisateur de la ligne à effacer
+	 * @param mixed $eventId L'identifiant de l'evenement de la ligne à effacer
+	 * @return mixed La valeur de retour de la méthode execute()
+	 */
+	public function deleteJoueur($userId, $eventId)
+	{
+		if (!is_numeric($userId) && !is_numeric($eventId)){
+			return false;
+		}
+
+		$sql = "DELETE FROM joueurs WHERE user_id = :userId AND event_id = :eventId LIMIT 1";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":userId", $userId);
+		$sth->bindValue(":eventId", $eventId);
+		return $sth->execute();
 	}
 
 }

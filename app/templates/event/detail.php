@@ -77,7 +77,7 @@
 				<?php if ($retirer == false):?>
 				<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
 				<?php else: ?>
-				<a href="" class="btn btn-danger" >Retirer</a>
+				<a href="<?= $this->url('retirer', ['id' => $event['id']]) ?>" class="btn btn-danger" >Retirer</a>
 				<?php endif; ?>
 			</div>
 
@@ -95,11 +95,11 @@
 			<table class="table table-striped table-hover ">
 				<thead>
 					<tr>
-						<th>#</th>
 						<th>Joueur</th>
 						<th>Niveau</th>
 						<th>Genre</th>
 						<th>Statut</th>
+
 						<th>Edit (Admin)</th>
 					</tr>
 				</thead>
@@ -107,11 +107,11 @@
 				<tbody>
 					<?php foreach ($joueurs as $joueur): ?>
 					<tr>
-						<td>1</td>
 						<td><?= $this->e($joueur['prenom']).' '.$this->e($joueur['nom'])?></td>
 						<td><?= $this->e($joueur['niveau'])?></td>
 						<td><?= $this->e($joueur['sexe'])?></td>
 						<td><?= $this->e($joueur['statut'])?></td>
+
 						<td>
 							<a href="" class="btn btn-primary">Confirmer</a>
 							<a href="#" class="btn btn-danger">Retirer</a>
