@@ -54,7 +54,7 @@ class EventController extends Controller
 				}
 
 				// Date
-				if (!$TimeReg || date("U", $whatDate) < time()) {
+				if (!$TimeReg || date("Y-m-d", $whatDate) < date("Y-m-d", time()) ) {
 					$erreurs[] = "La date entrée n'est pas valide.";
 				}
 				// Heure

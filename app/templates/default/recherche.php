@@ -135,10 +135,10 @@
 							</div>
 						</a>
 						<div class="col-xs-6">
-							<p><?= $this->e($event['titre']) ?></p>
-							<p><?= $this->e($event['date']) ?></p>
-							<p><?= $this->e($event['sexe']) ?></p>
-							<p><?= $this->e($event['niveau']) ?></p>
+							<p>Titre : <?= $this->e($event['titre']) ?></p>
+							<p>Date : <?= $this->e($event['date']) ?></p>
+							<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
+							<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
 						</div> 
 					</div>
 				</figure>

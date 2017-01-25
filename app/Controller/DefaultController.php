@@ -54,7 +54,7 @@ class DefaultController extends Controller
 
 				// Date
 				if ($_GET['date_debut'] > $_GET['date_fin'] ||
-					 date('U' ,$_GET['date_debut']) < time()) {
+					 $_GET['date_debut'] < date("Y-m-d",time()) ) {
 					$erreurs[] = 'Les champs de dates ne sont pas valides';
 				}
 
