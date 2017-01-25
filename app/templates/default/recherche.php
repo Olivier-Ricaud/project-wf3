@@ -66,7 +66,7 @@
 					<label for="duree" class="col-sm-4 col-form-label">Durée</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="duree" name="duree">
-							<option value="<?php if(isset($_GET['duree'])) echo $_GET['duree'] ; ?>"><?php if(isset($_GET['duree'])) echo $_GET['duree'] ; ?></option>
+							<option></option>
 							<option value="01:00">1h</option>
 							<option value="02:00">2h</option>
 						</select>		  		 
