@@ -10,7 +10,7 @@ class JoueurManager extends \W\Manager\Manager {
 	 */
 	public function infosJoueurs($id) {
 
-		$sql = "SELECT u.nom, u.prenom, u.niveau, u.sexe, s.statut FROM joueurs j 
+		$sql = "SELECT u.nom, u.prenom, u.niveau, u.sexe, s.statut, j.user_id FROM joueurs j 
 			INNER JOIN wusers w ON j.user_id = w.id 
 			INNER JOIN utilisateurs u ON w.id = u.user_id 
 			INNER JOIN statuts s ON s.id = j.statut_id 
@@ -26,7 +26,8 @@ class JoueurManager extends \W\Manager\Manager {
 
 	/**
 	 * Teste si un utilisateur est déja présent dans la table joueur (et donc inscrit à un événément)
-	 * @param string $id est l'id de l'utilisateur à tester
+	 * @param int $userId est l'id de l'utilisateur à tester
+	 * @param int $eventId est l'id de l'événement sur lequelle est l'utilisateur dans son navigateur
 	 * @return boolean true si présent en base de données, false sinon
 	 */
 	public function joueurExist($userId, $eventId)
@@ -64,5 +65,23 @@ class JoueurManager extends \W\Manager\Manager {
 		$sth->bindValue(":eventId", $eventId);
 		return $sth->execute();
 	}
+
+	/**
+	 * Efface tous les joueurs d'un événément en
+	 * @param mixed $eventId L'identifiant de l'evenement des lignes à supprimer
+	 * @return mixed La valeur de retour de la méthode execute()
+	 */
+	public function deleteAllJoueur($id)
+	{
+		if ( !is_numeric($id) ){
+			return false;
+		}
+
+		$sql = "DELETE FROM joueurs WHERE event_id = :id LIMIT 10";
+		$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":id", $id);
+		return $sth->execute();
+	}
+
 
 }

@@ -11,6 +11,7 @@
 
 	<!-- DETAIL EVENEMENTS -->
 	<section class="row">
+		<section class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-map-marker" aria-hidden="true"></i>Lieu</div>
@@ -38,7 +39,9 @@
 					<div class="panel-body"><?= $this->e($event['sexe']) ?></div>
 				</div>
 			</div>
+		</section>
 
+		<section class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-eur" aria-hidden="true"></i> tarif</div>
@@ -66,6 +69,7 @@
 					<div class="panel-body"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
 				</div>
 			</div>
+		</section>
 	</section>
 
 	<!-- DESCRIPTION ET MAP -->
@@ -77,7 +81,7 @@
 				<?php if ($retirer == false):?>
 				<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
 				<?php else: ?>
-				<a href="<?= $this->url('retirer', ['id' => $event['id']]) ?>" class="btn btn-danger" >Retirer</a>
+				<a href="<?= $this->url('desinscrire', ['id' => $event['id']]) ?>" class="btn btn-danger" >Se désinscrire</a>
 				<?php endif; ?>
 			</div>
 
@@ -95,31 +99,41 @@
 			<table class="table table-striped table-hover ">
 				<thead>
 					<tr>
+						<th>id</th>
 						<th>Joueur</th>
 						<th>Niveau</th>
 						<th>Genre</th>
 						<th>Statut</th>
-
-						<th>Edit (Admin)</th>
+						
+						<?php if ($host == true): ?>
+							<th>Edit (Admin)</th>
+						<?php endif; ?>
+						
 					</tr>
 				</thead>
 
 				<tbody>
 					<?php foreach ($joueurs as $joueur): ?>
 					<tr>
+						<td><?= $this->e($joueur['user_id'])?></td>
 						<td><?= $this->e($joueur['prenom']).' '.$this->e($joueur['nom'])?></td>
 						<td><?= $this->e($joueur['niveau'])?></td>
 						<td><?= $this->e($joueur['sexe'])?></td>
 						<td><?= $this->e($joueur['statut'])?></td>
-
+						
+						<?php if ($host == true): ?>
 						<td>
-							<a href="" class="btn btn-primary">Confirmer</a>
-							<a href="#" class="btn btn-danger">Retirer</a>
+							<a href="<?= $this->url('confirmer', ['userId' => $joueur['user_id'], 'eventId' => $event['id'] ]) ?>" class="btn btn-primary">Confirmer</a>
+							<a href="<?= $this->url('retirer', ['userId' => $joueur['user_id'], 'eventId' => $event['id'] ]) ?>" class="btn btn-danger">Retirer</a>
 						</td>	
+					<?php endif; ?>
 					</tr> 
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+			<?php if ($host == true): ?>
+				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
+			<?php endif; ?>
 		</div>
 		<!-- FIN DU TABLEAU DES JOUEURS INSCRITS -->
 

@@ -6,6 +6,7 @@ use \W\Controller\Controller;
 use \Manager\EventManager;
 use \Manager\SalleManager;
 use \Manager\JoueurManager;
+use \Manager\HostManager;
 
 
 class EventController extends Controller
@@ -102,8 +103,10 @@ class EventController extends Controller
 
 				if ( empty($erreurs) ) {
 
-					$event_manager->insert($_POST['form_event']);
-					$this->redirectToRoute('detail');
+					$event = $event_manager->insert($_POST['form_event']);
+
+
+					$this->redirectToRoute('detail', ['id' => $event['id']]);
 
 				}
 
@@ -138,24 +141,37 @@ class EventController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
+
 			// Requete pour aller chercher les données de l'événenement
 			$event_manager = new EventManager();
-			$event = $event_manager->find($id);
+			//Execute les fonctions uniquement si l'id de l'événement existe, autrement renvoi à la page de recherche
+			if($event = $event_manager->find($id)) {
 
-			// Requete pour aller chercher les données de la salle correspondant à l'événement
-			$salle_manager = new SalleManager();
-			$salle = $salle_manager->find($event['salle_id']);
+				//Vérifier si la personne présente sur la page est l'administrateur de l'événement
+				$host_manager = new HostManager();
+				$host = false;
+				if ( $host_manager->getHost($_SESSION['user']['id'],$event['id']) ) {
+					$host = true;
+				}
 
-			$joueurs_manager = new JoueurManager();
-			$joueurs = $joueurs_manager->infosJoueurs($id);
+				// Requete pour aller chercher les données de la salle correspondant à l'événement
+				$salle_manager = new SalleManager();
+				$salle = $salle_manager->find($event['salle_id']);
 
-			// Gérer l'apparition du boutton d'inscription ou de désinscription à un événénement
-			$retirer = false;
-			if ( $joueurs_manager->joueurExist($_SESSION['user']['id'],$event['id'] ) ) {
-				$retirer = true;
+				$joueurs_manager = new JoueurManager();
+				$joueurs = $joueurs_manager->infosJoueurs($id);
+
+				// Gérer l'apparition du boutton d'inscription ou de désinscription à un événénement
+				$retirer = false;
+				if ( $joueurs_manager->joueurExist($_SESSION['user']['id'],$event['id'] ) ) {
+					$retirer = true;
+				}
+
+				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host ]);
+			} else {
+				$this->redirectToRoute('recherche');
 			}
 
-			$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer ]);
 		} else {
 			$this->redirectToRoute('login');
 		}
