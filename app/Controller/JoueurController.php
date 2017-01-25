@@ -30,7 +30,7 @@ class JoueurController extends Controller
 	 * Page de détail d'événement : Fonction de désinscription à un événenement.
 	 * @param id de l'événement actuellement affiché dans le navigateur
 	 */
-	public function retirer($id)
+	public function desinscrire($id)
 	{
 
 		$joueur_manager = new JoueurManager();
@@ -40,4 +40,5 @@ class JoueurController extends Controller
 		$this->redirectToRoute('detail', [ 'id' => $id]);
 
 	}
+
 }

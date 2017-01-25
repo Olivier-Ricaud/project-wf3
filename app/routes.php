@@ -24,6 +24,11 @@
 
 		// Routes concernant les utilisateurs participant à l'évenement du site
 		['GET|POST', '/participer/[i:id]', 'joueur#participer', 'participer'],
-		['GET|POST', '/retirer/[i:id]', 'joueur#retirer', 'retirer']
+		['GET|POST', '/desinscrire/[i:id]', 'joueur#desinscrire', 'desinscrire'],
+
+		// Routes concernant les utilisateurs participant à l'évenement du site
+		['GET|POST', '/confirmer/[i:userId]/[i:eventId]', 'host#confirmer', 'confirmer'],
+		['GET|POST', '/retirer/[i:userId]/[i:eventId]', 'host#retirer', 'retirer'],
+		['GET|POST', '/delete-event/[i:id]', 'host#deleteEvent', 'delete_event'],
 
 	);
