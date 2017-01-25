@@ -5,7 +5,7 @@ namespace Controller;
 use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \Manager\EventManager; 
-use \Manager\SalleManager; 
+use \Manager\SalleManager;
 
 class DefaultController extends Controller
 {
@@ -59,12 +59,13 @@ class DefaultController extends Controller
 					$erreurs[] = 'Les champs de dates ne sont pas valides';
 				}
 
-
-				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs]);
+				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs]);
 			}
 
+			$nextRdvs_manager = new EventManager();
+			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
 
-			$this->show('default/recherche');
+			$this->show('default/recherche', ['nextRdvs' => $nextRdvs]);
 		} else  {
 
 			$this->redirectToRoute('login');

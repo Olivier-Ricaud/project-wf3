@@ -106,15 +106,17 @@
 					<div class="panel-heading">
 						<h4 class="list-group-item-heading">Prochain(s) Rdv(s) :</h4>
 					</div>
-				
-					<table class="table table-striped table-hover">
-						<tbody data-link="row" class="rowlink">
-							<tr> <!-- Fonction JQuery pour faire réagir la ligne au clique --> 
-								<td><a href="index.php?page=detail">28/12/2016</a></td>
-								<td>Paris</td>
-							</tr>
-						</tbody>
-					</table> 
+
+					<!-- Affichage par événement -->
+					<!-- Fonction JQuery pour faire réagir la ligne au clique -->
+					<?php foreach ($nextRdvs as $nextRdv): ?>
+						<table class="table table-striped table-hover">
+							<tbody data-link="row" class="rowlink">		
+								<td><?= $this->e($nextRdv['date']) ?></td>
+								<td><?= $this->e($nextRdv['ville']) ?></td>
+							</tbody>
+						</table> 
+					<?php endforeach; ?>
 				</div> <!-- End div panel -->
 			</div>
 		</div> <!-- End col-sm-5 End col-sm-offset-2 -->
