@@ -39,6 +39,7 @@ class EventController extends Controller
 				// Salle
 				$salle = $_POST['form_event']['salle_id'];
 				$depreg = preg_match('/^[0-9]+$/', $salle);
+
 				
 				// Description
 				$htmlScTa = htmlspecialchars($_POST['form_event']['description']);
@@ -46,16 +47,15 @@ class EventController extends Controller
 				// Validation et Filtrage [form_event]
 
 				// Titre
-				if ( empty( $_POST['form_event']['titre']) ||
-					(strlen($_POST['form_event']['titre']) <3) ||
+				if ((strlen($_POST['form_event']['titre']) <3) ||
 					(strlen($_POST['form_event']['titre']) > 100) ||
-					!preg_match('/^[a-zA-Z\s_]+$/', $_POST['form_event']['titre'])) {
+					!preg_match('/^[a-zA-Z0-9\s_]+$/', $_POST['form_event']['titre'])) {
 					
 					$erreurs[] = 'Le champ "titre" doit être valide (entre 3 et 100 caractères).';
 				}
 
 				// Date
-				if (!$TimeReg || date("U", $whatDate) < time()) {
+				if (!$TimeReg || date("Y-m-d", $whatDate) < date("Y-m-d", time()) ) {
 					$erreurs[] = "La date entrée n'est pas valide.";
 				}
 				// Heure
@@ -111,6 +111,7 @@ class EventController extends Controller
 			}
 
 			$this->show('event/creer', ['erreurs' => $erreurs, 'salles' => $salles]);
+
 		} else  {
 
 			$this->redirectToRoute('login');

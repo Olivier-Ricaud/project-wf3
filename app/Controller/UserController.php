@@ -82,6 +82,7 @@ class UserController extends Controller
 
 			// Validation et Filtrage [form_register_util]
 			
+			// Nom
 			if( empty( $_POST['form_register_util']['nom']) ||
 				 (strlen($_POST['form_register_util']['nom']) <3) ||
 				 (strlen($_POST['form_register_util']['nom']) > 100) ||
@@ -91,6 +92,7 @@ class UserController extends Controller
 	   
 	        }
 
+	        // Prenom
 	        if( empty($_POST['form_register_util']['prenom']) ||
 	         	(strlen($_POST['form_register_util']['prenom']) <3) ||
 	          	(strlen($_POST['form_register_util']['prenom']) > 100) ||
@@ -99,6 +101,7 @@ class UserController extends Controller
 	            $erreurs[] = 'Le champ "prénom" doit être valide (entre 3 et 100 caractères).';
 	        }
 
+	        // Departement
 	        if( empty($_POST['form_register_util']['departement']) ||
 	        	(strlen($_POST['form_register_util']['departement']) <3) ||
 	        	(strlen($_POST['form_register_util']['departement']) > 100)) {
@@ -106,14 +109,17 @@ class UserController extends Controller
 	            $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
 	        } 
 
+
+	        // Sexe
 	        if( ! ($_POST['form_register_util']['sexe'] == 'Homme' ||
-                $_POST['form_register_util']['sexe'] == 'Femme')) {
+	        	$_POST['form_register_util']['sexe'] == 'Femme'))  {
 
 	        	$erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
 	        }
 
 	        // Validation et Filtrage [form_register_user]
 
+	        // Email
 	        if (empty($_POST['form_register_user']['email']) ||
 	        	 strlen($_POST['form_register_user']['email']) > 255 ||
 	        	 !filter_var($_POST['form_register_user']['email'], FILTER_VALIDATE_EMAIL)) {
@@ -127,15 +133,18 @@ class UserController extends Controller
 
 	        }
 
+	        // Password
 	        if (empty($_POST['form_register_user']['password']) ||
 	        	strlen($_POST['form_register_user']['password']) > 300) {
 	        	$erreurs[] = "Champ mot de passe requis.";
 	        }
 
+	        // Confirm password
 	        if ($_POST['form_register_user']['confirm_password'] != $_POST['form_register_user']['password']) {
 	        	$erreurs[] = "Le mot de passe ne correspond pas.";
 	        }
 	        
+	        // Si $erreurs vide, Validation OK
 	       if ( empty($erreurs)) {
 	            
 	            $wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
