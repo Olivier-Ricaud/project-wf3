@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'Organiser un match']) ?>
+    <?php $this->layout('layout', ['title' => 'Organiser un match']) ?>
 <?php $this->start('main_content') ?>
 <!-- Page de création d'événement -->
 <main class="container-fluid">
@@ -6,6 +6,8 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-2">
             <h1>Création d'événement</h1>
+            <?php var_dump($_POST['duree']) ?>
+            <?php var_dump($_POST['form_event']['heure']) ?>
             <?php if (!empty($erreurs)): ?>
 				<ul class="alert alert-danger">
 					<?php foreach ($erreurs as $erreur): ?>
