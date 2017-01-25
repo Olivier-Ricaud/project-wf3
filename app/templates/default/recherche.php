@@ -128,6 +128,7 @@
 			<h2>Liste des résultats</h2>
 			
 			<?php if(isset($_GET['search']) && empty($erreurs)): ?>
+				
 				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>	
 					<figure class="col-sm-10 col-sm-offset-1">
@@ -146,11 +147,11 @@
 								<p>Ville : <?= $this->e($event['ville']) ?></p>
 								<p>Code postal : <?= $this->e($event['cp']) ?></p>
 								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank">Site internet de la salle</a></p>
+								<p>Joueurs inscrits : <?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'/ 10' ?></p>
 							</div> 
 						</div>
 					</figure>
 				<?php endforeach; ?>
-
 			<?php endif; ?>
 		</section>
 	</div> <!-- End row Liste événement(s) -->

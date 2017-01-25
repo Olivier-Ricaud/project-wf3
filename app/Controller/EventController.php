@@ -72,8 +72,8 @@ class EventController extends Controller
 				}
 
 				// Durée
-				if( ! ($_POST['duree'] == '01:00' ||
-					 $_POST['duree'] == '02:00'))  {
+				if( ! ($_POST['form_event']['duree'] == '01:00' ||
+					 $_POST['form_event']['duree'] == '02:00'))  {
 
 				    $erreurs[] = 'Le champ "durée" doit correspondre aux choix proposés.';
 				}
@@ -161,13 +161,18 @@ class EventController extends Controller
 				$joueurs_manager = new JoueurManager();
 				$joueurs = $joueurs_manager->infosJoueurs($id);
 
+				// Compter le nombre de joueurs inscrits
+				$nbrsJoueurs = $joueurs_manager->countJoueurs($id);
+				//update table events pour afficher le nombre de joueurs dans la recherche events
+				$event_manager->update(['nbrs_joueurs' => $nbrsJoueurs],$id);
+
 				// Gérer l'apparition du boutton d'inscription ou de désinscription à un événénement
 				$retirer = false;
 				if ( $joueurs_manager->joueurExist($_SESSION['user']['id'],$event['id'] ) ) {
 					$retirer = true;
 				}
 
-				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host ]);
+				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host, 'nbrsJoueurs' => $nbrsJoueurs ]);
 			} else {
 				$this->redirectToRoute('recherche');
 			}

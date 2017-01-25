@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-24 16:27:58 +0000
+# Generation Time: 2017-01-25 14:12:20 +0000
 # ************************************************************
 
 
@@ -68,15 +68,23 @@ CREATE TABLE `events` (
   `description` text,
   `sexe` enum('Homme','Femme','Mixte') DEFAULT NULL,
   `niveau` enum('Débutant','Intermédiaire','Confirmé','Tout niveaux') DEFAULT NULL,
+  `nbrs_joueurs` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
 
-INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`)
+INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`, `nbrs_joueurs`)
 VALUES
-	(4,3,3,'Bonsoir Bonsoir','2017-01-27','18:30:00','02:00:00','Salut salut','Homme','Intermédiaire');
+	(5,3,1,'Premier Evenement','2017-02-03','19:00:00',NULL,'  Premier événément créer dans la base de données','Mixte','',1),
+	(6,3,2,'Deuxieme Evenement','2017-01-28','18:30:00',NULL,'  Deuxieme événement dans la base de données','Homme','Intermédiaire',NULL),
+	(10,3,3,'Troisieme Evenement','2017-01-27','18:00:00',NULL,' Troisième événément dans la base de données ','Femme','Confirmé',NULL),
+	(11,3,4,'Quatrieme Evenement','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','',NULL),
+	(16,3,4,'Salu','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','',NULL),
+	(18,5,1,'Nouvelle event','2017-01-29','18:00:00',NULL,'  Nouvelle evenement','Homme','Intermédiaire',NULL),
+	(19,5,1,'Nouvelle event','2017-01-29','18:00:00','02:00:00','   Nouvelle evenement ','Homme','Intermédiaire',NULL),
+	(20,5,1,'Nouvelle event','2017-01-29','18:00:00','01:00:00','  Nouvelle evenement','Homme','Intermédiaire',NULL);
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -101,7 +109,7 @@ LOCK TABLES `joueurs` WRITE;
 
 INSERT INTO `joueurs` (`id`, `user_id`, `event_id`, `equipe_id`, `statut_id`)
 VALUES
-	(12,3,4,NULL,1);
+	(26,3,5,NULL,1);
 
 /*!40000 ALTER TABLE `joueurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -200,8 +208,9 @@ LOCK TABLES `utilisateurs` WRITE;
 
 INSERT INTO `utilisateurs` (`id`, `user_id`, `nom`, `prenom`, `departement`, `sexe`, `niveau`)
 VALUES
-	(1,1,'PIUSSAN','Thomas','95 - Val-d-Oise','Homme',NULL),
-	(3,3,'Liu','Anais','75 - Paris','Homme','Débutant');
+	(3,3,'Liu','Anais','75 - Paris','Homme','Débutant'),
+	(4,4,'Piussan','charles','95 - Val-d-Oise','Femme',NULL),
+	(5,5,'Piussan','thomas','75 - Paris','Homme','Débutant');
 
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -225,8 +234,9 @@ LOCK TABLES `wusers` WRITE;
 
 INSERT INTO `wusers` (`id`, `username`, `password`, `email`)
 VALUES
-	(1,NULL,'$2y$10$rUkVLnpLwoeC5BHkTQYC6u.4rMhKuh9kF4naZJWyhGkcbagVZ9WMy','thomas.piussan@gmail.com'),
-	(3,'Dada','$2y$10$5LJ1dANMDTTsZMe/59aJ8Oi9OgcVwXOObzSxbpsS8NLjuXcQOZIz2','Anais.liu@gmail.com');
+	(3,'Dada','$2y$10$5LJ1dANMDTTsZMe/59aJ8Oi9OgcVwXOObzSxbpsS8NLjuXcQOZIz2','Anais.liu@gmail.com'),
+	(4,NULL,'$2y$10$M3LL0KkUxLxo8bZCSb3Ey.vY2flWcFEMDbXzcxhp89HyOxjJ5XowC','charles.p@gmail.com'),
+	(5,'Toto','$2y$10$u9xWPj.qY9iKqpLlwhjf4OrHCiXtGhvA25x9JYk5EwJn4bQyN/mlS','thomas.piussan@gmail.com');
 
 /*!40000 ALTER TABLE `wusers` ENABLE KEYS */;
 UNLOCK TABLES;

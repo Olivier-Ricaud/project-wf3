@@ -43,7 +43,7 @@
             <div class="form-group row">
                 <label for="duree" class="col-sm-3 col-form-label">Durée</label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="duree" name="duree">
+                    <select class="form-control" id="duree" name="form_event[duree]">
                         <option value="01:00">1h</option>
                         <option value="02:00">2h</option>
                     </select>              

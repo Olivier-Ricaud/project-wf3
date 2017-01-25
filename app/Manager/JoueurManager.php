@@ -48,6 +48,25 @@ class JoueurManager extends \W\Manager\Manager {
 	}
 
 	/**
+	 * Compte le nombre de joueurs inscrit à un événement
+	 * @param int $eventId est l'id de l'événement sur lequelle est l'utilisateur dans son navigateur
+	 * @return int total du nombre de joueurs inscrit
+	 */
+	public function countJoueurs($eventId)
+	{
+
+	    $sql = "SELECT COUNT(user_id) AS nb FROM joueurs WHERE event_id = $eventId LIMIT 10";
+	    
+	    $sth = $this->dbh->query($sql);
+	    
+	    $result = $sth->fetch(); 
+
+	    $nb = $result['nb'];
+		
+		return $nb;
+	}
+
+	/**
 	 * Efface un joueur d'un événément en fonction de son identifiant
 	 * @param mixed $userId L'identifiant de l'utilisateur de la ligne à effacer
 	 * @param mixed $eventId L'identifiant de l'evenement de la ligne à effacer

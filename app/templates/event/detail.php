@@ -25,11 +25,11 @@
 					<div class="panel-body"><?= $this->e($event['date']) ?></div>
 				</div>
 			</div>
-
+	
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-users" aria-hidden="true"></i> Nombre de joueurs inscrits</div>
-					<div class="panel-body">10</div>
+					<div class="panel-body"><?= $this->e($nbrsJoueurs) ?> /10</div>
 				</div>
 			</div>
 
@@ -79,7 +79,11 @@
 				<p><?= $this->e($event['description']) ?></p>
 
 				<?php if ($retirer == false):?>
-				<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+					<?php if($this->e($nbrsJoueurs) < 10): ?>
+						<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+					<?php else: ?>
+						<p class="btn btn-danger">MATCH FULL !</p>
+					<?php endif; ?>
 				<?php else: ?>
 				<a href="<?= $this->url('desinscrire', ['id' => $event['id']]) ?>" class="btn btn-danger" >Se désinscrire</a>
 				<?php endif; ?>
