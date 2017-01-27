@@ -6,6 +6,7 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
+use \Manager\EventManager;
 
 class UserController extends Controller
 {
@@ -173,7 +174,12 @@ class UserController extends Controller
 	public function profil()
 	{
 		if (isset($_SESSION['user'])) {
-			$this->show('user/profil');
+
+			$events_manager = new EventManager();
+			$events = $events_manager->userEvents($_SESSION['user']['id']);
+			print_r($_SESSION['user']['id']);
+
+			$this->show('user/profil',['events' => $events]);
 		} else  {
 
 			$this->redirectToRoute('login');

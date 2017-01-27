@@ -66,7 +66,7 @@
 					<label for="duree" class="col-sm-4 col-form-label">Durée</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="duree" name="duree">
-							<option value="<?php if(isset($_GET['duree'])) echo $_GET['duree'] ; ?>"><?php if(isset($_GET['duree'])) echo $_GET['duree'] ; ?></option>
+							<option></option>
 							<option value="01:00">1h</option>
 							<option value="02:00">2h</option>
 						</select>		  		 
@@ -106,15 +106,17 @@
 					<div class="panel-heading">
 						<h4 class="list-group-item-heading">Prochain(s) Rdv(s) :</h4>
 					</div>
-				
-					<table class="table table-striped table-hover">
-						<tbody data-link="row" class="rowlink">
-							<tr> <!-- Fonction JQuery pour faire réagir la ligne au clique --> 
-								<td><a href="index.php?page=detail">28/12/2016</a></td>
-								<td>Paris</td>
-							</tr>
-						</tbody>
-					</table> 
+
+					<!-- Affichage par événement -->
+					<!-- Fonction JQuery pour faire réagir la ligne au clique -->
+					<?php foreach ($nextRdvs as $nextRdv): ?>
+						<table class="table table-striped table-hover">
+							<tbody data-link="row" class="rowlink">		
+								<td><?= $this->e($nextRdv['date']) ?></td>
+								<td><?= $this->e($nextRdv['ville']) ?></td>
+							</tbody>
+						</table> 
+					<?php endforeach; ?>
 				</div> <!-- End div panel -->
 			</div>
 		</div> <!-- End col-sm-5 End col-sm-offset-2 -->
@@ -124,28 +126,31 @@
 	<div class="row">
 		<section class="col-sm-10 col-sm-offset-1">
 			<h2>Liste des résultats</h2>
-
-			<?php  echo '<pre>';
-			var_dump($events);
-			echo'</pre>' ?>
-			<?php if(isset($_GET['search'])): ?>
+			
+			<?php if(isset($_GET['search']) && empty($erreurs)): ?>
+				
+				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>	
-				<figure class="col-sm-10 col-sm-offset-1">
-					<div class="row">
-						<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
+					<figure class="col-sm-10 col-sm-offset-1">
+						<div class="row">
+							<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
+								<div class="col-xs-6">
+									<img src="assets/img/arena3.png" alt="image de l'event">
+								</div>
+							</a>
 							<div class="col-xs-6">
-								<img src="assets/img/arena3.png" alt="image de l'event">
-							</div>
-						</a>
-						<div class="col-xs-6">
-							<p>Titre : <?= $this->e($event['titre']) ?></p>
-							<p>Date : <?= $this->e($event['date']) ?></p>
-							<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
-							<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
-							<p>Joueurs inscrits : <?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'/ 10' ?></p>
-						</div> 
-					</div>
-				</figure>
+								<p>Titre : <?= $this->e($event['titre']) ?></p>
+								<p>Date : <?= $this->e($event['date']) ?></p>
+								<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
+								<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
+								<p>Adresse : <?= $this->e($event['adresse']) ?></p>
+								<p>Ville : <?= $this->e($event['ville']) ?></p>
+								<p>Code postal : <?= $this->e($event['cp']) ?></p>
+								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank">Site internet de la salle</a></p>
+								<p>Joueurs inscrits : <?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'/ 10' ?></p>
+							</div> 
+						</div>
+					</figure>
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</section>

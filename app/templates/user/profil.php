@@ -34,50 +34,29 @@
 		<section class="col-sm-9">
 			<h2>Mes événements à venir</h2>
 
-				<figure class="col-sm-10 col-sm-offset-1">
-					<div class="row">
-						<a href="index.php?page=detail">
+				<!-- Affichage par événement -->
+				<?php foreach ($events as $event): ?>	
+					<figure class="col-sm-10 col-sm-offset-1">
+						<div class="row">
+							<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
+								<div class="col-xs-6">
+									<img src="assets/img/arena3.png" alt="image de l'event">
+								</div>
+							</a>
 							<div class="col-xs-6">
-								<img src="assets/img/arena3.png" alt="image de l'event">
-							</div>
-						</a>
-						<div class="col-xs-6">
-							<p>titre de l'événement</p>
-							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
-						</div> 
-					</div>
-				</figure>
-
-				<figure class="col-sm-10 col-sm-offset-1">
-					<div class="row">
-						<a href="index.php?page=detail">
-							<div class="col-xs-6">
-								<img src="assets/img/terrainExterieur.jpg" alt="image de l'event">
-							</div>
-						</a>
-						<div class="col-xs-6">
-							<p>titre de l'événement</p>
-							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
-						</div> 
-					</div>
-				</figure>
-
-				<figure class="col-sm-10 col-sm-offset-1">
-					<div class="row">
-						<a href="index.php?page=detail">
-							<div class="col-xs-6">
-								<img src="assets/img/arena3.png" alt="image de l'event">
-							</div>
-						</a>
-						<div class="col-xs-6">
-							<p>titre de l'événement</p>
-							<p>Lieu / date </p>
-							<p>Nombres de joueurs inscrits 1/10</p>
-						</div> 
-					</div>
-				</figure>
+								<p>Titre : <?= $this->e($event['titre']) ?></p>
+								<p>Date : <?= $this->e($event['date']) ?></p>
+								<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
+								<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
+								<p>Adresse : <?= $this->e($event['adresse']) ?></p>
+								<p>Ville : <?= $this->e($event['ville']) ?></p>
+								<p>Code postal : <?= $this->e($event['cp']) ?></p>
+								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank">Site internet de la salle</a></p>
+							</div> 
+						</div>
+					</figure>
+				<?php endforeach; ?>
+				
 		</section>
 	</div> <!-- end of row -->
 	<!-- FIN SECTION EVENEMENTS A VENIR -->
