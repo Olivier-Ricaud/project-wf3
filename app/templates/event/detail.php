@@ -4,7 +4,7 @@
 <main class="container-fluid">
 	<section class="row">
 			<div class="imgBackground">
-				<img src="assets/img/futsal2.jpg" alt="exemple"> 
+				<img src="<?= $this->assetUrl('salle/'.$this->e($salle['id']).'.jpg') ?>" alt="exemple">
 				<h1 class="title"><?= $this->e($event['titre']) ?></h1>
 			</div>
 	</section>
