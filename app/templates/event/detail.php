@@ -66,7 +66,7 @@
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading">Site internet de la salle</div>
-					<div class="panel-body"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
+					<div class="panel-body"><i class="fa fa-futbol-o" aria-hidden="true"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
 				</div>
 			</div>
 		</section>
@@ -115,7 +115,6 @@
 						
 					</tr>
 				</thead>
-
 				<tbody>
 					<?php foreach ($joueurs as $joueur): ?>
 					<tr>

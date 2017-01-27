@@ -1,7 +1,7 @@
 <?php $this->layout('layout2', ['title' => 'Connexion']) ?>
 
 <?php $this->start('main_content') ?>
-<main class="container-fluid">
+<main class="container-fluid" id="main">
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Connexion</h1>

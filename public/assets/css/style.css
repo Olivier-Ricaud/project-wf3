@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline|Lato:400,700');
 /*
   STYLE GENERAL --------------
 */
@@ -12,7 +13,7 @@ html{
 }
 
 body {
-  font-family: 'Opensans', serif;
+  font-family: 'Lato', sans-serif;
   font-size: 1.5rem;
   text-align: center;
   background-color: #272b30;
@@ -20,9 +21,6 @@ body {
 /*NE JAMAIS MODIFIER LA LARGUEUR OU HAUTEUR*/
 }
 
-section {
-  margin-bottom:;
-}
 
 img {
   max-width: 100%;
@@ -33,6 +31,31 @@ img {
 
 h1 {
   margin: 10rem auto 5rem auto;
+  font-family: 'Bungee Inline', cursive;
+}
+
+.title h1 {
+  margin: 10rem auto 5rem auto;
+  font-family: 'Bungee Inline', cursive;
+  font-size: 10rem;
+}
+
+h2 {
+  font-weight: bold;
+  margin-bottom: 4rem;
+}
+
+h2:after {
+    content: "";
+    display: block;
+    height: .4rem;
+    width: 4rem;
+    background: white;
+    margin: 4rem auto;
+}
+
+section{
+  margin-bottom: 4rem;
 }
 
 .row {
@@ -45,7 +68,8 @@ h1 {
 
 /* style des boutons du site */
 .btn {
-  margin-bottom : 2rem;
+  margin-bottom: 2rem;
+  padding: 1.2rem;
 }
 
 .btn-primary {
@@ -64,6 +88,10 @@ h1 {
 
   .navbar {
     background-color: black;
+  }
+
+  .navbar-brand {
+    font-family: 'Bungee Inline', cursive;
   }
 
   .navbar-default .navbar-nav>li>a {
@@ -146,7 +174,11 @@ h1 {
   STYLE MAIN : PAGE PLAQUETTE DU SITE --------------
 */
 .carousel { 
-  z-index: -99; /* Conserve le carousel en arrièr plan */
+    z-index: -99; /* Conserve le carousel en arrièr plan */
+    -webkit-filter: blur(.2rem); /* Safari */
+    filter: blur(.2rem);
+    -webkit-filter: grayscale(15%); /* Safari */
+    filter: grayscale(15%);
 } 
 
 .carousel .item { 
@@ -187,6 +219,47 @@ h1 {
   position : relative ;
 }
 
+/* Media queries */
+@media screen and (max-width: 642px){
+  #accueil button {
+    display: none;
+  }
+
+  #accueil h1 {
+    font-size: 5rem;
+  }
+}
+
+
+section:nth-child(2) .fa {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+section:nth-child(3) {
+  background-color: white;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+section:nth-child(3), section:nth-child(3) p{
+  color: #272b30;
+}
+
+section:nth-child(3) p {
+  padding-top: 1rem;
+}
+
+section:nth-child(3) h2:after {
+  background: #272b30;
+}
+
+section:nth-child(3) div {
+  margin-bottom: 2rem;
+}
+
+
 /*
   STYLE MAIN : CGU ET CHARTE  --------------
 */
@@ -206,6 +279,10 @@ h1 {
 /*
   STYLE MAIN : PAGE DE PROFIL -----------------
 */
+  #main {
+    margin-bottom: 24rem;
+  } 
+
 
   figure:first-of-type {
     margin-top: 3rem;
@@ -300,7 +377,7 @@ h1 {
     /* Image header */
     .imgBackground {
       position: relative;
-      width: 100%;
+      max-width: 100%;
     }
 
     .title {
@@ -320,3 +397,6 @@ h1 {
       width: auto; 
       height: 300px;
     }
+
+
+
