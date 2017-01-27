@@ -116,15 +116,32 @@ class DefaultController extends Controller
 
 	        // Envoi et réception du mail destinataire 
 	        $destinataire = 'wefive.project@gmail.com';
+
 	        // Tableau d'erreur
 	        $erreurs = [];
+	        // Description
+			$htmlScTa = htmlspecialchars($_POST['form_contact']['message']);
 
 	        // Formulaire soumis par le user
 	        if (isset($_POST['envoyer'])) {
 
-	            $data = array_merge($_POST['form_contact'], ['date' => date('Y-m-d H:i:s'), 'user_id' => $_SESSION['user']['id']]);
+	            $data = array_merge($_POST['form_contact'], ['date' => date('Y-m-d H:i:s'), 'user_id' => $_SESSION['user']['id'], 'nom' => $_SESSION['user']['infos']['nom'] , 'prenom' => $_SESSION['user']['infos']['prenom'], 'email' => $_SESSION['user']['email'] ]);
 
-		        // if ( empty($erreurs) ) {
+	            // Titre
+				if ((strlen($_POST['form_contact']['sujet']) <3) ||
+					(strlen($_POST['form_contact']['sujet']) > 100) ||
+					!preg_match('/^[a-zA-Z0-9\s_]+$/', $_POST['form_contact']['sujet'])) {
+					
+					$erreurs[] = 'Le champ "sujet" doit être valide (entre 3 et 100 caractères).';
+				}
+
+				// Message
+				if (empty($htmlScTa) || strlen($htmlScTa) < 5 ||
+					 strlen($htmlScTa) > 5000) {
+					$erreurs[] = 'Le champ "message" est requis et doit comporter moins de 5000 caractères.';
+				}
+
+		        if ( empty($erreurs) ) {
 			            
 		            // traitement du formulaire
 	            	$contact_manager = new ContactManager();
@@ -135,10 +152,10 @@ class DefaultController extends Controller
 		            $mail = mail($destinataire,$_POST['form_contact'['sujet']], $_POST['form_contact'['message']], $expediteur . ' : wefive.com : Mail de contact');
 
 	        		$this->redirectToRoute('home');
-		        // }
+		        }
 			} 
 			
-			$this->show('default/contact', ['utilisateur' => $utilisateur]);
+			$this->show('default/contact', ['utilisateur' => $utilisateur, 'erreurs' => $erreurs]);
 
 		} else {
 				
@@ -146,34 +163,3 @@ class DefaultController extends Controller
 		}
 	}
 }
-
-// 	public function contact()
-// 	{
-
-// 		if ( isset($_SESSION['user']) ) {
-
-// 			// récuperer nom, prénom et email de l'user
-// 	        $utilisateur_manageur = new UtilisateurManager();
-// 	        $utilisateur = $utilisateur_manageur->find($_SESSION['user']['id']);
-// 	        // Envoi et réception du mail destinataire 
-// 	        $destinataire = 'wefive.project@gmail.com';     
-// 	        // Formulaire soumis par le user
-// 	        if (isset($_POST['send'])) {
-// 	            $contact_manager = new ContactManager();
-// 	            $data = array_merge($_POST['form_contact'], ['date' => date('Y-m-d H:i:s'), 'user_id' => $_SESSION['user']['id']]);
-// 	            // traitement du formulaire
-// 	            $contact_manager->insert($data); 
-// 	            // Traitement envoi du mail
-// 	            $expediteur = $utilisateur['nom'] . ' <'. $_SESSION['user']['email'] .'>';
-// 	            $mail = mail($destinataire,$_POST['form_contact'['sujet']], $_POST['form_contact'['message']], $expediteur . ' : wefive.com : Mail de contact');
-//             $this->redirectToRoute('home');
-//         }
-
-
-// 			$this->show('default/contact', ['utilisateur' => $utilisateur]);
-// 		} else  {
-			
-// 			$this->redirectToRoute('login');
-// 		}
-// 	}
-// }
