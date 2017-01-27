@@ -135,7 +135,8 @@
 						<div class="row">
 							<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
 								<div class="col-xs-6">
-									<img src="assets/img/arena3.png" alt="image de l'event">
+									<img src="<?= $this->assetUrl('salle/'.$this->e($event['photo']).'.jpg') ?>">
+
 								</div>
 							</a>
 							<div class="col-xs-6">

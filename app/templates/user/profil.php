@@ -18,7 +18,7 @@
 				</div>
 				
 				<div class="panel-body">
-					 <img src="<?= $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') ?>" alt="photo de profil" class="img-circle" data-toggle="dropdown" width="150" height="150">
+					 <img src="<?= ( file_exists('assets/avatars/'.$this->e($_SESSION['user']['id']).'.jpg') )? $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') : $this->assetUrl('avatars/default.jpg') ?>" alt="profile picture" class="img-circle dropdown-toggle" data-toggle="dropdown" height="150" width="150"></a>
 					 <p><i class="fa fa-user" aria-hidden="true"></i> <?= $this->e($_SESSION['user']['username']) ?> </p>
 					 <p><?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></p>
 					 <p><i class="fa fa-map-marker" aria-hidden="true"></i> <?= $this->e($_SESSION['user']['infos']['departement']) ?></p>

@@ -19,7 +19,13 @@
 		<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="nav pull-right">
-					<img src="<?= $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') ?>" alt="profile picture" class=" img-circle dropdown-toggle" data-toggle="dropdown" width="50" height="50"></a>
+				<!-- test ternaire -->
+				<!-- exemple ternaire (empty($_POST['action'])) ? 'default' : $_POST['action'] -->
+				<!-- $this->assetUrl('avatars/img/profil/default.jpg') -->
+				<!-- test avec condition normal/var => this -->
+
+				<!-- ($this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg')) -->
+					<img src="<?= ( file_exists('assets/avatars/'.$this->e($_SESSION['user']['id']).'.jpg') )? $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') : $this->assetUrl('avatars/default.jpg') ?>" alt="profile picture" class="img-circle dropdown-toggle" data-toggle="dropdown" height="50" width="50"></a>
 					<ul class="dropdown-menu inverse-dropdown">
 						<li><a href="#">Bonjour <?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></a></li>
 						<li><a href="<?= $this->url('home')?>">Accueil</a></li>
@@ -32,7 +38,6 @@
 				<div class="navbar-header">
 					<a class="navbar-brand" data-toggle="collapse" data-target="#myNavbar">WE5</a>
 				</div> <!-- End Navbar header-->
-				
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<li class="<?= ( $page === 'accueil') ? "active" : "" ?>"><a href="<?= $this->url('home')?>">Accueil</a></li>
