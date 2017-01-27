@@ -3,6 +3,7 @@
 <!-- Page de création d'événement -->
 <main class="container-fluid">
 
+<<<<<<< HEAD
     <div class="row">
         <div class="col-sm-9 col-sm-offset-2">
             <h1>Création d'événement</h1>
@@ -76,7 +77,7 @@
                 <label for="niveau" class="col-sm-3 col-form-label">Niveau</label>
                 <div class="col-sm-9">
                     <select class="form-control" id="niveau" name="form_event[niveau]">
-                    	<option value="<?php if(isset($_POST['form_event']['niveau'])) echo $_POST['form_event']['niveau'] ; ?>"><?php if(isset($_POST['form_event']['niveau'])) echo $_POST['form_event']['niveau'] ; ?></option>
+                    	<option value="NULL" ?>Choisissez un niveau...</option>
                         <option value="Débutant"> Débutant</option>
                         <option value="Intermediaire"> Intermédiaire</option>
                         <option value="Confirmé">Confirmé</option>

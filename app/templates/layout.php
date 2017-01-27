@@ -12,6 +12,7 @@
 	<!-- Extension bootStrap pour gérer l'event click sur les row d'une table & améliorer les inputs files -->
 	<link rel="stylesheet" href="<?= $this->assetUrl('css/jasny-bootstrap.min.css') ?>">
 
+
 </head>
 
 <body>

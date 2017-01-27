@@ -6,7 +6,7 @@
 		['GET|POST', '/recherche', 'Default#recherche', 'recherche'],
 		['GET', '/cgu', 'Default#cgu', 'cgu'],
 		['GET', '/charte', 'Default#charte', 'charte'],
-		['GET', '/contact', 'Default#contact', 'contact'],
+		['GET|POST', '/contact', 'Default#contact', 'contact'],
 
 		// Routes pour les pages concernant le compte utilisateur du site
 		['GET|POST', '/login', 'user#login', 'login'],

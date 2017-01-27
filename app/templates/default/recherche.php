@@ -18,22 +18,24 @@
 		<section class="col-md-5">
 			<form class="form-horizontal" id="formRecherche" method="GET">
 				<div class="form-group row">
-					<label for="lieu" class="col-sm-4 col-form-label">Département </label>
+					<label for="departement" class="col-sm-4 col-form-label">Département </label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="lieu" name="departement" list="departement">
-						<datalist id="departement">
-							<option value="<?php if(isset($_GET['departement'])) echo $_GET['departement'] ; ?>"><?php if(isset($_GET['departement'])) echo $_GET['departement'] ; ?></option>
-							<option value="Paris">75 - Paris</option>
+						<select class="form-control"  name="departement" id="departement">
+							<?php 	if(isset($_GET['departement'])): ?>
+								<option value="<?= $_GET['departement'] ; ?>"> <?= $_GET['departement'] ; ?></option>
+							<?php 	endif; ?>
+							<option value="NULL">Choisissez un département...</option>
+							<option value="Paris" selected>75 - Paris</option>
 							<option value="Val-d-Oise">95 - Val-d-Oise</option>
-						</datalist>
+						</select>
 					</div>	
 				</div>
 
 				<div class="form-group row">
 					<label for="date" class="col-sm-4 col-form-label">Dates</label>
 					<div class="col-sm-8">
-						<input type="date" class="form-control" name="date_debut" placeholder="..." value="<?php if(isset($_GET['date_debut'])) echo $_GET['date_debut'] ; ?>">
-						<input type="date" class="form-control" name="date_fin" placeholder="..." value="<?php if(isset($_GET['date_fin'])) echo $_GET['date_fin'] ; ?>">
+						<input type="date" class="form-control" name="date_debut" value="<?php if(isset($_GET['date_debut'])) echo $_GET['date_debut'] ; ?>">
+						<input type="date" class="form-control" name="date_fin" value="<?php if(isset($_GET['date_fin'])) echo $_GET['date_fin'] ; ?>">
 					</div>
 				</div>
 
@@ -41,7 +43,10 @@
 					<label for="niveau" class="col-sm-4 col-form-label">Niveau</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="niveau" name="niveau">
-							<option value="<?php if(isset($_GET['niveau'])) echo $_GET['niveau'] ; ?>"><?php if(isset($_GET['niveau'])) echo $_GET['niveau'] ; ?></option>
+							<?php 	if(isset($_GET['niveau'])): ?>
+								<option value="<?= $_GET['niveau'] ; ?>"> <?= $_GET['niveau'] ; ?></option>
+							<?php 	endif; ?>
+							<option value="NULL">Selectionnez un niveau... </option>
 							<option value="Débutant">Débutant</option>
 							<option value="Intermédiaire">Intermédiaire</option>
 							<option value="Confirmé">Confirmé</option>
@@ -54,7 +59,10 @@
 					<label for="sexe" class="col-sm-4 col-form-label">Sexe</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="sexe" name="sexe">
-							<option value="<?php if(isset($_GET['sexe'])) echo $_GET['sexe'] ; ?>"><?php if(isset($_GET['sexe'])) echo $_GET['sexe'] ; ?></option>
+							<?php 	if(isset($_GET['sexe'])): ?>
+								<option value="<?= $_GET['sexe'] ; ?>"> <?= $_GET['sexe'] ; ?></option>
+							<?php 	endif; ?>
+							<option value="NULL">Choisissez un genre...</option>						
 							<option value="Homme">Homme</option>
 							<option value="Femme">Femme</option>
 							<option value="Mixte">Mixte</option>
@@ -66,7 +74,7 @@
 					<label for="duree" class="col-sm-4 col-form-label">Durée</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="duree" name="duree">
-							<option></option>
+							<option value="NULL">Choisissez une durée...</option>
 							<option value="01:00">1h</option>
 							<option value="02:00">2h</option>
 						</select>		  		 
@@ -87,7 +95,7 @@
 				<!-- Premier Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="list-group-item-heading">Résultats des Derniers Matchs :</h4>
+						<h4 class="list-group-item-heading">Résultats des derniers matchs :</h4>
 					</div>
 					
 					<table class="table table-striped table-hover">
@@ -104,7 +112,7 @@
 				<!-- Deuxième Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="list-group-item-heading">Prochain(s) Rdv(s) :</h4>
+						<h4 class="list-group-item-heading">Prochain(s) rdv(s) :</h4>
 					</div>
 
 					<!-- Affichage par événement -->
