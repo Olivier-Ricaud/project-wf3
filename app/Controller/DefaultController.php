@@ -19,21 +19,83 @@ class DefaultController extends Controller
         if (isset($_SESSION['user'])) {
             $this->redirectToRoute('recherche');
         } else  {
+
+
             // Dans le cas de l'envoi d'un formulaire exterieur
             // Envoi et réception du mail destinataire 
             $destinataire = 'wefive.project@gmail.com';
+
+            // Tableau d'erreur
+	        $erreurs = [];
+	        // erreur description
+			$htmlScTa = htmlspecialchars($_POST['form_contactExt']['message']);
+
+			// Message de validation
+			$validation = "";
+
             if (isset($_POST['envoyer'])) {
-                $contact_manager = new ContactManager();
+
                 $data = array_merge($_POST['form_contactExt'], ['date' => date('Y-m-d H:i:s')]);
-                print_r($data);
-                // traitement du formulaire
-                $contact_manager->insert($data);
-                // Traitement envoi du mail
-                $expediteur = $_POST['form_contactExt'['nom']] . ' <'. $_POST['form_contactExt'['email']] .'>';
-                $mail = mail($destinataire,$_POST['form_contactExt'['sujet']], $_POST['form_contactExt'['message']], $expediteur . ' : wefive.com : Mail de contact');
-                $this->redirectToRoute('home');
+
+                // Nom
+				if( empty( $_POST['form_contactExt']['nom']) ||
+					 (strlen($_POST['form_contactExt']['nom']) <3) ||
+					 (strlen($_POST['form_contactExt']['nom']) > 100) ||
+					 !preg_match('/^[a-zA-Z_]+$/', $_POST['form_contactExt']['nom']) ) {
+					
+		            $erreurs[] = 'Le champ "nom" doit être valide (entre 3 et 100 caractères).';
+		   
+		        }
+
+		        // Prenom
+		        if( empty($_POST['form_contactExt']['prenom']) ||
+		         	(strlen($_POST['form_contactExt']['prenom']) <3) ||
+		          	(strlen($_POST['form_contactExt']['prenom']) > 100) ||
+		          	!preg_match('/^[a-zA-Z_]+$/', $_POST['form_contactExt']['prenom'])) {
+					
+		            $erreurs[] = 'Le champ "prénom" doit être valide (entre 3 et 100 caractères).';
+		        }
+
+	        	// Email
+		        if (empty($_POST['form_contactExt']['email']) ||
+		        	 strlen($_POST['form_contactExt']['email']) > 255 ||
+		        	 !filter_var($_POST['form_contactExt']['email'], FILTER_VALIDATE_EMAIL)) {
+
+		        	$erreurs[] = "Votre email n'est pas valide.";
+
+		        }
+
+				// Titre
+				if ((strlen($_POST['form_contactExt']['sujet']) <3) ||
+					(strlen($_POST['form_contactExt']['sujet']) > 100) ||
+					!preg_match('/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s_-]+$/', $_POST['form_contactExt']['sujet'])) {
+					
+					$erreurs[] = 'Le champ "sujet" doit être valide (entre 3 et 100 caractères).';
+				}
+
+				// Message
+				if (empty($htmlScTa) || strlen($htmlScTa) < 5 ||
+					 strlen($htmlScTa) > 5000) {
+					$erreurs[] = 'Le champ "message" est requis et doit comporter moins de 5000 caractères.';
+				}
+
+                if ( empty($erreurs) ) {
+
+                	// traitement du formulaire
+	                $contact_manager = new ContactManager();
+	                $contact_manager->insert($data);
+
+	                // Traitement envoi du mail
+	                $expediteur = $_POST['form_contactExt']['nom'] . ' <'. $_POST['form_contactExt']['email'] .'>';
+	                $mail = mail($destinataire,$_POST['form_contactExt']['sujet'], $_POST['form_contactExt']['message'], $expediteur . ' : wefive.com : Mail de contact');
+
+	                $validation = 'Votre Message a été envoyé.';
+
+	                $this->show('default/home', ['validation' => $validation]); 	
+                }
+                
             }
-            $this->show('default/home');
+            $this->show('default/home', ['erreurs' => $erreurs]);
         }
         
     }
@@ -44,7 +106,8 @@ class DefaultController extends Controller
 	public function recherche()
 	{
 		if (isset($_SESSION['user'])) {
-		
+			
+			// tableau d'erreurs
 			$erreurs = [];
 
 			if ( isset($_GET['search']) ) {
@@ -122,6 +185,9 @@ class DefaultController extends Controller
 	        // Description
 			$htmlScTa = htmlspecialchars($_POST['form_contact']['message']);
 
+			// Message de validation
+			$validation = "";
+
 	        // Formulaire soumis par le user
 	        if (isset($_POST['envoyer'])) {
 
@@ -130,7 +196,7 @@ class DefaultController extends Controller
 	            // Titre
 				if ((strlen($_POST['form_contact']['sujet']) <3) ||
 					(strlen($_POST['form_contact']['sujet']) > 100) ||
-					!preg_match('/^[a-zA-Z0-9\s_]+$/', $_POST['form_contact']['sujet'])) {
+					!preg_match('/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s_-]+$/', $_POST['form_contact']['sujet'])) {
 					
 					$erreurs[] = 'Le champ "sujet" doit être valide (entre 3 et 100 caractères).';
 				}
@@ -149,9 +215,11 @@ class DefaultController extends Controller
 
 		            // Traitement envoi du mail
 		            $expediteur = $utilisateur['nom'] . ' <'. $_SESSION['user']['email'] .'>';
-		            $mail = mail($destinataire,$_POST['form_contact'['sujet']], $_POST['form_contact'['message']], $expediteur . ' : wefive.com : Mail de contact');
+		            $mail = mail($destinataire,$_POST['form_contact']['sujet'], $_POST['form_contact']['message'], $expediteur . ' : wefive.com : Mail de contact');
 
-	        		$this->redirectToRoute('home');
+	        		$validation = 'Votre Message a été envoyé.';
+
+	                $this->show('/contact', ['validation' => $validation]); ;
 		        }
 			} 
 			

@@ -13,6 +13,13 @@
 					<? endforeach; ?>
 				</ul>
 			<? endif; ?>
+
+            <!-- Message de Validation  -->
+            <?php if (!empty($validation)): ?>
+                <ul class="alert alert-success">
+                        <li> <?= $validation ?> </li>
+                </ul>
+            <? endif; ?>
 		</div>
 	</div> <!-- End of row h1-->
 	

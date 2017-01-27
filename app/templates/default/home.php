@@ -83,6 +83,23 @@
 	
 	<section id="contact" class="row">
         <h2>Contact</h2>
+		
+		<!-- Affichage des erreurs -->
+		<?php if (!empty($erreurs)): ?>
+			<ul class="alert alert-danger">
+				<?php foreach ($erreurs as $erreur): ?>
+					<li> <?= $erreur ?> </li>
+				<? endforeach; ?>
+			</ul>
+		<? endif; ?>
+
+		<!-- Message de Validation  -->
+		<?php if (!empty($validation)): ?>
+			<ul class="alert alert-success">
+					<li> <?= $validation ?> </li>
+			</ul>
+		<? endif; ?>
+
         <form class="col-xs-10 col-xs-offset-1" method="POST">
             <fieldset class="col-md-6">
                 <div class="form-group row">
