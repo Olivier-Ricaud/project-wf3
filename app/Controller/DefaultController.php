@@ -6,6 +6,7 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \Manager\EventManager; 
 use \Manager\SalleManager;
+use \Manager\ContactManager;
 
 class DefaultController extends Controller
 {
@@ -14,15 +15,28 @@ class DefaultController extends Controller
 	 * Page d'accueil du site par defaut
 	 */
 	public function home()
-	{	
-
-		if (isset($_SESSION['user'])) {
-			$this->redirectToRoute('recherche');
-		} else  {
-			$this->show('default/home');
-		}
-		
-	}
+    {   
+        if (isset($_SESSION['user'])) {
+            $this->redirectToRoute('recherche');
+        } else  {
+            // Dans le cas de l'envoi d'un formulaire exterieur
+            // Envoi et réception du mail destinataire 
+            $destinataire = 'wefive.project@gmail.com';
+            if (isset($_POST['envoyer'])) {
+                $contact_manager = new ContactManager();
+                $data = array_merge($_POST['form_contactExt'], ['date' => date('Y-m-d H:i:s')]);
+                print_r($data);
+                // traitement du formulaire
+                $contact_manager->insert($data);
+                // Traitement envoi du mail
+                $expediteur = $_POST['form_contactExt'['nom']] . ' <'. $_POST['form_contactExt'['email']] .'>';
+                $mail = mail($destinataire,$_POST['form_contactExt'['sujet']], $_POST['form_contactExt'['message']], $expediteur . ' : wefive.com : Mail de contact');
+                $this->redirectToRoute('home');
+            }
+            $this->show('default/home');
+        }
+        
+    }
 
 	/**
 	 * Page d'accueil du site pour un utilisateur connecté
@@ -94,12 +108,72 @@ class DefaultController extends Controller
 	public function contact()
 	{
 
-		if (isset($_SESSION['user'])) {
-			$this->show('default/contact');
-		} else  {
+		if ( isset($_SESSION['user']) ) {
+
+			// récuperer nom, prénom et email de l'user
+	        $utilisateur_manageur = new UtilisateurManager();
+	        $utilisateur = $utilisateur_manageur->find($_SESSION['user']['id']);
+
+	        // Envoi et réception du mail destinataire 
+	        $destinataire = 'wefive.project@gmail.com';
+	        // Tableau d'erreur
+	        $erreurs = [];
+
+	        // Formulaire soumis par le user
+	        if (isset($_POST['envoyer'])) {
+
+	            $data = array_merge($_POST['form_contact'], ['date' => date('Y-m-d H:i:s'), 'user_id' => $_SESSION['user']['id']]);
+
+		        // if ( empty($erreurs) ) {
+			            
+		            // traitement du formulaire
+	            	$contact_manager = new ContactManager();
+		            $donne = $contact_manager->insert($data); 
+
+		            // Traitement envoi du mail
+		            $expediteur = $utilisateur['nom'] . ' <'. $_SESSION['user']['email'] .'>';
+		            $mail = mail($destinataire,$_POST['form_contact'['sujet']], $_POST['form_contact'['message']], $expediteur . ' : wefive.com : Mail de contact');
+
+	        		$this->redirectToRoute('home');
+		        // }
+			} 
 			
+			$this->show('default/contact', ['utilisateur' => $utilisateur]);
+
+		} else {
+				
 			$this->redirectToRoute('login');
 		}
 	}
-
 }
+
+// 	public function contact()
+// 	{
+
+// 		if ( isset($_SESSION['user']) ) {
+
+// 			// récuperer nom, prénom et email de l'user
+// 	        $utilisateur_manageur = new UtilisateurManager();
+// 	        $utilisateur = $utilisateur_manageur->find($_SESSION['user']['id']);
+// 	        // Envoi et réception du mail destinataire 
+// 	        $destinataire = 'wefive.project@gmail.com';     
+// 	        // Formulaire soumis par le user
+// 	        if (isset($_POST['send'])) {
+// 	            $contact_manager = new ContactManager();
+// 	            $data = array_merge($_POST['form_contact'], ['date' => date('Y-m-d H:i:s'), 'user_id' => $_SESSION['user']['id']]);
+// 	            // traitement du formulaire
+// 	            $contact_manager->insert($data); 
+// 	            // Traitement envoi du mail
+// 	            $expediteur = $utilisateur['nom'] . ' <'. $_SESSION['user']['email'] .'>';
+// 	            $mail = mail($destinataire,$_POST['form_contact'['sujet']], $_POST['form_contact'['message']], $expediteur . ' : wefive.com : Mail de contact');
+//             $this->redirectToRoute('home');
+//         }
+
+
+// 			$this->show('default/contact', ['utilisateur' => $utilisateur]);
+// 		} else  {
+			
+// 			$this->redirectToRoute('login');
+// 		}
+// 	}
+// }

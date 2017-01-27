@@ -82,56 +82,49 @@
 	</section>
 	
 	<section id="contact" class="row">
-		<h2>Contact</h2>
-
-		<form class="col-xs-10 col-xs-offset-1" method="POST">
-			<fieldset class="col-md-6">
-				<div class="form-group row">
-					<label for="nom" class="col-xs-12 col-sm-2 col-form-label">Nom </label>
-					<div class="col-xs-12 col-sm-8">
-						<input type="text" class="form-control" id="nom" name="nom" aria-describedby="Champ nom de l'utilisateur" placeholder="Votre nom...">
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label for="prenom" class="col-xs-12 col-sm-2 col-form-label">Prenom </label>
-					<div class="col-xs-12 col-sm-8">
-						<input type="text" class="form-control" id="prenom" name="prenom" aria-describedby="Champ prenom de l'utilisateur" placeholder="Votre prenom...">
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label for="email" class="col-xs-12 col-sm-2 col-form-label">E-mail </label>
-					<div class="col-xs-12 col-sm-8">
-						<input type="email" class="form-control" id="email" name="email" aria-describedby="Champ email de l'utilisateur" placeholder="Votre Email...">
-					</div>
-				</div>
-			</fieldset>
-
-			<fieldset class="col-md-6">
-				<div class="form-group row">
-					<label for="sujet" class="col-xs-12 col-sm-2 col-form-label">Sujet</label>
-					<div class="col-xs-12 col-sm-8">
-						<input type="text" class="form-control" id="sujet" name="sujet" aria-describedby="Champ mot de passe de l'utilisateur" placeholder="Sujet du message">
-					</div>
-				</div>
-
-				<div class="form-group row">
-					<label for="message" class="col-xs-12 col-sm-2 col-form-label">Message </label>
-					<div class="col-xs-12 col-sm-8">
-						<textarea type="message" class="form-control" id="message" name="message" placeholder="Votre message..." rows="10" maxlength="5000"></textarea>
-					</div>
-				</div>
-
-				<div class="col-sm-2 col-sm-offset-4 col-md-offset-3">
-					<button type="submit" name="send" class="btn btn-primary">Envoyer</button>
-				</div> 
-
-				<div class="col-sm-2 col-md-offset-1">
-					<button type="reset" class="btn btn-default">Annuler</button>
-				</div> 
-			</fieldset>
-		</form>
-	</section>
+        <h2>Contact</h2>
+        <form class="col-xs-10 col-xs-offset-1" method="POST">
+            <fieldset class="col-md-6">
+                <div class="form-group row">
+                    <label for="nom" class="col-xs-12 col-sm-2 col-form-label">Nom </label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="text" class="form-control" id="nom" name="form_contactExt[nom]" aria-describedby="Champ nom de l'utilisateur" placeholder="Votre nom...">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="prenom" class="col-xs-12 col-sm-2 col-form-label">Prénom </label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="text" class="form-control" id="prenom" name="form_contactExt[prenom]" aria-describedby="Champ prenom de l'utilisateur" placeholder="Votre prenom...">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-xs-12 col-sm-2 col-form-label">E-mail </label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="email" class="form-control" id="email" name="form_contactExt[email]" aria-describedby="Champ email de l'utilisateur" placeholder="Votre Email...">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="col-md-6">
+                <div class="form-group row">
+                    <label for="sujet" class="col-xs-12 col-sm-2 col-form-label">Sujet</label>
+                    <div class="col-xs-12 col-sm-8">
+                        <input type="text" class="form-control" id="sujet" name="form_contactExt[sujet]" aria-describedby="Champ mot de passe de l'utilisateur" placeholder="Sujet du message">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="message" class="col-xs-12 col-sm-2 col-form-label">Message </label>
+                    <div class="col-xs-12 col-sm-8">
+                        <textarea type="message" class="form-control" id="message" name="form_contactExt[message]" placeholder="Votre message..." rows="10" maxlength="5000"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4 col-md-offset-3">
+                    <button type="submit" name="envoyer" class="btn btn-primary">Envoyer</button>
+                </div> 
+                <div class="col-sm-2 col-md-offset-1">
+                    <button type="reset" class="btn btn-default">Annuler</button>
+                </div> 
+            </fieldset>
+        </form>
+    </section>
 </main>
 <?php $this->stop('main_content') ?>
