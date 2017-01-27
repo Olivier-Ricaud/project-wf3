@@ -18,9 +18,9 @@
 		<section class="col-md-5">
 			<form class="form-horizontal" id="formRecherche" method="GET">
 				<div class="form-group row">
-					<label for="lieu" class="col-sm-4 col-form-label">Département </label>
+					<label for="departement" class="col-sm-4 col-form-label">Département </label>
 					<div class="col-sm-8">
-						<select id="departement">
+						<select class="form-control"  name="departement" id="departement">
 							<?php 	if(isset($_GET['departement'])): ?>
 								<option value="<?= $_GET['departement'] ; ?>"> <?= $_GET['departement'] ; ?></option>
 							<?php 	endif; ?>
@@ -134,7 +134,6 @@
 	<div class="row">
 		<section class="col-sm-10 col-sm-offset-1">
 			<h2>Liste des résultats</h2>
-<<<<<<< HEAD
 			
 			<?php if(isset($_GET['search']) && empty($erreurs)): ?>
 				
