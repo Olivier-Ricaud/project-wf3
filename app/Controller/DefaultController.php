@@ -219,7 +219,7 @@ class DefaultController extends Controller
 
 	        		$validation = 'Votre Message a été envoyé.';
 
-	                $this->show('/contact', ['validation' => $validation]); ;
+	                $this->show('default/contact', ['validation' => $validation]); ;
 		        }
 			} 
 			
