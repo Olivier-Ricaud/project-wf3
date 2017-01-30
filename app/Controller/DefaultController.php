@@ -142,10 +142,19 @@ class DefaultController extends Controller
 					$erreurs[] = 'La date de début doit être inférieure à la date de fin et ne peut pas être antérieure à aujourd\'hui';
 				}
 
-				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs]);
+				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs, 'matchs_over' => $matchs_over]);
 			}
+			
+			$matchs_manager = new EventManager();
 
-			$this->show('default/recherche', ['nextRdvs' => $nextRdvs]);
+			//  Prochains rendez-vous 
+			$nextRdvs = $matchs_manager->userEvents($_SESSION['user']['id']);
+			
+			// Match(s) Terminé(s)
+			$matchs_over = $matchs_manager->userEvents_over($_SESSION['user']['id']);
+
+			$this->show('default/recherche', ['nextRdvs' => $nextRdvs, 'matchs_over' => $matchs_over]);
+
 		} else  {
 
 			$this->redirectToRoute('login');

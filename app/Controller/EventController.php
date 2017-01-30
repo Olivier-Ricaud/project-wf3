@@ -186,10 +186,49 @@ class EventController extends Controller
 	/**
 	 * Page de feuille de match
 	 */
-	public function feuilleMatch()
+	public function feuilleMatch($id)
 	{
-		$this->show('event/feuille-de-match');
-	}
+		if (isset($_SESSION['user'])) {
 
+			// Requete pour aller chercher les données de l'événenement
+			$event_manager = new EventManager();
+			//Execute les fonctions uniquement si l'id de l'événement existe, autrement renvoi à la page de recherche
+			if($event = $event_manager->find($id)) {
+
+				//Vérifier si la personne présente sur la page est l'administrateur de l'événement
+				$host_manager = new HostManager();
+				$host = false;
+				if ( $host_manager->getHost($_SESSION['user']['id'],$event['id']) ) {
+					$host = true;
+				}
+
+				// Requete pour aller chercher les données joueurs correspondant à l'événement				
+				$joueurs_manager = new JoueurManager();
+				$joueurs = $joueurs_manager->infosJoueurs($id);
+
+				// Validation du formulaire de Resultat
+				if ( isset($_POST['send']) ) {
+
+					$event_manager = new EventManager();
+
+					$event = $event_manager->resultatMatch($id);
+					$equipe_1 = $event_manager->equipe_1_Match();
+					$equipe_2 = $event_manager->equipe_2_Match();
+
+
+					$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs]);
+
+				}
+
+				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
+			}
+
+			$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
+
+		} else {
+			$this->redirectToRoute('login');
+		}
+		
+	}
 
 }

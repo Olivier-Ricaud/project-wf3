@@ -106,10 +106,16 @@
 					<table class="table table-striped table-hover">
 						<tbody>
 							<tr>
-								<td>28/12/2016</td>
-								<td>Paris</td>   
-								<td>3-2</td>
-					 			<td>Gagné</td> 
+							       <th>Date</th>
+							       <th>Ville</th>
+							       <th>Equipe 1</th>
+							       <th>Equipe 2</th>
+						   </tr>
+							<tr>
+								<td><?= $this->e($matchs_over['0']['date']) ?></td>
+								<td><?= $this->e($matchs_over['0']['ville']) ?></td>
+								<td><?= $this->e($matchs_over['0']['score_equipe_1']) ?></td>
+								<td><?= $this->e($matchs_over['0']['score_equipe_2']) ?></td>
 							</tr>
 						</tbody>
 					</table> 

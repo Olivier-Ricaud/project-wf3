@@ -66,7 +66,7 @@
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading"><i class="fa fa-futbol-o" aria-hidden="true"></i>Site internet de la salle</div>
-					<div class="panel-body"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
+					<div class="panel-body"><a href="<?= $this->e($salle['site_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
 				</div>
 			</div>
 		</section>
@@ -75,6 +75,18 @@
 	<!-- DESCRIPTION ET MAP -->
 	<section class="row">
 			<div class="col-md-6">
+				<section class="row">
+					<h3>Score</h3>
+					<div class="col-sm-6">
+						<h3>Equipe 1</h3>
+						<h2><?= $this->e($event['score_equipe_1']) ?></h2>
+					</div>
+					<div class="col-sm-6">
+						<h3>Equipe 2</h3>
+						<h2><?= $this->e($event['score_equipe_2']) ?></h2>
+					</div>
+					
+				</section>
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
 
@@ -134,8 +146,15 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+			
+			<!-- Boutton suppression événement -->
 			<?php if ($host == true): ?>
 				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
+			<?php endif; ?>
+
+			<!-- Boutton vers feuille-de-match.php -->
+			<?php if ( ($host == true) && ($this->e($event['date']) >= $this->e($event['date'])) ): ?>
+				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
 			<?php endif; ?>
 		</div>
 		<!-- FIN DU TABLEAU DES JOUEURS INSCRITS -->

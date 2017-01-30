@@ -70,6 +70,28 @@
 	<div class="row">
 		<section class="col-sm-9 col-sm-offset-3">
 			<h2>Mes événements terminés</h2>
+				<!-- Affichage par événement -->
+				<?php foreach ($matchs_over as $match_over): ?>	
+					<figure class="col-sm-10 col-sm-offset-1">
+						<div class="row">
+							<a href="<?= $this->url('detail', ['id' => $matchs_over['0']['id']])?>">
+								<div class="col-xs-6">
+									<img src="<?= $this->assetUrl('salle/'.$this->e($matchs_over['0']['photo']).'.jpg') ?>">
+								</div>
+							</a>
+							<div class="col-xs-6">
+								<p>Titre : <?= $this->e($matchs_over['0']['titre']) ?></p>
+								<p>Date : <?= $this->e($matchs_over['0']['date']) ?></p>
+								<p>Catégorie : <?= $this->e($matchs_over['0']['sexe']) ?></p>
+								<p>Niveau demandé : <?= $this->e($matchs_over['0']['niveau']) ?></p>
+								<p>Adresse : <?= $this->e($matchs_over['0']['adresse']) ?></p>
+								<p>Ville : <?= $this->e($matchs_over['0']['ville']) ?></p>
+								<p>Code postal : <?= $this->e($matchs_over['0']['cp']) ?></p>
+								<p><a href="<?= $this->e($matchs_over['0']['site_web'])?>" target="_blank">Site internet de la salle</a></p>
+							</div> 
+						</div>
+					</figure>
+				<?php endforeach; ?>
 		</section>
 	</div> <!-- end of row -->
 	<!-- FIN SECTION EVENEMENTS TERMINES -->
