@@ -5,6 +5,8 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Connexion</h1>
+
+			<!-- Affichage des erreurs -->
 			<?php if (!empty($erreurs)): ?>
 				<ul class="alert alert-danger">
 					<?php foreach ($erreurs as $erreur): ?>
@@ -12,6 +14,14 @@
 					<? endforeach; ?>
 				</ul>
 			<? endif; ?>
+
+			<!-- Message de Validation  -->
+			<?php if (!empty($validation)): ?>
+				<ul class="alert alert-success">
+						<li> <?= $validation ?> </li>
+				</ul>
+			<? endif; ?>
+
 		</div>
 	</div> <!-- End of row h1-->
 	

@@ -32,7 +32,7 @@
 				</div>
 
 				<div class="form-group row">
-					<label for="date" class="col-sm-4 col-form-label">Dates</label>
+					<label for="date" class="col-sm-4 col-form-label">Dates de début et de fin </label>
 					<div class="col-sm-8">
 						<input type="date" class="form-control" name="date_debut" value="<?php if(isset($_GET['date_debut'])) echo $_GET['date_debut'] ; ?>">
 						<input type="date" class="form-control" name="date_fin" value="<?php if(isset($_GET['date_fin'])) echo $_GET['date_fin'] ; ?>">

@@ -144,6 +144,5 @@
             </fieldset>
         </form>
     </section>
->>>>>>> pageContact
 </main>
 <?php $this->stop('main_content') ?>
