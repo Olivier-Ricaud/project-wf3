@@ -98,14 +98,19 @@
 						<h4 class="list-group-item-heading">Résultats des derniers matchs :</h4>
 					</div>
 					
-					<?php var_dump($matchs_over) ?>
 					<table class="table table-striped table-hover">
 						<tbody>
 							<tr>
-								<td><?= $this->e($matchs_over['date']) ?></td>
-								<td><?= $this->e($matchs_over['ville']) ?></td>
-								<td><?= $this->e($matchs_over['score_eq_1']) ?></td>
-								<td><?= $this->e($matchs_over['score_eq_2']) ?></td>
+							       <th>Date</th>
+							       <th>Ville</th>
+							       <th>Equipe 1</th>
+							       <th>Equipe 2</th>
+						   </tr>
+							<tr>
+								<td><?= $this->e($matchs_over['0']['date']) ?></td>
+								<td><?= $this->e($matchs_over['0']['ville']) ?></td>
+								<td><?= $this->e($matchs_over['0']['score_equipe_1']) ?></td>
+								<td><?= $this->e($matchs_over['0']['score_equipe_2']) ?></td>
 							</tr>
 						</tbody>
 					</table> 
