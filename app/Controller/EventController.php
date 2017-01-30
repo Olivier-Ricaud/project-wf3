@@ -215,7 +215,7 @@ class EventController extends Controller
 					$equipe_2 = $event_manager->equipe_2_Match();
 
 
-					$this->show('event/detail', ['id' => $event['id']]);
+					$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs]);
 
 				}
 

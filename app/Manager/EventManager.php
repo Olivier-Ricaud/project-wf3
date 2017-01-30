@@ -63,7 +63,7 @@ class EventManager extends \W\Manager\Manager {
 	public function userEvents($id)
 	{
 		
-		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = " . $id;
+		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = $id AND e.match_over = 0";
 		
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
@@ -71,7 +71,17 @@ class EventManager extends \W\Manager\Manager {
 		return $sth->fetchAll();
 	}
 
-// UPDATE joueurs SET joueurs.equipe_id = 1 WHERE joueurs.user_id IN (6, 7, 8) 
+	public function userEvents_over($id)
+	{
+		
+		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = $id AND e.match_over = 1";
+		
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchAll();
+	}
+
 
 	public function resultatMatch($id)
 	{

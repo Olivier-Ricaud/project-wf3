@@ -136,13 +136,19 @@ class DefaultController extends Controller
 					$erreurs[] = 'Les champs de dates ne sont pas valides';
 				}
 
-				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs]);
+				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs, 'matchs_over' => $matchs_over]);
 			}
 
-			$nextRdvs_manager = new EventManager();
-			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
+			
+			$matchs_manager = new EventManager();
 
-			$this->show('default/recherche', ['nextRdvs' => $nextRdvs]);
+			//  Prochains rendez-vous 
+			$nextRdvs = $matchs_manager->userEvents($_SESSION['user']['id']);
+			
+			// Match(s) Terminé(s)
+			$matchs_over = $matchs_manager->userEvents_over($_SESSION['user']['id']);
+
+			$this->show('default/recherche', ['nextRdvs' => $nextRdvs, 'matchs_over' => $matchs_over]);
 		} else  {
 
 			$this->redirectToRoute('login');
