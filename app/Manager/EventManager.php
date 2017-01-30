@@ -71,25 +71,58 @@ class EventManager extends \W\Manager\Manager {
 		return $sth->fetchAll();
 	}
 
+// UPDATE joueurs SET joueurs.equipe_id = 1 WHERE joueurs.user_id IN (6, 7, 8) 
+
 	public function resultatMatch($id)
 	{
 
-		$sql = "UPDATE events, joueurs SET events.match_over = 1, events.score_equipe_1 = :s1, events.score_equipe_2 = :s2, joueurs.equipe_id = :j1, joueurs.equipe_id = :j2, joueurs.equipe_id = :j3, joueurs.equipe_id = :j4, joueurs.equipe_id = :j5, joueurs.equipe_id = :j6, joueurs.equipe_id = :j7, joueurs.equipe_id = :j8, joueurs.equipe_id = :j9, joueurs.equipe_id = :j10 WHERE events.id = :id";
+		$sql = "UPDATE events, joueurs 
+			SET events.match_over = 1, 
+				events.score_equipe_1 = :s1, 
+				events.score_equipe_2 = :s2
+			WHERE events.id = :id";
+
 		$sth = $this->dbh->prepare($sql);
 		$sth->bindValue(":id", $id);
 		$sth->bindValue(":s1", $_POST['s1']);
 		$sth->bindValue(":s2", $_POST['s2']);
-		$sth->bindValue(":j1", $_POST['j1']);
-		$sth->bindValue(":j2", $_POST['j2']);
-		$sth->bindValue(":j3", $_POST['j3']);
-		$sth->bindValue(":j4", $_POST['j4']);
-		$sth->bindValue(":j5", $_POST['j5']);
-		$sth->bindValue(":j6", $_POST['j6']);
-		$sth->bindValue(":j7", $_POST['j7']);
-		$sth->bindValue(":j8", $_POST['j8']);
-		$sth->bindValue(":j9", $_POST['j9']);
-		$sth->bindValue(":j10", $_POST['j10']);
 
 		return $sth->execute();
+	}
+
+	public function equipe_1_Match()
+	{
+
+		$sql_eq1 = "UPDATE joueurs 
+			SET joueurs.equipe_id = 1 
+			WHERE joueurs.user_id 
+			IN (:j1, :j2, :j3, :j4, :j5)";
+
+		$sth1 = $this->dbh->prepare($sql_eq1);		
+		$sth1->bindValue(":j1", $_POST['j1']);
+		$sth1->bindValue(":j2", $_POST['j2']);
+		$sth1->bindValue(":j3", $_POST['j3']);
+		$sth1->bindValue(":j4", $_POST['j4']);
+		$sth1->bindValue(":j5", $_POST['j5']);
+
+		return $sth1->execute();
+	}
+
+	public function equipe_2_Match()
+	{
+
+		$sql_eq2 = "UPDATE joueurs 
+			SET joueurs.equipe_id = 2 
+			WHERE joueurs.user_id 
+			IN (:j6, :j7, :j8, :j9, :j10)";
+
+		$sth2 = $this->dbh->prepare($sql_eq2);
+		$sth2->bindValue(":j6", $_POST['j6']);
+		$sth2->bindValue(":j7", $_POST['j7']);
+		$sth2->bindValue(":j8", $_POST['j8']);
+		$sth2->bindValue(":j9", $_POST['j9']);
+		$sth2->bindValue(":j10", $_POST['j10']);
+
+		return $sth2->execute();
 	}
 }

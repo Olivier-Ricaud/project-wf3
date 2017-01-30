@@ -23,27 +23,27 @@
 								<div class="form-group">
 									<select name="j1" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="1">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j2" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="1">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j3" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="1">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j4" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="1">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j5" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="1">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 								</div> <!-- End of form-group -->
@@ -57,7 +57,7 @@
 
 							<div class="panel-body">
 								<div class="col-lg-8 col-lg-offset-2">
-									<input type="number" min="0" name="s1" class="form-control" id="score1" placeholder="Buts marqués par l'équipe 1">
+									<input type="number" min="0" name="s1" class="form-control" user_id="score1" placeholder="Buts marqués par l'équipe 1">
 								</div>
 							</div> <!-- End of panel-body -->
 						</div> <!-- End of panel-primary -->
@@ -73,27 +73,27 @@
 								<div class="form-group">
 									<select name="j6" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="2">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j7" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="2">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>                
 									<select name="j8" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="2">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j9" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="2">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 									<select name="j10" class="form-control">
 										<?php foreach ($joueurs as $joueur): ?>
-												<option value="2">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
+												<option value="<?= $this->e($joueur['user_id']) ?>">- <?= $this->e($joueur['prenom']) ?> <?= $this->e($joueur['nom']) ?> -</option>   
 										<?php endforeach; ?>   
 									</select>
 								</div> <!-- End of form-group -->

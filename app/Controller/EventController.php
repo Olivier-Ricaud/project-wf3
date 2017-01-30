@@ -211,6 +211,8 @@ class EventController extends Controller
 					$event_manager = new EventManager();
 
 					$event = $event_manager->resultatMatch($id);
+					$equipe_1 = $event_manager->equipe_1_Match();
+					$equipe_2 = $event_manager->equipe_2_Match();
 
 
 					$this->show('event/detail', ['id' => $event['id']]);
