@@ -24,7 +24,7 @@
 							<?php 	if(isset($_GET['departement'])): ?>
 								<option value="<?= $_GET['departement'] ; ?>"> <?= $_GET['departement'] ; ?></option>
 							<?php 	endif; ?>
-							<option value="NULL">Choisissez un département...</option>
+							<option value="">Choisissez un département...</option>
 							<option value="Paris" selected>75 - Paris</option>
 							<option value="Val-d-Oise">95 - Val-d-Oise</option>
 						</select>
@@ -46,7 +46,7 @@
 							<?php 	if(isset($_GET['niveau'])): ?>
 								<option value="<?= $_GET['niveau'] ; ?>"> <?= $_GET['niveau'] ; ?></option>
 							<?php 	endif; ?>
-							<option value="NULL">Selectionnez un niveau... </option>
+							<option value="">Selectionnez un niveau... </option>
 							<option value="Débutant">Débutant</option>
 							<option value="Intermédiaire">Intermédiaire</option>
 							<option value="Confirmé">Confirmé</option>
@@ -62,7 +62,7 @@
 							<?php 	if(isset($_GET['sexe'])): ?>
 								<option value="<?= $_GET['sexe'] ; ?>"> <?= $_GET['sexe'] ; ?></option>
 							<?php 	endif; ?>
-							<option value="NULL">Choisissez un genre...</option>						
+							<option value="">Choisissez un genre...</option>						
 							<option value="Homme">Homme</option>
 							<option value="Femme">Femme</option>
 							<option value="Mixte">Mixte</option>
@@ -74,7 +74,7 @@
 					<label for="duree" class="col-sm-4 col-form-label">Durée</label>
 					<div class="col-sm-8">
 						<select class="form-control" id="duree" name="duree">
-							<option value="NULL">Choisissez une durée...</option>
+							<option value="">Choisissez une durée...</option>
 							<option value="01:00">1h</option>
 							<option value="02:00">2h</option>
 						</select>		  		 

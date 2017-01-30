@@ -110,6 +110,9 @@ class DefaultController extends Controller
 			// tableau d'erreurs
 			$erreurs = [];
 
+			$nextRdvs_manager = new EventManager();
+			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
+
 			if ( isset($_GET['search']) ) {
 				
 				$event_manager = new EventManager;
@@ -139,8 +142,7 @@ class DefaultController extends Controller
 				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs]);
 			}
 
-			$nextRdvs_manager = new EventManager();
-			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
+
 
 			$this->show('default/recherche', ['nextRdvs' => $nextRdvs]);
 		} else  {
