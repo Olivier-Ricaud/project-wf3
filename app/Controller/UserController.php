@@ -73,8 +73,13 @@ class UserController extends Controller
 	 * Page d'inscription
 	 */
 	public function register()
-	{
+	{	
+		// Tableau d'erreur
 		$erreurs = [];
+
+		// Message de validation
+			$validation = "";
+
 		if ( isset($_POST['sign-up']) ) {
 		
 
@@ -136,8 +141,9 @@ class UserController extends Controller
 
 	        // Password
 	        if (empty($_POST['form_register_user']['password']) ||
+	        	strlen($_POST['form_register_user']['password']) < 6 ||
 	        	strlen($_POST['form_register_user']['password']) > 300) {
-	        	$erreurs[] = "Champ mot de passe requis.";
+	        	$erreurs[] = "Champ mot de passe requis (plus de 6 caractères).";
 	        }
 
 	        // Confirm password
@@ -155,11 +161,14 @@ class UserController extends Controller
 
 				$utilisateur = new UtilisateurManager();
 				$utilisateur->insert($_POST['form_register_util']);
-				$this->redirectToRoute('login');
+
+				$validation = 'Votre Inscription a été validé.';
+
+				$this->show('user/login' , ['validation' => $validation]);
 
 	        }
 
-	        $this->show('user/register', ['erreurs' => $erreurs]);
+	        $this->show('user/register', ['erreurs' => $erreurs,]);
 	        // Fin Validation et Filtrage
 
         } else {
@@ -192,6 +201,9 @@ class UserController extends Controller
 	public function profilEditer($id)
 	{
 		if (isset($_SESSION['user'])) {
+
+			// Message de validation
+			$validation = "";
 			
 			if(isset($_POST['update'])) {
 
@@ -215,6 +227,11 @@ class UserController extends Controller
 				$auth_manager->refreshUser();
 				$userInfos = $utilisateur->find($_SESSION['user']['id']);
 				$_SESSION['user']['infos'] = $userInfos;
+
+				// Message de validation
+				$validation = 'Votre Profil a été mis à jour.';
+
+				$this->show('user/profil',['validation' => $validation]);
 			}
 
 			$this->show('user/profil-editer', ['id' => $_SESSION['user']['id']]);
