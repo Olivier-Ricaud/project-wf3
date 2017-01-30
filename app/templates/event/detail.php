@@ -66,7 +66,7 @@
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-heading">Site internet de la salle</div>
-					<div class="panel-body"><i class="fa fa-futbol-o" aria-hidden="true"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
+					<div class="panel-body"><i class="fa fa-futbol-o" aria-hidden="true"></i><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
 				</div>
 			</div>
 		</section>
@@ -78,11 +78,11 @@
 				<section class="row">
 					<h3>Score</h3>
 					<div class="col-sm-6">
-						<h3>Equipe 1 :</h3>
+						<h3>Equipe 1</h3>
 						<h2><?= $this->e($event['score_equipe_1']) ?></h2>
 					</div>
 					<div class="col-sm-6">
-						<h3>Equipe 2 :</h3>
+						<h3>Equipe 2</h3>
 						<h2><?= $this->e($event['score_equipe_2']) ?></h2>
 					</div>
 					
