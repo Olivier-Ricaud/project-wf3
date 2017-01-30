@@ -184,11 +184,17 @@ class UserController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
+			// Affichage événements
 			$events_manager = new EventManager();
-			$events = $events_manager->userEvents($_SESSION['user']['id']);
-			print_r($_SESSION['user']['id']);
 
-			$this->show('user/profil',['events' => $events]);
+			// match(s) à venir
+			$events = $events_manager->userEvents($_SESSION['user']['id']);
+
+			// match(s) terminé(s)
+			$matchs_over = $events_manager->userEvents_over($_SESSION['user']['id']);
+			print_r($matchs_over);
+
+			$this->show('user/profil',['events' => $events, 'matchs_over' => $matchs_over]);
 		} else  {
 
 			$this->redirectToRoute('login');
