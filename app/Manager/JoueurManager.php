@@ -102,5 +102,4 @@ class JoueurManager extends \W\Manager\Manager {
 		return $sth->execute();
 	}
 
-
 }

@@ -134,8 +134,15 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+			
+			<!-- Boutton suppression événement -->
 			<?php if ($host == true): ?>
 				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
+			<?php endif; ?>
+
+			<!-- Boutton vers feuille-de-match.php -->
+			<?php if ( ($host == true) && ($this->e($event['date']) >= $this->e($event['date'])) ): ?>
+				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
 			<?php endif; ?>
 		</div>
 		<!-- FIN DU TABLEAU DES JOUEURS INSCRITS -->

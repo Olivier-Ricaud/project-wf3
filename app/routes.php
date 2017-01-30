@@ -20,7 +20,7 @@
 		['GET|POST', '/creer', 'event#creer', 'creer'],
 		['GET|POST', '/salle-detail/[i:id]', 'event#salleDetail', 'salle_detail'],
 		['GET|POST', '/detail/[i:id]', 'event#detail', 'detail'],
-		['GET', '/feuille-de-match', 'event#feuilleMatch', 'feuille_match'],
+		['GET|POST', '/feuille-de-match/[i:id]', 'event#feuilleMatch', 'feuille_match'],
 
 		// Routes concernant les utilisateurs participant à l'évenement du site
 		['GET|POST', '/participer/[i:id]', 'joueur#participer', 'participer'],
