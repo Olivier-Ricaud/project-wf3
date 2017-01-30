@@ -75,6 +75,18 @@
 	<!-- DESCRIPTION ET MAP -->
 	<section class="row">
 			<div class="col-md-6">
+				<section class="row">
+					<h3>Score</h3>
+					<div class="col-sm-6">
+						<h3>Equipe 1 :</h3>
+						<h2><?= $this->e($event['score_equipe_1']) ?></h2>
+					</div>
+					<div class="col-sm-6">
+						<h3>Equipe 2 :</h3>
+						<h2><?= $this->e($event['score_equipe_2']) ?></h2>
+					</div>
+					
+				</section>
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
 

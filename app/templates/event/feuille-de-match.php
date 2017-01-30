@@ -8,7 +8,6 @@
 		</div>
 	</div> <!-- End of row h1-->
 		
-		<!-- action=" <?= $this->url('detail', ['id' => $event['id'] ] ) ?> " -->
 	<form method="POST">
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
