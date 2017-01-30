@@ -57,8 +57,9 @@ class EventController extends Controller
 
 				// Date
 				if (!$TimeReg || date("Y-m-d", $whatDate) < date("Y-m-d", time()) ) {
-					$erreurs[] = "La date entrée n'est pas valide.";
+					$erreurs[] = "La date ne peut pas être antérieure à aujourd'hui";
 				}
+
 				// Heure
 				$hour = $_POST['form_event']['heure'];
 				$hourReg = preg_match('/^[0-9:]+$/', $hour);
@@ -81,7 +82,7 @@ class EventController extends Controller
 				// Déscription
 				if (empty($htmlScTa) || strlen($htmlScTa) < 5 ||
 					 strlen($htmlScTa) > 5000) {
-					$erreurs[] = "Le champ de description est requis et doit comporter moins de 5000 caractères.";
+					$erreurs[] = "Le champ de description est requis et doit comporter entre 5 et 5000 caractères.";
 				}
 
 				// Niveau
@@ -98,7 +99,7 @@ class EventController extends Controller
 					 $_POST['form_event']['sexe'] == 'Homme' || 
 				 	$_POST['form_event']['sexe'] == 'Femme'))  {
 
-				    $erreurs[] = 'Le champ "sexe" doit correspondre aux choix proposées.';
+				    $erreurs[] = 'Le champ "sexe" doit correspondre aux choix proposés.';
 				}
 
 				if ( empty($erreurs) ) {

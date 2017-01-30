@@ -35,7 +35,7 @@
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"> Sexe des joueurs recherchés</div>
+					<div class="panel-heading"><i class="fa fa-venus-mars" aria-hidden="true"></i> Sexe des joueurs recherchés</div>
 					<div class="panel-body"><?= $this->e($event['sexe']) ?></div>
 				</div>
 			</div>
@@ -44,29 +44,29 @@
 		<section class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-eur" aria-hidden="true"></i> tarif</div>
+					<div class="panel-heading"><i class="fa fa-eur" aria-hidden="true"></i> Tarif</div>
 					<div class="panel-body">10€</div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> durée</div>
+					<div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i> Durée</div>
 					<div class="panel-body"><?= $this->e($event['duree']) ?></div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading">Niveau recomendé</div>
+					<div class="panel-heading"><i class="fa fa-level-up" aria-hidden="true"></i>Niveau recomendé</div>
 					<div class="panel-body"><?= $this->e($event['niveau']) ?></div>
 				</div>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading">Site internet de la salle</div>
-					<div class="panel-body"><i class="fa fa-futbol-o" aria-hidden="true"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
+					<div class="panel-heading"><i class="fa fa-futbol-o" aria-hidden="true"></i>Site internet de la salle</div>
+					<div class="panel-body"><a href="<?= $this->e($salle['ste_web']) ?>"><?= $this->e($salle['nom']) ?></a></div>
 				</div>
 			</div>
 		</section>

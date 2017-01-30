@@ -27,8 +27,7 @@ class DefaultController extends Controller
 
             // Tableau d'erreur
 	        $erreurs = [];
-	        // erreur description
-			$htmlScTa = htmlspecialchars($_POST['form_contactExt']['message']);
+	        
 
 			// Message de validation
 			$validation = "";
@@ -74,6 +73,8 @@ class DefaultController extends Controller
 				}
 
 				// Message
+		        // erreur description
+				$htmlScTa = htmlspecialchars($_POST['form_contactExt']['message']);
 				if (empty($htmlScTa) || strlen($htmlScTa) < 5 ||
 					 strlen($htmlScTa) > 5000) {
 					$erreurs[] = 'Le champ "message" est requis et doit comporter moins de 5000 caractères.';
@@ -110,15 +111,20 @@ class DefaultController extends Controller
 			// tableau d'erreurs
 			$erreurs = [];
 
+			$nextRdvs_manager = new EventManager();
+			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
+
+
 			if ( isset($_GET['search']) ) {
 				
-				$event_manager = new EventManager;
+				$event_manager = new EventManager();
 				$events = $event_manager->findEvents($_GET['departement'],
 					$_GET['date_debut'],
 					$_GET['date_fin'],
 					$_GET['niveau'],
 					$_GET['sexe'],
 					$_GET['duree']);
+
 
 				// Filtre et Validation
 
@@ -127,20 +133,17 @@ class DefaultController extends Controller
 					(strlen($_GET['departement']) <3) ||
 					(strlen($_GET['departement']) > 100)) {
 
-				    $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
+				    $erreurs[] = 'Le champ "département" doit être sélectionné';
 				} 
 
 				// Date
 				if ($_GET['date_debut'] > $_GET['date_fin'] ||
 					 $_GET['date_debut'] < date("Y-m-d",time()) ) {
-					$erreurs[] = 'Les champs de dates ne sont pas valides';
+					$erreurs[] = 'La date de début doit être inférieure à la date de fin et ne peut pas être antérieure à aujourd\'hui';
 				}
 
 				$this->show('default/recherche', ['events' => $events, 'erreurs' => $erreurs, 'nextRdvs' => $nextRdvs]);
 			}
-
-			$nextRdvs_manager = new EventManager();
-			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
 
 			$this->show('default/recherche', ['nextRdvs' => $nextRdvs]);
 		} else  {
@@ -183,7 +186,7 @@ class DefaultController extends Controller
 	        // Tableau d'erreur
 	        $erreurs = [];
 	        // Description
-			$htmlScTa = htmlspecialchars($_POST['form_contact']['message']);
+			$htmlScTa = htmlspecialchars($_POST['form_contact']['contenu']);
 
 			// Message de validation
 			$validation = "";
@@ -215,7 +218,7 @@ class DefaultController extends Controller
 
 		            // Traitement envoi du mail
 		            $expediteur = $utilisateur['nom'] . ' <'. $_SESSION['user']['email'] .'>';
-		            $mail = mail($destinataire,$_POST['form_contact']['sujet'], $_POST['form_contact']['message'], $expediteur . ' : wefive.com : Mail de contact');
+		            $mail = mail($destinataire,$_POST['form_contact']['sujet'], $_POST['form_contact']['contenu'], $expediteur . ' : wefive.com : Mail de contact');
 
 	        		$validation = 'Votre Message a été envoyé.';
 

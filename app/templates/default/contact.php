@@ -7,18 +7,22 @@
 			<h1>Contact</h1>
 			<!-- Affichage des erreurs -->
 			<?php if (!empty($erreurs)): ?>
-				<ul class="alert alert-danger">
-					<?php foreach ($erreurs as $erreur): ?>
-						<li> <?= $erreur ?> </li>
-					<? endforeach; ?>
-				</ul>
+                <div class="col-sm-8 col-sm-offset-2">
+    				<ul class="alert alert-danger">
+    					<?php foreach ($erreurs as $erreur): ?>
+    						<li> <?= $erreur ?> </li>
+    					<? endforeach; ?>
+    				</ul>
+                </div>
 			<? endif; ?>
 
             <!-- Message de Validation  -->
             <?php if (!empty($validation)): ?>
-                <ul class="alert alert-success">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <ul class="alert alert-success">
                         <li> <?= $validation ?> </li>
-                </ul>
+                    </ul>
+                </div>
             <? endif; ?>
 		</div>
 	</div> <!-- End of row h1-->
@@ -34,7 +38,7 @@
             <div class="form-group row">
                 <label for="message" class="col-xs-12 col-sm-3 col-form-label">Message </label>
                 <div class="col-xs-12 col-sm-8">
-                    <textarea type="message" class="form-control" id="message" name="form_contact[message]" placeholder="Votre message..." rows="10" maxlength="5000"></textarea>
+                    <textarea type="message" class="form-control" id="message" name="form_contact[contenu]" placeholder="Votre message..." rows="10" maxlength="5000"></textarea>
                 </div>
             </div>
  

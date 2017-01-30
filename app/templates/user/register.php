@@ -6,11 +6,13 @@
 		<div class="col-sm-9 col-sm-offset-2">
 			<h1>Inscription</h1>
 			<?php if (!empty($erreurs)): ?>
-				<ul class="alert alert-danger">
-					<?php foreach ($erreurs as $erreur): ?>
-						<li> <?= $erreur ?> </li>
-					<? endforeach; ?>
-				</ul>
+				<div class="col-sm-8 col-sm-offset-2">
+					<ul class="alert alert-danger">
+						<?php foreach ($erreurs as $erreur): ?>
+							<li> <?= $erreur ?> </li>
+						<? endforeach; ?>
+					</ul>
+				</div>
 			<? endif; ?>
 		</div>
 	</div> <!-- End of row h1-->

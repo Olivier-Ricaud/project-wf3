@@ -4,8 +4,6 @@ namespace Manager;
 
 class EventManager extends \W\Manager\Manager {
 
-	
-
 	/**
 	 * Récupère toutes les lignes de la table
 	 * @param   $departement 
@@ -62,12 +60,12 @@ class EventManager extends \W\Manager\Manager {
 
 	public function userEvents($id)
 	{
-		
 		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = " . $id;
-		
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
 		return $sth->fetchAll();
 	}
+
+
 }

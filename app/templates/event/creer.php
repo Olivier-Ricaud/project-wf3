@@ -3,18 +3,17 @@
 <!-- Page de création d'événement -->
 <main class="container-fluid">
 
-<<<<<<< HEAD
     <div class="row">
         <div class="col-sm-9 col-sm-offset-2">
             <h1>Création d'événement</h1>
-            <?php var_dump($_POST['duree']) ?>
-            <?php var_dump($_POST['form_event']['heure']) ?>
             <?php if (!empty($erreurs)): ?>
-				<ul class="alert alert-danger">
-					<?php foreach ($erreurs as $erreur): ?>
-						<li> <?= $erreur ?> </li>
-					<? endforeach; ?>
-				</ul>
+                <div class="col-sm-9 col-sm-offset-2">
+                    <ul class="alert alert-danger">
+                        <?php foreach ($erreurs as $erreur): ?>
+                            <li> <?= $erreur ?> </li>
+                        <? endforeach; ?>
+                    </ul>
+                </div>
 			<? endif; ?>
         </div>
     </div> <!-- End of row h1-->
@@ -62,7 +61,7 @@
    						<?php endforeach; ?>
 	               	</select>
 
-	               	<div id="txtSalle"><b>Salle info will be listed here...</b></div>
+	               	<div id="txtSalle"></div>
                 </div>
             </div> <!-- End row -->
             
