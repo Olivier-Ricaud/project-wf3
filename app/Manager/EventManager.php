@@ -58,7 +58,7 @@ class EventManager extends \W\Manager\Manager {
 		}
 	}
 
-	public function userEvents($id, $over)
+	public function userEvents($id, $over = 0)
 	{	
 		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = $id AND e.match_over = $over";
 		

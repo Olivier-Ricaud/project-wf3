@@ -5,7 +5,6 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Feuille de match</h1>
-
 	        <?php if (!empty($erreurs)): ?>
 				<ul class="alert alert-danger">
 					<?php foreach ($erreurs as $erreur): ?>

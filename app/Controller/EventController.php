@@ -192,7 +192,7 @@ class EventController extends Controller
 		if (isset($_SESSION['user'])) {
 
 			// tableau liste d'erreurs
-			$erreurs[] = "";
+			$erreurs = [];
 
 			// Requete pour aller chercher les données de l'événenement
 			$event_manager = new EventManager();
@@ -227,9 +227,13 @@ class EventController extends Controller
 							$m++;
 							}		   
 							if ($_POST['j'.$n] == $_POST['j' .  $m]) {
-								$erreurs[] = "'Un joueur ne peut être selectionner qu'une seule fois.'";
+								$erreurs[] = "Un joueur ne peut être selectionner qu'une seule fois.";
 						}
 						$m++;
+					}
+
+					if ( empty($_POST['s1']) || empty($_POST['s2']) ) {
+						$erreurs[] = 'Veuillez remplir tous les champs "score"';
 					}
 
 					if ( empty($erreurs) ) {
@@ -239,12 +243,12 @@ class EventController extends Controller
 						$equipe_2 = $event_manager->equipe_2_Match();
 
 
-						$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs, 'erreurs' => $erreurs]);
+						$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs]);
 					}
 
 				}
 
-				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
+				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs, 'erreurs' => $erreurs]);	
 			}
 
 			$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
