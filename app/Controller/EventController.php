@@ -192,7 +192,7 @@ class EventController extends Controller
 		if (isset($_SESSION['user'])) {
 
 			// tableau liste d'erreurs
-			$erreurs = [];
+			$erreurs[] = "";
 
 			// Requete pour aller chercher les données de l'événenement
 			$event_manager = new EventManager();
@@ -215,9 +215,21 @@ class EventController extends Controller
 
 					$event_manager = new EventManager();
 
-					if (  ) {
-
-						$erreurs[] = 'Un joueur ne peut être selectionner qu\'une seule fois.';
+					// Vérifie si la valeur $_POST[j$n] != $_POST[j$m] 
+					for ($i=0; $i < 20; $i++) { 
+						$n = 1;
+						$m = 1;
+						if ($m == 10) {
+							$n++;
+							$m = 1;
+							}
+							if ($n == $m) {
+							$m++;
+							}		   
+							if ($_POST['j'.$n] == $_POST['j' .  $m]) {
+								$erreurs[] = "'Un joueur ne peut être selectionner qu'une seule fois.'";
+						}
+						$m++;
 					}
 
 					if ( empty($erreurs) ) {
@@ -232,7 +244,7 @@ class EventController extends Controller
 
 				}
 
-				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs, 'erreurs' => $erreurs]);	
+				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
 			}
 
 			$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
