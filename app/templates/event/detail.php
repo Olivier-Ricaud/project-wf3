@@ -72,9 +72,11 @@
 		</section>
 	</section>
 
-	<!-- DESCRIPTION ET MAP -->
+	<!-- DESCRIPTION , MAP ET SCORE-->
 	<section class="row">
 			<div class="col-md-6">
+				
+				<!-- Affichage du score des equipes -->
 				<section class="row">
 					<h3>Score</h3>
 					<div class="col-sm-6">

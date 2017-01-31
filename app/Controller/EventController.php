@@ -143,7 +143,6 @@ class EventController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
-
 			// Requete pour aller chercher les données de l'événenement
 			$event_manager = new EventManager();
 			//Execute les fonctions uniquement si l'id de l'événement existe, autrement renvoi à la page de recherche
@@ -174,7 +173,7 @@ class EventController extends Controller
 					$retirer = true;
 				}
 
-				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host, 'nbrsJoueurs' => $nbrsJoueurs]);
+				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host, 'nbrsJoueurs' => $nbrsJoueurs);
 			} else {
 				$this->redirectToRoute('recherche');
 			}
@@ -215,21 +214,29 @@ class EventController extends Controller
 
 					$event_manager = new EventManager();
 
-					// Vérifie si la valeur $_POST[j$n] != $_POST[j$m] 
-					for ($i=0; $i < 20; $i++) { 
-						$n = 1;
-						$m = 1;
-						if ($m == 10) {
-							$n++;
-							$m = 1;
-							}
-							if ($n == $m) {
-							$m++;
-							}		   
-							if ($_POST['j'.$n] == $_POST['j' .  $m]) {
-								$erreurs[] = "Un joueur ne peut être selectionner qu'une seule fois.";
-						}
-						$m++;
+					// Affiche une erreur si un même joueur est selectionné plusieurs fois
+					// Faire 20 tours
+					for ($i=0; $i < 20; $i++) {
+					 	//$n => $_POST['j' . $n] (j1 devient j2 une fois que $m == 10) 
+					    $n = 1;
+					    // $m => $_POST['j' . $m] (le comparer à $_POST['j'.$n] puis $m++ à la fin des instructions)
+					    $m = 1;
+
+					    if ($m == 10) {
+					        $n++;
+					        $m = 1;
+					        }
+
+					    // Empecher les situation $_POST['j1'] == $_POST['j1']
+					    if ($n == $m) {
+					        $m++;
+					    }   
+					    // TEST des POST[$n] == POST[$m] == erreur
+					    if ($_POST['j' . $n] == $_POST['j' . $m]) {
+					       	$erreurs[] = "'Un joueur ne peut être selectionner qu'une seule fois.'";
+					    }
+					    
+					    $m++;
 					}
 
 					if ( empty($_POST['s1']) || empty($_POST['s2']) ) {
@@ -241,7 +248,6 @@ class EventController extends Controller
 						$event = $event_manager->resultatMatch($id);
 						$equipe_1 = $event_manager->equipe_1_Match();
 						$equipe_2 = $event_manager->equipe_2_Match();
-
 
 						$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs]);
 					}
