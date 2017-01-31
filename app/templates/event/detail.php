@@ -58,7 +58,7 @@
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-level-up" aria-hidden="true"></i>Niveau recomendé</div>
+					<div class="panel-heading"><i class="fa fa-level-up" aria-hidden="true"></i>Niveau recommandé</div>
 					<div class="panel-body"><?= $this->e($event['niveau']) ?></div>
 				</div>
 			</div>
@@ -75,30 +75,30 @@
 	<!-- DESCRIPTION ET MAP -->
 	<section class="row">
 			<div class="col-md-6">
-				<section class="row">
-					<?php if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
-						<h3>Score</h3>
-						<div class="col-sm-6">
-							<h3>Equipe 1</h3>
-							<h2><?= $this->e($event['score_equipe_1']) ?></h2>
-						</div>
-						<div class="col-sm-6">
-							<h3>Equipe 2</h3>
-							<h2><?= $this->e($event['score_equipe_2']) ?></h2>
-						</div>
-					<?php endif; ?>
-				</section>
+				<?php if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+					<section class="row" id="score">
+							<div class="col-sm-4 col-sm-offset-2">
+								<h2>Score Equipe 1 </h2>
+								<h3 value="<?= $this->e($event['score_equipe_1']) ?>"><?= $this->e($event['score_equipe_1']) ?></h3>
+							</div>
+							<div class="col-sm-4">
+								<h2>Score Equipe 2</h2>
+								<h3 value="<?= $this->e($event['score_equipe_2']) ?>"><?= $this->e($event['score_equipe_2']) ?></h3>
+							</div>
+					</section>
+				<?php endif; ?>
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
-
-				<?php if ($retirer == false):?>
-					<?php if($this->e($nbrsJoueurs) < 10): ?>
-						<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+				<?php if( !isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+					<?php if ($retirer == false):?>
+						<?php if($this->e($nbrsJoueurs) < 10): ?>
+							<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+						<?php else: ?>
+							<p class="btn btn-danger">MATCH FULL !</p>
+						<?php endif; ?>
 					<?php else: ?>
-						<p class="btn btn-danger">MATCH FULL !</p>
+					<a href="<?= $this->url('desinscrire', ['id' => $event['id']]) ?>" class="btn btn-danger" >Se désinscrire</a>
 					<?php endif; ?>
-				<?php else: ?>
-				<a href="<?= $this->url('desinscrire', ['id' => $event['id']]) ?>" class="btn btn-danger" >Se désinscrire</a>
 				<?php endif; ?>
 			</div>
 
@@ -120,7 +120,12 @@
 						<th>Joueur</th>
 						<th>Niveau</th>
 						<th>Genre</th>
-						<th>Statut</th>
+						
+						<?php  if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+							<th>Equipe</th>
+						<?php else: ?>
+							<th>Statut</th>
+						<?php endif; ?>
 						
 						<?php if ($host == true): ?>
 							<th>Edit (Admin)</th>
@@ -135,8 +140,17 @@
 						<td><?= $this->e($joueur['prenom']).' '.$this->e($joueur['nom'])?></td>
 						<td><?= $this->e($joueur['niveau'])?></td>
 						<td><?= $this->e($joueur['sexe'])?></td>
-						<td><?= $this->e($joueur['statut'])?></td>
 						
+						<?php  if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+							<td><?= $this->e($joueur['equipe_id'])?></td>
+						<?php else: ?>
+							<?php if ($joueur['user_id'] == $event['host_id']): ?>
+									<td>Hôte</td>
+							<?php else: ?>
+							<td><?= $this->e($joueur['statut'])?></td>
+							<?php endif ?>
+						<?php endif; ?>
+
 						<?php if ($host == true): ?>
 						<td>
 							<a href="<?= $this->url('confirmer', ['userId' => $joueur['user_id'], 'eventId' => $event['id'] ]) ?>" class="btn btn-primary">Confirmer</a>
@@ -147,15 +161,14 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-			
-			<!-- Boutton suppression événement -->
-			<?php if ($host == true): ?>
-				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
-			<?php endif; ?>
 
 			<!-- Boutton vers feuille-de-match.php -->
+			
 			<?php if ( ($host == true) && ($this->e($event['date']) >= $this->e($event['date'])) ): ?>
 				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
+			<?php else: ?>
+				<!-- Boutton suppression événement -->
+				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
 			<?php endif; ?>
 		</div>
 		<!-- FIN DU TABLEAU DES JOUEURS INSCRITS -->

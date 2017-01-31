@@ -38,7 +38,7 @@
 				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>
 					<div class="row">
-						<article class="col-sm-10 col-sm-offset-1">
+						<article class="col-xs-12 col-sm-10 col-sm-offset-1">
 							<div class="col-xs-4">
 								<a href="<?= $this->url('detail', ['id' => $event['event_id']])?>">
 									<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
@@ -72,25 +72,28 @@
 			<h2>Mes événements terminés</h2>
 				<!-- Affichage par événement -->
 				<?php foreach ($matchs_over as $match_over): ?>	
-					<figure class="col-sm-10 col-sm-offset-1">
-						<div class="row">
-							<a href="<?= $this->url('detail', ['id' => $matchs_over['0']['id']])?>">
-								<div class="col-xs-6">
-									<img src="<?= $this->assetUrl('salle/'.$this->e($matchs_over['0']['photo']).'.jpg') ?>">
-								</div>
+					<article class="col-xs-12 col-sm-10 col-sm-offset-1">
+						<div class="col-xs-4">
+							<a href="<?= $this->url('detail', ['id' => $match_over['event_id']])?>">
+								<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($match_over['salle_id']).'.jpg') ?>">
 							</a>
-							<div class="col-xs-6">
-								<p>Titre : <?= $this->e($matchs_over['0']['titre']) ?></p>
-								<p>Date : <?= $this->e($matchs_over['0']['date']) ?></p>
-								<p>Catégorie : <?= $this->e($matchs_over['0']['sexe']) ?></p>
-								<p>Niveau demandé : <?= $this->e($matchs_over['0']['niveau']) ?></p>
-								<p>Adresse : <?= $this->e($matchs_over['0']['adresse']) ?></p>
-								<p>Ville : <?= $this->e($matchs_over['0']['ville']) ?></p>
-								<p>Code postal : <?= $this->e($matchs_over['0']['cp']) ?></p>
-								<p><a href="<?= $this->e($matchs_over['0']['site_web'])?>" target="_blank">Site internet de la salle</a></p>
-							</div> 
+							<p><a href="<?= $this->e($match_over['site_web'])?>" target="_blank"><?= $this->e($event['nom'])?></a></p>
 						</div>
-					</figure>
+
+						<div class="col-xs-8">
+							<h3><?= $this->e($match_over['titre']) ?></h3>
+						</div>
+
+						<div class="col-xs-4">
+							<p>Adresse : <?= $this->e($match_over['adresse']) ?> <?= $this->e($match_over['cp']) ?> - <?= $this->e($match_over['ville']) ?></p>
+							<p>Places : <span><?= ($this->e($match_over['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($match_over['nbrs_joueurs']).'</span> / 10' ?></p>
+						</div>
+						<div class="col-xs-4">
+							<p>Le <?= $this->e($match_over['date']) ?></p>
+							<p>Catégorie : <?= $this->e($match_over['sexe']) ?></p>
+							<p>Niveau demandé : <?= $this->e($match_over['niveau']) ?></p>
+						</div> 
+					</article>
 				<?php endforeach; ?>
 		</section>
 	</div> <!-- end of row -->

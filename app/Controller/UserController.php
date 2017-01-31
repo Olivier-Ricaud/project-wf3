@@ -6,6 +6,7 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
+use \Manager\JoueurManager;
 use \Manager\EventManager;
 
 class UserController extends Controller
@@ -22,9 +23,6 @@ class UserController extends Controller
 
 			$erreurs = [];
 
-
-			$validation;
-
 			// Validation et Filtrage
 
 			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) == 0 ) {
@@ -40,7 +38,7 @@ class UserController extends Controller
 
 			// Si Filtrage Ok
 			if ( ( empty($erreurs) ) AND
-				 ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
+				 ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) ) ) {
 				
 				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
 
@@ -52,7 +50,7 @@ class UserController extends Controller
 				$this->redirectToRoute('recherche');
 			} 
 
-			$this->show('user/login', ['erreurs' => $erreurs, 'validation' => $validation]);
+			$this->show('user/login', ['erreurs' => $erreurs]);
 
 			// Fin Validation et Filtrage
 
@@ -167,7 +165,7 @@ class UserController extends Controller
 
 				$validation = 'Votre Inscription a été validé.';
 
-				$this->redirectToRoute('login' , ['validation' => $validation]);
+				$this->redirectToRoute('login');
 
 	        }
 
@@ -195,7 +193,6 @@ class UserController extends Controller
 
 			// match(s) terminé(s)
 			$matchs_over = $events_manager->userEvents_over($_SESSION['user']['id']);
-			print_r($matchs_over);
 
 			$this->show('user/profil',['events' => $events, 'matchs_over' => $matchs_over]);
 		} else  {
@@ -277,6 +274,9 @@ class UserController extends Controller
 		        }
 
 		        // Password
+		        if (empty($_POST['form_update_user']['password']) || empty($_POST['confirm_password'])) {
+		        	$erreurs[] = "Veuillez saisir votre mot de passe pour valider la modification du profil";
+		        }
 		        if(!empty($_POST['form_update_user']['password'])) {
 			        if (strlen($_POST['form_update_user']['password']) < 6 ||
 			        	strlen($_POST['form_update_user']['password']) > 300) {
@@ -292,6 +292,7 @@ class UserController extends Controller
 		        if ( empty($erreurs)) {
 
 					$_POST['form_update_user']['password'] = password_hash($_POST['form_update_user']['password'], PASSWORD_DEFAULT);
+
 					$manager->update($_POST['form_update_user'],$id);
 
 					$utilisateur = new UtilisateurManager();
@@ -337,7 +338,7 @@ class UserController extends Controller
 			$manager->delete($id);
 
 			$utilisateur = new UtilisateurManager();
-			$utilisateur->delete($id);
+			$utilisateur->deleteUtil($id);
 
 			$this->redirectToRoute('home');
  	

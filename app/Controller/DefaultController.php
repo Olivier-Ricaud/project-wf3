@@ -130,7 +130,7 @@ class DefaultController extends Controller
 
 				// Departement
 				if( empty($_GET['departement']) ||
-					(strlen($_GET['departement']) <3) ||
+					(strlen($_GET['departement']) < 3) ||
 					(strlen($_GET['departement']) > 100)) {
 
 				    $erreurs[] = 'Le champ "département" doit être sélectionné';

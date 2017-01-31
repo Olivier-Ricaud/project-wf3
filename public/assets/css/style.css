@@ -45,7 +45,7 @@ h2 {
   margin-bottom: 4rem;
 }
 
-h2:after {
+h2:after:not(#score) {
     content: "";
     display: block;
     height: .4rem;
@@ -471,6 +471,22 @@ section:nth-child(3) div {
       overflow-y: auto; 
       width: auto; 
       height: 300px;
+    }
+    /* Classes des scores de match*/
+    #score h3 {
+      font-size: 5rem;
+    }
+
+    .win {
+      color : green;
+    }
+
+    .lose {
+      color : red;
+    }
+
+    .equal {
+      color : blue;
     }
 
 

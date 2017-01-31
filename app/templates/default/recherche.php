@@ -98,49 +98,56 @@
 			<div id="aside">
 				<a href="<?= $this->url('creer')?>" class="btn btn-primary">Créer Match</a>
 				<!-- Premier Panel -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="list-group-item-heading">Résultats des derniers matchs :</h4>
-					</div>
-					
-					<table class="table table-striped table-hover">
-						<tbody>
-							<tr>
-							       <th>Date</th>
-							       <th>Ville</th>
-							       <th>Equipe 1</th>
-							       <th>Equipe 2</th>
-						   </tr>
-							<tr>
-								<td><?= $this->e($matchs_over['0']['date']) ?></td>
-								<td><?= $this->e($matchs_over['0']['ville']) ?></td>
-								<td><?= $this->e($matchs_over['0']['score_equipe_1']) ?></td>
-								<td><?= $this->e($matchs_over['0']['score_equipe_2']) ?></td>
-							</tr>
-						</tbody>
-					</table> 
-				</div> <!-- End div panel-->
-				<!-- Deuxième Panel -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="list-group-item-heading">Prochain(s) rdv(s) :</h4>
-					</div>
-
-					<!-- Affichage par événement -->
-					<!-- Fonction JQuery pour faire réagir la ligne au clique -->
-					<?php foreach ($nextRdvs as $nextRdv): ?>
+				<?php if(!empty($matchs_over)): ?>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="list-group-item-heading">Résultats des derniers matchs :</h4>
+						</div>
+						
 						<table class="table table-striped table-hover">
-							<tbody data-link="row" class="rowlink">	
-							<tr>
-								<td><a href="<?= $this->url('detail', ['id' => $nextRdv['event_id']])?>"><?= $this->e($nextRdv['titre']) ?></a></td>
-								<td><?= $this->e($nextRdv['date']) ?></td>
-								<td><?= $this->e($nextRdv['heure']) ?></td>
-								<td><?= $this->e($nextRdv['ville']) ?></td>
-							</tr>
+							<tbody>
+								<tr>
+								       <th>Date</th>
+								       <th>Ville</th>
+								       <th>Equipe 1</th>
+								       <th>Equipe 2</th>
+							   </tr>
+							   <?php foreach ($matchs_over as $match_over): ?>
+									<tr>
+										<td><?= $this->e($match_over['date']) ?></td>
+										<td><?= $this->e($match_over['ville']) ?></td>
+										<td><?= $this->e($match_over['score_equipe_1']) ?></td>
+										<td><?= $this->e($match_over['score_equipe_2']) ?></td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
-						</table> 
-					<?php endforeach; ?>
-				</div> <!-- End div panel -->
+						</table>
+					</div> <!-- End div panel-->
+				<?php endif; ?> 
+
+				<!-- Deuxième Panel -->
+				<?php if(!empty($nextRdvs)): ?>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="list-group-item-heading">Prochain(s) rdv(s) :</h4>
+						</div>
+
+						<!-- Affichage par événement -->
+						<!-- Fonction JQuery pour faire réagir la ligne au clique -->
+							<table class="table table-striped table-hover">
+								<tbody data-link="row" class="rowlink">	
+								<?php foreach ($nextRdvs as $nextRdv): ?>
+								<tr>
+									<td><a href="<?= $this->url('detail', ['id' => $nextRdv['event_id']])?>"><?= $this->e($nextRdv['titre']) ?></a></td>
+									<td><?= $this->e($nextRdv['date']) ?></td>
+									<td><?= $this->e($nextRdv['heure']) ?></td>
+									<td><?= $this->e($nextRdv['ville']) ?></td>
+								</tr>
+								<?php endforeach; ?>
+								</tbody>
+							</table>
+					</div> <!-- End div panel -->
+				<?php endif; ?>
 			</div>
 		</div> <!-- End col-sm-5 End col-sm-offset-2 -->
 	</div> <!-- End row -->
@@ -155,7 +162,7 @@
 				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>	
 					<div class="row">
-						<article class="col-sm-10 col-sm-offset-1">
+						<article class="col-xs-12 col-sm-10 col-sm-offset-1">
 							<div class="col-xs-4">
 								<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
 								<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
