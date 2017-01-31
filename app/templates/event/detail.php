@@ -72,9 +72,10 @@
 		</section>
 	</section>
 
-	<!-- DESCRIPTION ET MAP -->
+	<!-- DESCRIPTION , MAP ET SCORE-->
 	<section class="row">
 			<div class="col-md-6">
+
 				<?php if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
 					<section class="row" id="score">
 							<div class="col-sm-4 col-sm-offset-2">
@@ -87,6 +88,7 @@
 							</div>
 					</section>
 				<?php endif; ?>
+				
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
 				<?php if( !isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
