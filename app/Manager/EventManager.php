@@ -58,27 +58,15 @@ class EventManager extends \W\Manager\Manager {
 		}
 	}
 
-	public function userEvents($id)
+	public function userEvents($id, $over)
 	{	
-		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = $id AND e.match_over = 0";
+		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = $id AND e.match_over = $over";
 		
 		$sth = $this->dbh->prepare($sql);
 		$sth->execute();
 
 		return $sth->fetchAll();
 	}
-
-	public function userEvents_over($id)
-	{
-		
-		$sql = "SELECT * FROM events e INNER JOIN joueurs j ON e.id = j.event_id INNER JOIN salles s ON e.salle_id = s.id WHERE j.user_id = $id AND e.match_over = 1";
-		
-		$sth = $this->dbh->prepare($sql);
-		$sth->execute();
-
-		return $sth->fetchAll();
-	}
-
 
 	public function resultatMatch($id)
 	{

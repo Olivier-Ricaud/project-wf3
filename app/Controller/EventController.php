@@ -19,6 +19,7 @@ class EventController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
+			// tableau liste d'erreurs
 			$erreurs = [];
 
 			//Rechercher toutes les salles pour les insérer dans le formulaire de création
@@ -190,6 +191,9 @@ class EventController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
+			// tableau liste d'erreurs
+			$erreurs = [];
+
 			// Requete pour aller chercher les données de l'événenement
 			$event_manager = new EventManager();
 			//Execute les fonctions uniquement si l'id de l'événement existe, autrement renvoi à la page de recherche
@@ -211,16 +215,24 @@ class EventController extends Controller
 
 					$event_manager = new EventManager();
 
-					$event = $event_manager->resultatMatch($id);
-					$equipe_1 = $event_manager->equipe_1_Match();
-					$equipe_2 = $event_manager->equipe_2_Match();
+					if (  ) {
+
+						$erreurs[] = 'Un joueur ne peut être selectionner qu\'une seule fois.';
+					}
+
+					if ( empty($erreurs) ) {
+
+						$event = $event_manager->resultatMatch($id);
+						$equipe_1 = $event_manager->equipe_1_Match();
+						$equipe_2 = $event_manager->equipe_2_Match();
 
 
-					$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs]);
+						$this->redirectToRoute('detail', [ 'id' => $id, 'event' => $event, 'joueurs' => $joueurs, 'erreurs' => $erreurs]);
+					}
 
 				}
 
-				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	
+				$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs, 'erreurs' => $erreurs]);	
 			}
 
 			$this->show('event/feuille-de-match', [ 'id' => $event['id'], 'joueurs' => $joueurs]);	

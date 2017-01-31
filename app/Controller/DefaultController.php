@@ -148,10 +148,10 @@ class DefaultController extends Controller
 			$matchs_manager = new EventManager();
 
 			//  Prochains rendez-vous 
-			$nextRdvs = $matchs_manager->userEvents($_SESSION['user']['id']);
+			$nextRdvs = $matchs_manager->userEvents($_SESSION['user']['id'], 0);
 			
 			// Match(s) Terminé(s)
-			$matchs_over = $matchs_manager->userEvents_over($_SESSION['user']['id']);
+			$matchs_over = $matchs_manager->userEvents($_SESSION['user']['id'], 1);
 
 			$this->show('default/recherche', ['nextRdvs' => $nextRdvs, 'matchs_over' => $matchs_over]);
 
