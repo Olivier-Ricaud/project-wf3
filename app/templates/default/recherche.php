@@ -154,54 +154,56 @@
 	</div> <!-- End row -->
 
 	<!-- Liste événement(s) -->
-	<div class="row">
-		<section class="col-sm-10 col-sm-offset-1">
-			<h2>Liste des résultats</h2>
-			
-			<?php if(isset($_GET['search']) && empty($erreurs)): ?>
+	<?php if (!empty($events)): ?>
+		<div class="row">
+			<section class="col-sm-10 col-sm-offset-1">
+				<h2>Liste des résultats</h2>
 				
-				<!-- Affichage par événement -->
-				<?php foreach ($events as $event): ?>	
-					<div class="row">
-						<article class="col-xs-12 col-sm-10 col-sm-offset-1">
-							<div class="col-xs-4">
-								<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
-								<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
-								</a>
-								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank"><?= $this->e($event['nom'])?></a></p>
-							</div>
+				<?php if(isset($_GET['search']) && empty($erreurs)): ?>
+					
+					<!-- Affichage par événement -->
+					<?php foreach ($events as $event): ?>	
+						<div class="row">
+							<article class="col-xs-12 col-sm-10 col-sm-offset-1">
+								<div class="col-xs-4">
+									<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
+									<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
+									</a>
+									<p><a href="<?= $this->e($event['site_web'])?>" target="_blank"><?= $this->e($event['nom'])?></a></p>
+								</div>
 
-							<div class="col-xs-8">
-								<h3><?= $this->e($event['titre']) ?></h3>
-							</div>
+								<div class="col-xs-8">
+									<h3><?= $this->e($event['titre']) ?></h3>
+								</div>
 
-							<div class="col-xs-4">
-								<p>Adresse : <?= $this->e($event['adresse']) ?> <?= $this->e($event['cp']) ?> - <?= $this->e($event['ville']) ?></p>
-								<p>Places : <span><?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'</span> / 10' ?></p>
-							</div>
-							<div class="col-xs-4">
-								<p>Le <?= $this->e($event['date']) ?></p>
-								<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
-								<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
-							</div> 
-						</article>
-					</div>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</section>
-	</div> <!-- End row Liste événement(s) -->
+								<div class="col-xs-4">
+									<p>Adresse : <?= $this->e($event['adresse']) ?> <?= $this->e($event['cp']) ?> - <?= $this->e($event['ville']) ?></p>
+									<p>Places : <span><?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'</span> / 10' ?></p>
+								</div>
+								<div class="col-xs-4">
+									<p>Le <?= $this->e($event['date']) ?></p>
+									<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
+									<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
+								</div> 
+							</article>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</section>
+		</div> <!-- End row Liste événement(s) -->
 
-	<!-- Debut Pagination -->
-	<div class="row">
-			<ul class="pagination pagination-sm">
-				<li><a href="#">&laquo;</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">&raquo;</a></li>
-			</ul>
-	</div> <!-- End Pagination row -->
+		<!-- Debut Pagination (Work in Progress) -->
+		<div class="row">
+				<ul class="pagination pagination-sm">
+					<li><a href="#">&laquo;</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">&raquo;</a></li>
+				</ul>
+		</div> <!-- End Pagination row -->
+	<?php endif ?>
 </main>
 <?php $this->stop('main_content') ?>
