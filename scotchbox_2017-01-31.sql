@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-31 13:58:08 +0000
+# Generation Time: 2017-01-31 14:24:57 +0000
 # ************************************************************
 
 
@@ -82,7 +82,7 @@ LOCK TABLES `events` WRITE;
 
 INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`, `nbrs_joueurs`, `score_equipe_1`, `score_equipe_2`, `match_over`)
 VALUES
-	(24,16,1,'Premier Evenement','2017-01-29','17:30:00','01:00:00','    Premier Evenement','Mixte','Débutant',10,2,1,1);
+	(24,16,1,'Premier Evenement','2017-01-29','17:30:00','01:00:00','    Premier Evenement','Mixte','Débutant',9,2,1,1);
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -152,18 +152,19 @@ CREATE TABLE `salles` (
   `cp` int(11) DEFAULT NULL,
   `tarif` tinyint(3) DEFAULT NULL,
   `site_web` varchar(300) DEFAULT NULL,
+  `map` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `salles` WRITE;
 /*!40000 ALTER TABLE `salles` DISABLE KEYS */;
 
-INSERT INTO `salles` (`id`, `nom`, `departement`, `ville`, `adresse`, `cp`, `tarif`, `site_web`)
+INSERT INTO `salles` (`id`, `nom`, `departement`, `ville`, `adresse`, `cp`, `tarif`, `site_web`, `map`)
 VALUES
-	(1,'LE FIVE','Paris','Paris','32, rue Moussorgski',75018,14,'http://paris.lefive.fr/'),
-	(2,'URBAN SOCCER','Paris','Paris','22, Rue Notre Dame des Champs',75006,8,'http://www.bfive.fr/'),
-	(3,'GO PARK PONTOISE','Val-d-Oise','Pontoise','25, route de Ménandon ',95300,10,'http://www.gopark.fr/'),
-	(4,'KAISER PARK BEAUCHAMP','Val-d-Oise','Beauchamp','15, rue Denis Papin ',95250,8,'http://www.kaiserpark.fr/');
+	(1,'LE FIVE','Paris','Paris','32, rue Moussorgski',75018,14,'http://paris.lefive.fr/','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2623.0735310136465!2d2.36414351560241!3d48.89493580608693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e7e39484fd7%3A0xd45f821cde0e1263!2s32+Rue+Moussorgski%2C+75018+Paris!5e0!3m2!1sfr!2sfr!4v1485871622386'),
+	(2,'URBAN SOCCER','Paris','Paris','22, Rue Notre Dame des Champs',75006,8,'http://www.bfive.fr/','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.6751306504375!2d2.324781715600816!3d48.84533510957989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671ce16964efb%3A0x4506f0e1ad997bf7!2s22+Rue+Notre+Dame+des+Champs%2C+75006+Paris!5e0!3m2!1sfr!2sfr!4v1485871730283'),
+	(3,'GO PARK PONTOISE','Val-d-Oise','Pontoise','25, route de Ménandon ',95300,10,'http://www.gopark.fr/','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2615.155235665584!2d2.077531515607139!3d49.04567189545579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6f5170d1b370f%3A0x5f16710f52a6aa6c!2s25+Route+de+Menandon%2C+95300+Pontoise!5e0!3m2!1sfr!2sfr!4v1485871775932'),
+	(4,'KAISER PARK BEAUCHAMP','Val-d-Oise','Beauchamp','15, rue Denis Papin ',95250,8,'http://www.kaiserpark.fr/','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2616.63791529609!2d2.1754995156062544!3d49.01747319744633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e660a1dbd0122b%3A0xeaed0556fed5c42c!2s15+Rue+Denis+Papin%2C+95250+Beauchamp!5e0!3m2!1sfr!2sfr!4v1485871885303');
 
 /*!40000 ALTER TABLE `salles` ENABLE KEYS */;
 UNLOCK TABLES;
