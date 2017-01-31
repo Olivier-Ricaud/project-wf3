@@ -10,7 +10,7 @@ class JoueurManager extends \W\Manager\Manager {
 	 */
 	public function infosJoueurs($id) {
 
-		$sql = "SELECT u.nom, u.prenom, u.niveau, u.sexe, s.statut, j.user_id FROM joueurs j 
+		$sql = "SELECT u.nom, u.prenom, u.niveau, u.sexe, s.statut, j.user_id, j.equipe_id FROM joueurs j 
 			INNER JOIN wusers w ON j.user_id = w.id 
 			INNER JOIN utilisateurs u ON w.id = u.user_id 
 			INNER JOIN statuts s ON s.id = j.statut_id 

@@ -1,3 +1,5 @@
+
+// Fonction d'affichage du détail des salles dans le formulaire de création d'événement
 function showSalle(salleId) {
     if (salleId === "" ) {
         document.getElementById("txtSalle").innerHTML="";
@@ -20,6 +22,4 @@ function showSalle(salleId) {
             document.getElementById("txtSalle").innerHTML = this.responseText;
         }
     };
-
-
 }

@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-25 14:12:20 +0000
+# Generation Time: 2017-01-31 13:58:08 +0000
 # ************************************************************
 
 
@@ -42,6 +42,8 @@ DROP TABLE IF EXISTS `contacts`;
 
 CREATE TABLE `contacts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(50) NOT NULL DEFAULT '0',
+  `prenom` varchar(50) NOT NULL DEFAULT '0',
   `email` varchar(255) DEFAULT NULL,
   `sujet` varchar(255) DEFAULT NULL,
   `contenu` text,
@@ -69,22 +71,18 @@ CREATE TABLE `events` (
   `sexe` enum('Homme','Femme','Mixte') DEFAULT NULL,
   `niveau` enum('Débutant','Intermédiaire','Confirmé','Tout niveaux') DEFAULT NULL,
   `nbrs_joueurs` tinyint(2) DEFAULT NULL,
+  `score_equipe_1` int(11) DEFAULT NULL,
+  `score_equipe_2` int(11) DEFAULT NULL,
+  `match_over` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
 
-INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`, `nbrs_joueurs`)
+INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`, `nbrs_joueurs`, `score_equipe_1`, `score_equipe_2`, `match_over`)
 VALUES
-	(5,3,1,'Premier Evenement','2017-02-03','19:00:00',NULL,'  Premier événément créer dans la base de données','Mixte','',1),
-	(6,3,2,'Deuxieme Evenement','2017-01-28','18:30:00',NULL,'  Deuxieme événement dans la base de données','Homme','Intermédiaire',NULL),
-	(10,3,3,'Troisieme Evenement','2017-01-27','18:00:00',NULL,' Troisième événément dans la base de données ','Femme','Confirmé',NULL),
-	(11,3,4,'Quatrieme Evenement','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','',NULL),
-	(16,3,4,'Salu','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','',NULL),
-	(18,5,1,'Nouvelle event','2017-01-29','18:00:00',NULL,'  Nouvelle evenement','Homme','Intermédiaire',NULL),
-	(19,5,1,'Nouvelle event','2017-01-29','18:00:00','02:00:00','   Nouvelle evenement ','Homme','Intermédiaire',NULL),
-	(20,5,1,'Nouvelle event','2017-01-29','18:00:00','01:00:00','  Nouvelle evenement','Homme','Intermédiaire',NULL);
+	(24,16,1,'Premier Evenement','2017-01-29','17:30:00','01:00:00','    Premier Evenement','Mixte','Débutant',10,2,1,1);
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -109,7 +107,17 @@ LOCK TABLES `joueurs` WRITE;
 
 INSERT INTO `joueurs` (`id`, `user_id`, `event_id`, `equipe_id`, `statut_id`)
 VALUES
-	(26,3,5,NULL,1);
+	(43,16,24,2,2),
+	(44,17,24,1,2),
+	(47,16,25,2,1),
+	(48,19,24,1,2),
+	(49,19,25,1,1),
+	(50,20,24,1,2),
+	(51,21,24,NULL,1),
+	(52,22,24,2,1),
+	(53,23,24,2,1),
+	(54,24,24,NULL,1),
+	(55,25,24,2,1);
 
 /*!40000 ALTER TABLE `joueurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -144,19 +152,18 @@ CREATE TABLE `salles` (
   `cp` int(11) DEFAULT NULL,
   `tarif` tinyint(3) DEFAULT NULL,
   `site_web` varchar(300) DEFAULT NULL,
-  `photo` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `salles` WRITE;
 /*!40000 ALTER TABLE `salles` DISABLE KEYS */;
 
-INSERT INTO `salles` (`id`, `nom`, `departement`, `ville`, `adresse`, `cp`, `tarif`, `site_web`, `photo`)
+INSERT INTO `salles` (`id`, `nom`, `departement`, `ville`, `adresse`, `cp`, `tarif`, `site_web`)
 VALUES
-	(1,'LE FIVE','Paris','Paris','32, rue Moussorgski',75018,14,'http://paris.lefive.fr/',NULL),
-	(2,'URBAN SOCCER','Paris','Paris','22, Rue Notre Dame des Champs',75006,8,'http://www.bfive.fr/',NULL),
-	(3,'GO PARK PONTOISE','Val-d-Oise','Pontoise','25, route de Ménandon ',95300,10,'http://www.gopark.fr/',NULL),
-	(4,'KAISER PARK BEAUCHAMP','Val-d-Oise','Beauchamp','15, rue Denis Papin ',95250,8,'http://www.kaiserpark.fr/',NULL);
+	(1,'LE FIVE','Paris','Paris','32, rue Moussorgski',75018,14,'http://paris.lefive.fr/'),
+	(2,'URBAN SOCCER','Paris','Paris','22, Rue Notre Dame des Champs',75006,8,'http://www.bfive.fr/'),
+	(3,'GO PARK PONTOISE','Val-d-Oise','Pontoise','25, route de Ménandon ',95300,10,'http://www.gopark.fr/'),
+	(4,'KAISER PARK BEAUCHAMP','Val-d-Oise','Beauchamp','15, rue Denis Papin ',95250,8,'http://www.kaiserpark.fr/');
 
 /*!40000 ALTER TABLE `salles` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -208,9 +215,17 @@ LOCK TABLES `utilisateurs` WRITE;
 
 INSERT INTO `utilisateurs` (`id`, `user_id`, `nom`, `prenom`, `departement`, `sexe`, `niveau`)
 VALUES
-	(3,3,'Liu','Anais','75 - Paris','Homme','Débutant'),
-	(4,4,'Piussan','charles','95 - Val-d-Oise','Femme',NULL),
-	(5,5,'Piussan','thomas','75 - Paris','Homme','Débutant');
+	(16,16,'testnom','testprenom','75 - Paris','Homme','Débutant'),
+	(17,17,'testnom','testprenom','95 - Val-d-Oise','Homme','Intermédiaire'),
+	(18,18,'testnom','testprenom','95 - Val-d-Oise','Homme','Débutant'),
+	(19,19,'testnom','testprenom','75 - Paris','Homme','Intermédiaire'),
+	(20,20,'testnom','testprenom','95 - Val-d-Oise','Homme','Intermédiaire'),
+	(21,21,'testnom','testprenom','75 - Paris','Femme',NULL),
+	(22,22,'testnom','testprenom','95 - Val-d-Oise','Femme',NULL),
+	(23,23,'testnom','testprenom','75 - Paris','Homme',NULL),
+	(24,24,'testnom','testprenom','75 - Paris','Femme',NULL),
+	(25,25,'testnom','testprenom','95 - Val-d-Oise','Homme',NULL),
+	(26,27,'testnom','testprenom','75 - Paris','Homme',NULL);
 
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -234,9 +249,17 @@ LOCK TABLES `wusers` WRITE;
 
 INSERT INTO `wusers` (`id`, `username`, `password`, `email`)
 VALUES
-	(3,'Dada','$2y$10$5LJ1dANMDTTsZMe/59aJ8Oi9OgcVwXOObzSxbpsS8NLjuXcQOZIz2','Anais.liu@gmail.com'),
-	(4,NULL,'$2y$10$M3LL0KkUxLxo8bZCSb3Ey.vY2flWcFEMDbXzcxhp89HyOxjJ5XowC','charles.p@gmail.com'),
-	(5,'Toto','$2y$10$u9xWPj.qY9iKqpLlwhjf4OrHCiXtGhvA25x9JYk5EwJn4bQyN/mlS','thomas.piussan@gmail.com');
+	(16,'test01','$2y$10$5oTy4qhXeygEEruSZA6Z6ewddeYX.dX9bqwEn7Ftf78TuDsHXnOLO','test01@gmail.com'),
+	(17,'test02','$2y$10$LIMBklCDJeExu1vZOQQOXuIj10ku0hk0M909jW81lPke1mEmYo8.K','test02@gmail.com'),
+	(18,'test03','$2y$10$46xPJQ4YU09LH5zY/PrixuVIu5tB3HQBpbdEYOoHS4xYeuKAqbqp.','test03@gmail.com'),
+	(19,'test04','$2y$10$Ze7pMgkmQf2Wg7lSCjtaX.zHxUUMVBz01oJayUOqfaM5nKZxV3XHG','test04@gmail.com'),
+	(20,'test05','$2y$10$a4wWH1wZyLhfgdKkNuOdXeyo.ZxSMf14Lp9YUde05N6cxgKRReJG6','test05@gmail.com'),
+	(21,'test06','$2y$10$j/YB6GSMK3MZgCvIGVoGruN.R/dDyvoLG3fSw0fVbPL1EcwcJJM6G','test06@gmail.com'),
+	(22,'test07','$2y$10$XTlOJwJb5nrWi36OgKW.3eORVeHbj40cq6YQvZoAgX2tNjRxvAwWK','test07@gmail.com'),
+	(23,'test08','$2y$10$VpOoT.tdTOVSyKB/.FntkOuF7ck9LZZYyYzIdzAWkdnSDDY/zXQg2','test08@gmail.com'),
+	(24,'test09','$2y$10$WVdEp7LzBnG58gYypz4KZ.hNCrYz0sYEPuPgPZwdxY4D98HqhROO6','test09@gmail.com'),
+	(25,'test10','$2y$10$tXu6dTJ2/NvxfEv5sOByBO5KFSBK68xj1CfcirpfSSEk6IeV03L2C','test10@gmail.com'),
+	(27,NULL,'$2y$10$lYyKTnEAV1amsK.p8T8vIuSm.5klXQWPhXZhwuMVhTDIAu8uRT.ZG','test11@gmail.com');
 
 /*!40000 ALTER TABLE `wusers` ENABLE KEYS */;
 UNLOCK TABLES;
