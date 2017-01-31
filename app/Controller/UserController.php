@@ -341,7 +341,7 @@ class UserController extends Controller
 
 			$joueurs_manager = new JoueurManager();
 			foreach ($host_events_id as $id) {
-				$joueurs_manager->deleteAlljoueurs($id)
+				$joueurs_manager->deleteAlljoueurs($id);
 			}
 
 			$manager = new UserManager();
