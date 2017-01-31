@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-25 14:12:20 +0000
+# Generation Time: 2017-01-31 08:52:08 +0000
 # ************************************************************
 
 
@@ -42,6 +42,8 @@ DROP TABLE IF EXISTS `contacts`;
 
 CREATE TABLE `contacts` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nom` varchar(100) DEFAULT NULL,
+  `prenom` varchar(100) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `sujet` varchar(255) DEFAULT NULL,
   `contenu` text,
@@ -50,6 +52,15 @@ CREATE TABLE `contacts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `contacts` WRITE;
+/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+
+INSERT INTO `contacts` (`id`, `nom`, `prenom`, `email`, `sujet`, `contenu`, `date`, `user_id`)
+VALUES
+	(1,'','Marc','Morandini@gmail.com','Bonjour','Salut salut','2017-01-30 11:02:18',7);
+
+/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table events
@@ -77,14 +88,15 @@ LOCK TABLES `events` WRITE;
 
 INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`, `nbrs_joueurs`)
 VALUES
-	(5,3,1,'Premier Evenement','2017-02-03','19:00:00',NULL,'  Premier événément créer dans la base de données','Mixte','',1),
-	(6,3,2,'Deuxieme Evenement','2017-01-28','18:30:00',NULL,'  Deuxieme événement dans la base de données','Homme','Intermédiaire',NULL),
+	(5,3,1,'Premier Evenement','2017-02-03','19:00:00',NULL,'  Premier événément créer dans la base de données','Mixte','Confirmé',3),
+	(6,3,2,'Deuxieme Evenement','2017-01-28','18:30:00',NULL,'  Deuxieme événement dans la base de données','Homme','Intermédiaire',1),
 	(10,3,3,'Troisieme Evenement','2017-01-27','18:00:00',NULL,' Troisième événément dans la base de données ','Femme','Confirmé',NULL),
-	(11,3,4,'Quatrieme Evenement','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','',NULL),
-	(16,3,4,'Salu','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','',NULL),
-	(18,5,1,'Nouvelle event','2017-01-29','18:00:00',NULL,'  Nouvelle evenement','Homme','Intermédiaire',NULL),
-	(19,5,1,'Nouvelle event','2017-01-29','18:00:00','02:00:00','   Nouvelle evenement ','Homme','Intermédiaire',NULL),
-	(20,5,1,'Nouvelle event','2017-01-29','18:00:00','01:00:00','  Nouvelle evenement','Homme','Intermédiaire',NULL);
+	(11,3,4,'Quatrieme Evenement','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','Confirmé',NULL),
+	(16,3,4,'Salu','2017-01-27','17:30:00',NULL,'Quatrième événément dans la base de données','Mixte','Tout niveaux',NULL),
+	(18,5,1,'Nouvelle event','2017-01-29','18:00:00',NULL,'  Nouvelle evenement','Homme','Intermédiaire',0),
+	(19,5,1,'Nouvelle event','2017-01-29','18:00:00','02:00:00','   Nouvelle evenement ','Homme','Intermédiaire',0),
+	(20,5,1,'Nouvelle event','2017-01-29','18:00:00','01:00:00','  Nouvelle evenement','Homme','Intermédiaire',1),
+	(22,7,1,'lalala','2017-02-09','17:00:00','01:00:00','  lalalalal','Homme','Intermédiaire',0);
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -109,7 +121,11 @@ LOCK TABLES `joueurs` WRITE;
 
 INSERT INTO `joueurs` (`id`, `user_id`, `event_id`, `equipe_id`, `statut_id`)
 VALUES
-	(26,3,5,NULL,1);
+	(30,3,5,NULL,1),
+	(31,3,20,NULL,1),
+	(32,4,5,NULL,1),
+	(33,3,6,NULL,1),
+	(36,8,5,NULL,1);
 
 /*!40000 ALTER TABLE `joueurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -208,9 +224,12 @@ LOCK TABLES `utilisateurs` WRITE;
 
 INSERT INTO `utilisateurs` (`id`, `user_id`, `nom`, `prenom`, `departement`, `sexe`, `niveau`)
 VALUES
-	(3,3,'Liu','Anais','75 - Paris','Homme','Débutant'),
 	(4,4,'Piussan','charles','95 - Val-d-Oise','Femme',NULL),
-	(5,5,'Piussan','thomas','75 - Paris','Homme','Débutant');
+	(5,5,'Piussan','thomas','75 - Paris','Homme','Débutant'),
+	(6,6,'Thomas','Piussan','75 - Paris','Homme',NULL),
+	(7,7,'','Marc','75 - Paris','Homme','Débutant'),
+	(8,8,'Anais','Liu','75 - Paris','Homme',NULL),
+	(9,9,'aaaa','aaaaa','75 - Paris','Homme',NULL);
 
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -234,9 +253,12 @@ LOCK TABLES `wusers` WRITE;
 
 INSERT INTO `wusers` (`id`, `username`, `password`, `email`)
 VALUES
-	(3,'Dada','$2y$10$5LJ1dANMDTTsZMe/59aJ8Oi9OgcVwXOObzSxbpsS8NLjuXcQOZIz2','Anais.liu@gmail.com'),
 	(4,NULL,'$2y$10$M3LL0KkUxLxo8bZCSb3Ey.vY2flWcFEMDbXzcxhp89HyOxjJ5XowC','charles.p@gmail.com'),
-	(5,'Toto','$2y$10$u9xWPj.qY9iKqpLlwhjf4OrHCiXtGhvA25x9JYk5EwJn4bQyN/mlS','thomas.piussan@gmail.com');
+	(5,'Toto','$2y$10$u9xWPj.qY9iKqpLlwhjf4OrHCiXtGhvA25x9JYk5EwJn4bQyN/mlS','thomas.piussan@gmail.com'),
+	(6,NULL,'$2y$10$uYdf7fHhgAcYK0Fh6DjAjubWpjEkWLAHgmBrJ/6z23vD6TjVm.9xi','toto2@gmail.com'),
+	(7,'Waouw','$2y$10$IlXEB84UBDId4M4tlDMJ8udz1ShmchZm3M3ZHfQYesELU8DLEchsO','Morandini@gmail.com'),
+	(8,NULL,'$2y$10$YRE/g.W0Z03R6erwbmybd.yWNyP1oAs3yv6XFxfyPowJerXKOtZCy','anais@gmail.com'),
+	(9,NULL,'$2y$10$dvu/4ARW.SSFDMiG7oRYB.JPnK14f7UETfZh837h2YWvcDb5RVyWK','aaaaa@aaa.com');
 
 /*!40000 ALTER TABLE `wusers` ENABLE KEYS */;
 UNLOCK TABLES;

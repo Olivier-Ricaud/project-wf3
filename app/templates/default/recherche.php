@@ -3,7 +3,7 @@
 <?php $this->start('main_content') ?>
 <main class="container-fluid">
 	<div class="row">
-		<h1>Recherche d'Evénements</h1>
+		<h1>Recherche d'événements</h1>
         <?php if (!empty($erreurs)): ?>
 			<ul class="alert alert-danger">
 				<?php foreach ($erreurs as $erreur): ?>
@@ -155,11 +155,13 @@
 				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>	
 					<div class="row">
-						<figure class="col-sm-10 col-sm-offset-1">
+						<article class="col-sm-10 col-sm-offset-1">
 							<div class="col-xs-4">
 								<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
-									<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
+								<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
 								</a>
+
+								
 								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank"><?= $this->e($event['nom'])?></a></p>
 							</div>
 
@@ -176,7 +178,7 @@
 								<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
 								<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
 							</div> 
-						</figure>
+						</article>
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>

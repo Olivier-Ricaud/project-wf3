@@ -38,7 +38,7 @@
 				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>
 					<div class="row">
-						<figure class="col-sm-10 col-sm-offset-1">
+						<article class="col-sm-10 col-sm-offset-1">
 							<div class="col-xs-4">
 								<a href="<?= $this->url('detail', ['id' => $event['event_id']])?>">
 									<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
@@ -59,7 +59,7 @@
 								<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
 								<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
 							</div> 
-						</figure>
+						</article>
 					</div>
 				<?php endforeach; ?>
 		</section>
