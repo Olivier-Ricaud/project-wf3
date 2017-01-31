@@ -173,7 +173,7 @@ class EventController extends Controller
 					$retirer = true;
 				}
 
-				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host, 'nbrsJoueurs' => $nbrsJoueurs);
+				$this->show('event/detail', [ 'id' => $event['id'], 'event' => $event, 'salle' => $salle, 'joueurs' => $joueurs, 'retirer' => $retirer, 'host' => $host, 'nbrsJoueurs' => $nbrsJoueurs]);
 			} else {
 				$this->redirectToRoute('recherche');
 			}

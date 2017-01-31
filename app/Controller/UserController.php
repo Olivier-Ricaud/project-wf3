@@ -193,7 +193,6 @@ class UserController extends Controller
 
 			// match(s) terminé(s)
 			$matchs_over = $events_manager->userEvents($_SESSION['user']['id'], 1);
-			print_r($matchs_over);
 
 
 			$this->show('user/profil',['events' => $events, 'matchs_over' => $matchs_over]);

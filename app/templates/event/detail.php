@@ -88,7 +88,7 @@
 							</div>
 					</section>
 				<?php endif; ?>
-				
+
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
 				<?php if( !isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
@@ -107,7 +107,7 @@
 			<div class="col-md-6">
 				<!-- Responsive Embeds voir: http://www.w3schools.com/bootstrap/bootstrap_images.asp -->
 				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d70660.21304508974!2d2.301146715383795!3d48.84055251038102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6724c27587c7d%3A0x9415be5e9053dcc3!2sUrbanSoccer+-+Porte+d&#39;Ivry!5e0!3m2!1sfr!2sfr!4v1482938030233"></iframe>
+					<iframe class="embed-responsive-item" src="<?= $this->e($salle['map']) ?>"></iframe>
 				</div>
 			</div>
 	</section>
@@ -185,7 +185,7 @@
 				<div class="panel-body">
                		<div class="row">
                			<div class="col-xs-12">
-               				<span class="text-muted small">Le 12/12/2016</span>
+               				<span class="text-muted small"><!-- date du message --> </span>
                			</div>
                		</div>
 
@@ -193,10 +193,10 @@
                			<div class="col-xs-12">
                				<div class="media">
                					<div class="media-body">
-               						<h4 class="media-heading">Alex
-               							<span class="small pull-right">18:18</span>
+               						<h4 class="media-heading"> Work in progress...
+               							<span class="small pull-right"><!-- heure du message --></span>
                						</h4>
-               						<p>Message de l'utilisateur</p>
+               						<!-- <p> message utilisateur</p> -->
                					</div>
                				</div>
                			</div>
@@ -206,10 +206,6 @@
 
 	           	<div class="panel-footer">
 	               	<form action="" method="post" >
-
-	               		<div class="form-group">
-	               			<input class="form-control" name="pseudo" value="" placeholder="Votre Pseudo..." required>
-	               		</div>
 
 	               		<div class="form-group">
 	               			<textarea class="form-control" name="message" placeholder="Votre message..." required></textarea>
