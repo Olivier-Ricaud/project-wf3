@@ -108,10 +108,10 @@
 						<table class="table table-striped table-hover">
 							<tbody>
 								<tr>
-								       <th>Date</th>
-								       <th>Ville</th>
-								       <th>Equipe 1</th>
-								       <th>Equipe 2</th>
+									<th>Date</th>
+									<th>Ville</th>
+									<th>Equipe 1</th>
+									<th>Equipe 2</th>
 							   </tr>
 							   <?php foreach ($matchs_over as $match_over): ?>
 									<tr>
@@ -157,8 +157,6 @@
 	<div class="row">
 		<section class="col-sm-10 col-sm-offset-1">
 			<h2>Liste des résultats</h2>
-
-			<?php var_dump($matchs_over) ?>
 			
 			<?php if(isset($_GET['search']) && empty($erreurs)): ?>
 				
