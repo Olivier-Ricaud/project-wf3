@@ -50,14 +50,9 @@
 		<div class="footer-above">
 			<div class="container">
 				<div class="row">
-					<div class="footer-col col-sm-6">
+					<div class="footer-col col-xs-12">
 						<p><a href="<?= $this->url('cgu')?>">CGU</a></p>
 						<p><a href="<?= $this->url('charte')?>">Charte de confidentialité</a></p>
-					</div>
-					
-					<div class="footer-col col-sm-6">
-						<p>Nombre d'inscrits</p>
-						<p>Nombre d'événements</p>
 					</div>
 				</div> <!-- End Row -->
 			</div> <!-- End container -->

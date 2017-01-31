@@ -54,6 +54,9 @@
                 <label for="salle" class="col-sm-3 col-form-label">Salle</label>
                 <div class="col-sm-9">
 	               <select class="form-control" id="salle" name="form_event[salle_id]" onchange="showSalle(this.value)">
+                        <?php if(isset($_POST['form_event']['salle_id'])): ?>
+                           <option value="<?= $this->e($salle['id'])?>"> <?= $this->e($salle['nom']).' - '.$this->e($salle['ville'])?></option>
+                        <?php endif; ?>
    						<option value="">Choisissez votre salle...</option>
    						
    						<?php foreach($salles as $salle): ?>		
@@ -76,6 +79,9 @@
                 <label for="niveau" class="col-sm-3 col-form-label">Niveau</label>
                 <div class="col-sm-9">
                     <select class="form-control" id="niveau" name="form_event[niveau]">
+                        <?php if(isset($_POST['form_event']['sexe'])): ?>
+                           <option value="<?= $_POST['form_event']['niveau'] ?>"><?= $_POST['form_event']['niveau'] ?></option>
+                        <?php endif; ?>
                     	<option value="NULL" ?>Choisissez un niveau...</option>
                         <option value="Débutant"> Débutant</option>
                         <option value="Intermediaire"> Intermédiaire</option>
@@ -88,7 +94,10 @@
                 <label for="sexe" class="col-sm-3 col-form-label">Sexe recherché</label>
                 <div class="col-sm-9">
                     <select class="form-control" id="sexe" name="form_event[sexe]">
-                    	<option value="<?php if(isset($_POST['form_event']['sexe'])) echo $_POST['form_event']['sexe'] ; ?>"><?php if(isset($_POST['form_event']['sexe'])) echo $_POST['form_event']['sexe'] ; ?></option>
+                        <?php if(isset($_POST['form_event']['sexe'])): ?>
+                    	   <option value="<?= $_POST['form_event']['sexe'] ?>"><?= $_POST['form_event']['sexe'] ?></option>
+                        <?php endif; ?>
+                        <option value="">Choisissez un genre...</option>
                         <option value="Mixte">Mixte</option>
                         <option value="Homme">Homme</option>
                         <option value="Femme">Femme</option>

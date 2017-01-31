@@ -58,7 +58,7 @@
 
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-level-up" aria-hidden="true"></i>Niveau recomendé</div>
+					<div class="panel-heading"><i class="fa fa-level-up" aria-hidden="true"></i>Niveau recommandé</div>
 					<div class="panel-body"><?= $this->e($event['niveau']) ?></div>
 				</div>
 			</div>
@@ -72,39 +72,42 @@
 		</section>
 	</section>
 
-	<!-- DESCRIPTION ET MAP -->
+	<!-- DESCRIPTION , MAP ET SCORE-->
 	<section class="row">
 			<div class="col-md-6">
-				<section class="row">
-					<h3>Score</h3>
-					<div class="col-sm-6">
-						<h3>Equipe 1</h3>
-						<h2><?= $this->e($event['score_equipe_1']) ?></h2>
-					</div>
-					<div class="col-sm-6">
-						<h3>Equipe 2</h3>
-						<h2><?= $this->e($event['score_equipe_2']) ?></h2>
-					</div>
-					
-				</section>
+
+				<?php if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+					<section class="row" id="score">
+							<div class="col-sm-4 col-sm-offset-2">
+								<h2>Score Equipe 1 </h2>
+								<h3 value="<?= $this->e($event['score_equipe_1']) ?>"><?= $this->e($event['score_equipe_1']) ?></h3>
+							</div>
+							<div class="col-sm-4">
+								<h2>Score Equipe 2</h2>
+								<h3 value="<?= $this->e($event['score_equipe_2']) ?>"><?= $this->e($event['score_equipe_2']) ?></h3>
+							</div>
+					</section>
+				<?php endif; ?>
+
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
-
-				<?php if ($retirer == false):?>
-					<?php if($this->e($nbrsJoueurs) < 10): ?>
-						<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+				<?php if( !isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+					<?php if ($retirer == false):?>
+						<?php if($this->e($nbrsJoueurs) < 10): ?>
+							<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
+						<?php else: ?>
+							<p class="btn btn-danger">MATCH FULL !</p>
+						<?php endif; ?>
 					<?php else: ?>
-						<p class="btn btn-danger">MATCH FULL !</p>
+					<a href="<?= $this->url('desinscrire', ['id' => $event['id']]) ?>" class="btn btn-danger" >Se désinscrire</a>
 					<?php endif; ?>
-				<?php else: ?>
-				<a href="<?= $this->url('desinscrire', ['id' => $event['id']]) ?>" class="btn btn-danger" >Se désinscrire</a>
 				<?php endif; ?>
 			</div>
 
 			<div class="col-md-6">
 				<!-- Responsive Embeds voir: http://www.w3schools.com/bootstrap/bootstrap_images.asp -->
 				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d70660.21304508974!2d2.301146715383795!3d48.84055251038102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6724c27587c7d%3A0x9415be5e9053dcc3!2sUrbanSoccer+-+Porte+d&#39;Ivry!5e0!3m2!1sfr!2sfr!4v1482938030233"></iframe>
+					<iframe class="embed-responsive-item" src="<?= $this->e($salle['map']) ?>"></iframe>
 				</div>
 			</div>
 	</section>
@@ -119,7 +122,12 @@
 						<th>Joueur</th>
 						<th>Niveau</th>
 						<th>Genre</th>
-						<th>Statut</th>
+						
+						<?php  if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+							<th>Equipe</th>
+						<?php else: ?>
+							<th>Statut</th>
+						<?php endif; ?>
 						
 						<?php if ($host == true): ?>
 							<th>Edit (Admin)</th>
@@ -134,8 +142,17 @@
 						<td><?= $this->e($joueur['prenom']).' '.$this->e($joueur['nom'])?></td>
 						<td><?= $this->e($joueur['niveau'])?></td>
 						<td><?= $this->e($joueur['sexe'])?></td>
-						<td><?= $this->e($joueur['statut'])?></td>
 						
+						<?php  if( isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+							<td><?= $this->e($joueur['equipe_id'])?></td>
+						<?php else: ?>
+							<?php if ($joueur['user_id'] == $event['host_id']): ?>
+									<td>Hôte</td>
+							<?php else: ?>
+							<td><?= $this->e($joueur['statut'])?></td>
+							<?php endif ?>
+						<?php endif; ?>
+
 						<?php if ($host == true): ?>
 						<td>
 							<a href="<?= $this->url('confirmer', ['userId' => $joueur['user_id'], 'eventId' => $event['id'] ]) ?>" class="btn btn-primary">Confirmer</a>
@@ -146,15 +163,14 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
-			
-			<!-- Boutton suppression événement -->
-			<?php if ($host == true): ?>
-				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
-			<?php endif; ?>
 
 			<!-- Boutton vers feuille-de-match.php -->
+			
 			<?php if ( ($host == true) && ($this->e($event['date']) >= $this->e($event['date'])) ): ?>
 				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
+			<?php else: ?>
+				<!-- Boutton suppression événement -->
+				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
 			<?php endif; ?>
 		</div>
 		<!-- FIN DU TABLEAU DES JOUEURS INSCRITS -->
@@ -169,7 +185,7 @@
 				<div class="panel-body">
                		<div class="row">
                			<div class="col-xs-12">
-               				<span class="text-muted small">Le 12/12/2016</span>
+               				<span class="text-muted small"><!-- date du message --> </span>
                			</div>
                		</div>
 
@@ -177,10 +193,10 @@
                			<div class="col-xs-12">
                				<div class="media">
                					<div class="media-body">
-               						<h4 class="media-heading">Alex
-               							<span class="small pull-right">18:18</span>
+               						<h4 class="media-heading"> Work in progress...
+               							<span class="small pull-right"><!-- heure du message --></span>
                						</h4>
-               						<p>Message de l'utilisateur</p>
+               						<!-- <p> message utilisateur</p> -->
                					</div>
                				</div>
                			</div>
@@ -190,10 +206,6 @@
 
 	           	<div class="panel-footer">
 	               	<form action="" method="post" >
-
-	               		<div class="form-group">
-	               			<input class="form-control" name="pseudo" value="" placeholder="Votre Pseudo..." required>
-	               		</div>
 
 	               		<div class="form-group">
 	               			<textarea class="form-control" name="message" placeholder="Votre message..." required></textarea>

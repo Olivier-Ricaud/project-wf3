@@ -6,6 +6,7 @@ use \W\Controller\Controller;
 use \Manager\UtilisateurManager;
 use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
+use \Manager\JoueurManager;
 use \Manager\EventManager;
 
 class UserController extends Controller
@@ -22,9 +23,6 @@ class UserController extends Controller
 
 			$erreurs = [];
 
-
-			$validation;
-
 			// Validation et Filtrage
 
 			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) == 0 ) {
@@ -40,7 +38,7 @@ class UserController extends Controller
 
 			// Si Filtrage Ok
 			if ( ( empty($erreurs) ) AND
-				 ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) )) {
+				 ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) ) ) {
 				
 				$user = $util_manager->getUserByUsernameOrEmail($_POST['form_login']['email']);
 
@@ -52,7 +50,7 @@ class UserController extends Controller
 				$this->redirectToRoute('recherche');
 			} 
 
-			$this->show('user/login', ['erreurs' => $erreurs, 'validation' => $validation]);
+			$this->show('user/login', ['erreurs' => $erreurs]);
 
 			// Fin Validation et Filtrage
 
@@ -167,7 +165,7 @@ class UserController extends Controller
 
 				$validation = 'Votre Inscription a été validé.';
 
-				$this->redirectToRoute('login' , ['validation' => $validation]);
+				$this->redirectToRoute('login');
 
 	        }
 
@@ -191,11 +189,11 @@ class UserController extends Controller
 			$events_manager = new EventManager();
 
 			// match(s) à venir
-			$events = $events_manager->userEvents($_SESSION['user']['id']);
+			$events = $events_manager->userEvents($_SESSION['user']['id'], 0);
 
 			// match(s) terminé(s)
-			$matchs_over = $events_manager->userEvents_over($_SESSION['user']['id']);
-			print_r($matchs_over);
+			$matchs_over = $events_manager->userEvents($_SESSION['user']['id'], 1);
+
 
 			$this->show('user/profil',['events' => $events, 'matchs_over' => $matchs_over]);
 		} else  {
@@ -277,6 +275,9 @@ class UserController extends Controller
 		        }
 
 		        // Password
+		        if (empty($_POST['form_update_user']['password']) || empty($_POST['confirm_password'])) {
+		        	$erreurs[] = "Veuillez saisir votre mot de passe pour valider la modification du profil";
+		        }
 		        if(!empty($_POST['form_update_user']['password'])) {
 			        if (strlen($_POST['form_update_user']['password']) < 6 ||
 			        	strlen($_POST['form_update_user']['password']) > 300) {
@@ -292,6 +293,7 @@ class UserController extends Controller
 		        if ( empty($erreurs)) {
 
 					$_POST['form_update_user']['password'] = password_hash($_POST['form_update_user']['password'], PASSWORD_DEFAULT);
+
 					$manager->update($_POST['form_update_user'],$id);
 
 					$utilisateur = new UtilisateurManager();
@@ -330,17 +332,28 @@ class UserController extends Controller
 
 	/**
 	 * Suppression d'utilisateur
+	 * PAS ENCORE TEST
 	 */
 	public function delete($id)
 	{		
+			$host_manager = new Hostmanager();
+			$host_events_id = $host_manager->userEvents($id);
+
+			$joueurs_manager = new JoueurManager();
+			foreach ($host_events_id as $id) {
+				$joueurs_manager->deleteAlljoueurs($id)
+			}
+
 			$manager = new UserManager();
 			$manager->delete($id);
 
 			$utilisateur = new UtilisateurManager();
-			$utilisateur->delete($id);
+			$utilisateur->deleteUtil($id);
+
+			// Instance + suppression user / joueur
+			$jm = new JoueurManager();
+			$jm->del_Uj($id);
 
 			$this->redirectToRoute('home');
- 	
 	}
-
 }

@@ -9,7 +9,7 @@
         
         <!-- Message d'erreurs'  -->
         <?php if (!empty($erreurs)): ?>
-		<div class="col-sm-9 col-sm-offset-2">
+		<div class="col-sm-10 col-sm-offset-1">
 			<ul class="alert alert-danger">
 				<?php foreach ($erreurs as $erreur): ?>
 					<li> <?= $erreur ?> </li>
@@ -112,6 +112,9 @@
 					<label for="level" class="col-md-2 col-form-label">Niveau du joueur</label>
 					<div class="col-md-10">
 						<select class="form-control" id="level" name="form_update_util[niveau]">
+							<?php if(isset($_SESSION['user']['infos']['niveau'])): ?>
+							   <option value="<?= $this->e($_SESSION['user']['infos']['niveau']) ?>"> <?= $this->e($_SESSION['user']['infos']['niveau']) ?></option>
+							<?php endif; ?>
 							<option value="debutant">Débutant</option>
 							<option value="intermediaire">Intermédiaire</option>
 							<option value="confirme">Confirmé</option>
