@@ -75,6 +75,8 @@
 	<!-- DESCRIPTION , MAP ET SCORE-->
 	<section class="row">
 			<div class="col-md-6">
+
+				<?php var_dump($salle['adresse']) ?>
 				
 				<!-- Affichage du score des equipes -->
 				<section class="row">
