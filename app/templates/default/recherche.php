@@ -160,8 +160,6 @@
 								<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
 								<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
 								</a>
-
-								
 								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank"><?= $this->e($event['nom'])?></a></p>
 							</div>
 
