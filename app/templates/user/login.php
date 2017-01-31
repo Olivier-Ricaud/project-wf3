@@ -8,18 +8,22 @@
 
 			<!-- Affichage des erreurs -->
 			<?php if (!empty($erreurs)): ?>
-				<ul class="alert alert-danger">
-					<?php foreach ($erreurs as $erreur): ?>
-						<li> <?= $erreur ?> </li>
-					<? endforeach; ?>
-				</ul>
+				<div class="col-sm-6 col-sm-offset-3">
+					<ul class="alert alert-danger">
+						<?php foreach ($erreurs as $erreur): ?>
+							<li> <?= $erreur ?> </li>
+						<? endforeach; ?>
+					</ul>
+				</div>
 			<? endif; ?>
 
 			<!-- Message de Validation  -->
 			<?php if (!empty($validation)): ?>
-				<ul class="alert alert-success">
+				<div class="col-sm-6 col-sm-offset-3">
+					<ul class="alert alert-success">
 						<li> <?= $validation ?> </li>
-				</ul>
+					</ul>
+				</div>
 			<? endif; ?>
 
 		</div>

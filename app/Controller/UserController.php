@@ -22,6 +22,9 @@ class UserController extends Controller
 
 			$erreurs = [];
 
+
+			$validation;
+
 			// Validation et Filtrage
 
 			if ( $auth_manager->isValidLoginInfo($_POST['form_login']['email'], $_POST['form_login']['password']) == 0 ) {
@@ -49,7 +52,7 @@ class UserController extends Controller
 				$this->redirectToRoute('recherche');
 			} 
 
-			$this->show('user/login', ['erreurs' => $erreurs]);
+			$this->show('user/login', ['erreurs' => $erreurs, 'validation' => $validation]);
 
 			// Fin Validation et Filtrage
 
@@ -78,7 +81,7 @@ class UserController extends Controller
 		$erreurs = [];
 
 		// Message de validation
-			$validation = "";
+		$validation = "";
 
 		if ( isset($_POST['sign-up']) ) {
 		
@@ -151,7 +154,7 @@ class UserController extends Controller
 	        	$erreurs[] = "Le mot de passe ne correspond pas.";
 	        }
 	        
-	        // Si $erreurs vide, Validation OK
+	       // Si $erreurs vide, Validation OK
 	       if ( empty($erreurs)) {
 	            
 	            $wuser = $manager->insert(['email' => $_POST['form_register_user']['email'],
@@ -164,11 +167,11 @@ class UserController extends Controller
 
 				$validation = 'Votre Inscription a été validé.';
 
-				$this->show('user/login' , ['validation' => $validation]);
+				$this->redirectToRoute('login' , ['validation' => $validation]);
 
 	        }
 
-	        $this->show('user/register', ['erreurs' => $erreurs,]);
+	        $this->show('user/register', ['erreurs' => $erreurs]);
 	        // Fin Validation et Filtrage
 
         } else {
@@ -184,11 +187,17 @@ class UserController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
+			// Affichage événements
 			$events_manager = new EventManager();
-			$events = $events_manager->userEvents($_SESSION['user']['id']);
-			print_r($_SESSION['user']['id']);
 
-			$this->show('user/profil',['events' => $events]);
+			// match(s) à venir
+			$events = $events_manager->userEvents($_SESSION['user']['id']);
+
+			// match(s) terminé(s)
+			$matchs_over = $events_manager->userEvents_over($_SESSION['user']['id']);
+			print_r($matchs_over);
+
+			$this->show('user/profil',['events' => $events, 'matchs_over' => $matchs_over]);
 		} else  {
 
 			$this->redirectToRoute('login');
@@ -202,39 +211,115 @@ class UserController extends Controller
 	{
 		if (isset($_SESSION['user'])) {
 
+			// Tableau d'erreur
+			$erreurs = [];
+
 			// Message de validation
 			$validation = "";
 			
 			if(isset($_POST['update'])) {
-
-				$_POST['form_update_user']['password'] = password_hash($_POST['form_update_user']['password'], PASSWORD_DEFAULT);
+				
 				$manager = new UserManager();
-				$manager->update($_POST['form_update_user'],$id);
 
-				$utilisateur = new UtilisateurManager();
-				$utilisateur->update($_POST['form_update_util'],$id);
+				// Validation et Filtrage [form_update_util]
+				
+				// Nom
+				if( empty( $_POST['form_update_util']['nom']) ||
+					 (strlen($_POST['form_update_util']['nom']) < 3) ||
+					 (strlen($_POST['form_update_util']['nom']) > 100) ||
+					 !preg_match('/^[a-zA-Z_]+$/', $_POST['form_update_util']['nom']) ) {
+					
+		            $erreurs[] = 'Le champ "nom" doit être valide (entre 3 et 100 caractères).';
+		   
+		        }
 
-				// Enregistrement du fichier dans un dossier
-				// Le nom du fichier de l'avatar sera l'id de l'utilisateur
-  				$nom = $_SESSION['user']['id'];
-  				// extrait le nom de l'extension du fichier du nom du fichier upload par l'utilisateur
-				$extension_upload = strtolower( substr( strrchr($_FILES['avatar']['name'], '.') ,1) );
-				$destination = 'assets/avatars/'.$nom.'.'.$extension_upload;
-				$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'],$destination);
+		        // Prenom
+		        if( empty($_POST['form_update_util']['prenom']) ||
+		         	(strlen($_POST['form_update_util']['prenom']) <3) ||
+		          	(strlen($_POST['form_update_util']['prenom']) > 100) ||
+		          	!preg_match('/^[a-zA-Z_]+$/', $_POST['form_update_util']['prenom'])) {
+					
+		            $erreurs[] = 'Le champ "prénom" doit être valide (entre 3 et 100 caractères).';
+		        }
 
-				// Rafraichi la session utilisateur pour récupérer les données modifiées
-				$auth_manager = new AuthentificationManager();
-				$auth_manager->refreshUser();
-				$userInfos = $utilisateur->find($_SESSION['user']['id']);
-				$_SESSION['user']['infos'] = $userInfos;
+		        // Username ou pseudo
+		        if( empty($_POST['form_update_user']['username']) ||
+		         	(strlen($_POST['form_update_user']['username']) <5) ||
+		          	(strlen($_POST['form_update_user']['username']) > 100) ||
+		          	!preg_match('/^[a-zA-Z0-9_]+$/', $_POST['form_update_user']['username'])) {
+		        
+		            $erreurs[] = 'Le champ "pseudo" doit être valide (entre 5 et 100 caractères alphanumériques).';
+		        }
 
-				// Message de validation
-				$validation = 'Votre Profil a été mis à jour.';
+		        // Departement
+		        if( empty($_POST['form_update_util']['departement']) ||
+		        	(strlen($_POST['form_update_util']['departement']) <3) ||
+		        	(strlen($_POST['form_update_util']['departement']) > 100)) {
 
-				$this->show('user/profil',['validation' => $validation]);
+		            $erreurs[] = 'Le champ "département" doit être valide (entre 3 et 100 caractères).';
+		        } 
+
+
+		        // Sexe
+		        if( ! ($_POST['form_update_util']['sexe'] == 'Homme' ||
+		        	$_POST['form_update_util']['sexe'] == 'Femme'))  {
+
+		        	$erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
+		        }
+
+		        // Email
+		        if (empty($_POST['form_update_user']['email']) ||
+		        	 strlen($_POST['form_update_user']['email']) > 255 ||
+		        	 !filter_var($_POST['form_update_user']['email'], FILTER_VALIDATE_EMAIL)) {
+
+		        	$erreurs[] = "Votre email n'est pas valide.";
+
+		        }
+
+		        // Password
+		        if(!empty($_POST['form_update_user']['password'])) {
+			        if (strlen($_POST['form_update_user']['password']) < 6 ||
+			        	strlen($_POST['form_update_user']['password']) > 300) {
+			        	$erreurs[] = "Champ mot de passe requis (plus de 6 caractères).";
+			        }
+
+			        // Confirm password
+			        if ($_POST['confirm_password'] != $_POST['form_update_user']['password']) {
+			        	$erreurs[] = "Le mot de passe ne correspond pas.";
+			        }
+		        }
+		        // Si $erreurs vide, Validation OK
+		        if ( empty($erreurs)) {
+
+					$_POST['form_update_user']['password'] = password_hash($_POST['form_update_user']['password'], PASSWORD_DEFAULT);
+					$manager->update($_POST['form_update_user'],$id);
+
+					$utilisateur = new UtilisateurManager();
+					$utilisateur->update($_POST['form_update_util'],$id);
+
+					// Enregistrement du fichier dans un dossier
+					// Le nom du fichier de l'avatar sera l'id de l'utilisateur
+	  				$nom = $_SESSION['user']['id'];
+	  				// extrait le nom de l'extension du fichier du nom du fichier upload par l'utilisateur
+					$extension_upload = strtolower( substr( strrchr($_FILES['avatar']['name'], '.') ,1) );
+					$destination = 'assets/avatars/'.$nom.'.'.$extension_upload;
+					$resultat = move_uploaded_file($_FILES['avatar']['tmp_name'],$destination);
+
+					// Rafraichi la session utilisateur pour récupérer les données modifiées
+					$auth_manager = new AuthentificationManager();
+					$auth_manager->refreshUser();
+					
+					$userInfos = $utilisateur->find($_SESSION['user']['id']);
+					$_SESSION['user']['infos'] = $userInfos;
+
+					// Message de validation
+					$validation = 'Votre Profil a été mis à jour.';
+
+					$this->show('user/profil-editer', ['id' => $_SESSION['user']['id'], 'validation' => $validation]);
+				}
 			}
 
-			$this->show('user/profil-editer', ['id' => $_SESSION['user']['id']]);
+			$this->show('user/profil-editer', ['id' => $_SESSION['user']['id'], 'erreurs' => $erreurs]);
 
 		} else  {
 

@@ -6,6 +6,26 @@
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3">
           <h1>Détails du profil</h1>
+        
+        <!-- Message d'erreurs'  -->
+        <?php if (!empty($erreurs)): ?>
+		<div class="col-sm-9 col-sm-offset-2">
+			<ul class="alert alert-danger">
+				<?php foreach ($erreurs as $erreur): ?>
+					<li> <?= $erreur ?> </li>
+				<? endforeach; ?>
+			</ul>
+		</div>
+		<? endif; ?>
+
+        <!-- Message de Validation  -->
+        <?php if (!empty($validation)): ?>
+        	<div class=" col-sm-10 col-sm-offset-1">
+	          	<ul class="alert alert-success">
+	          		<li> <?= $validation ?> </li>
+	          	</ul>
+          	</div>
+        <? endif; ?>
         </div>
     </div>
 
@@ -18,13 +38,15 @@
 				</div>
 				
 				<div class="panel-body">
-					 <img src="<?= ( file_exists('assets/avatars/'.$this->e($_SESSION['user']['id']).'.jpg') )? $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') : $this->assetUrl('avatars/default.jpg') ?>" alt="profile picture" class="img-circle dropdown-toggle" data-toggle="dropdown" height="150" width="150"></a>
-					 <p><i class="fa fa-user" aria-hidden="true"></i> <?= $this->e($_SESSION['user']['username']) ?> </p>
-					 <p><?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></p>
-					 <p><i class="fa fa-map-marker" aria-hidden="true"></i> <?= $this->e($_SESSION['user']['infos']['departement']) ?></p>
-					 <p><?= $this->e($_SESSION['user']['infos']['niveau']) ?></p>
-					 <p><a href="<?= $this->url('profil')?>">Mes événements</a></p>
-					 <p><a href="<?= $this->url('profil_editer', ['id' => $_SESSION['user']['id']])?>">Editer mon profil</a></p>
+					<img src="<?= ( file_exists('assets/avatars/'.$this->e($_SESSION['user']['id']).'.jpg') )? $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') : $this->assetUrl('avatars/default.jpg') ?>" alt="profile picture" class="img-circle dropdown-toggle" data-toggle="dropdown" height="150" width="150"></a>
+					<i class="fa fa-user fa-2x" aria-hidden="true"></i> 
+					<p><?= $this->e($_SESSION['user']['username']) ?></p>
+					<p><?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></p>
+					<i class="fa fa-map-marker fa-2x" aria-hidden="true"></i> 
+					<p><?= $this->e($_SESSION['user']['infos']['departement']) ?></p>
+					<p><?= $this->e($_SESSION['user']['infos']['niveau']) ?></p>
+					<p><a href="<?= $this->url('profil')?>">Mes événements</a></p>
+					<p><a href="<?= $this->url('profil_editer', ['id' => $_SESSION['user']['id']])?>">Editer mon profil</a></p>
 				</div>
 			</div> <!-- End div panel-->		
 		</aside>
@@ -127,7 +149,7 @@
 			  	</div>
 
 			  	<div class="col-md-4">
-			  		<a class="btn btn-primary" href="<?= $this->url('delete', ['id' => $_SESSION['user']['id']] )?>">Supprimer votre compte</a>
+			  		<a class="btn btn-danger" href="<?= $this->url('delete', ['id' => $_SESSION['user']['id']] )?>">Supprimer votre compte</a>
 			  	</div>	
 			</form>
 		</section>

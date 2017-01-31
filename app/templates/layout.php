@@ -26,10 +26,10 @@
 				<!-- test avec condition normal/var => this -->
 
 				<!-- ($this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg')) -->
-					<img src="<?= ( file_exists('assets/avatars/'.$this->e($_SESSION['user']['id']).'.jpg') )? $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') : $this->assetUrl('avatars/default.jpg') ?>" alt="profile picture" class="img-circle dropdown-toggle" data-toggle="dropdown" height="50" width="50"></a>
+					<img src="<?= ( file_exists('assets/avatars/'.$this->e($_SESSION['user']['id']).'.jpg') )? $this->assetUrl('avatars/'.$this->e($_SESSION['user']['id']).'.jpg') : $this->assetUrl('avatars/default.jpg') ?>" alt="profile picture" class="img-circle img-responsive dropdown-toggle" data-toggle="dropdown"></a>
 					<ul class="dropdown-menu inverse-dropdown">
 						<li><a href="#">Bonjour <?= $this->e($_SESSION['user']['infos']['prenom']) ?> <?= $this->e($_SESSION['user']['infos']['nom']) ?></a></li>
-						<li><a href="<?= $this->url('home')?>">Accueil</a></li>
+						<li><a href="<?= $this->url('recherche')?>">Recherche</a></li>
 						<li><a href="<?= $this->url('profil')?>">Profil</a></li>
 						<li><a href="<?= $this->url('contact')?>">Nous contacter</a></li>
 						<li><a href="<?= $this->url('logout')?>">Déconnexion</a></li>
@@ -41,7 +41,7 @@
 				</div> <!-- End Navbar header-->
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li class="<?= ( $page === 'accueil') ? "active" : "" ?>"><a href="<?= $this->url('home')?>">Accueil</a></li>
+						<li class="<?= ( $page === 'accueil') ? "active" : "" ?>"><a href="<?= $this->url('recherche')?>">Recherche</a></li>
 						<li class="<?= ( $page === 'profil') ? "active" : "" ?>"><a href="<?= $this->url('profil')?>">Profil</a></li>
 						<li class="<?= ( $page === 'creer') ? "active" : "" ?>"><a href="<?= $this->url('creer')?>">Création d'événement</a></li>
 					</ul>

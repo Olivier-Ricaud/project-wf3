@@ -6,15 +6,15 @@
 		<div class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner" role="listbox">	
 				<div class="item active">
-					<img src="assets/img/futsal1.jpg" alt="Football field one">
+					<img src="<?= $this->assetUrl('img/futsal1.jpg')?>" alt="Football field one">
 				</div>
 
 				<div class="item">
-					<img src="assets/img/futsal2.jpg" alt="Football field two">
+					<img src="<?= $this->assetUrl('img/futsal2.jpg')?>" alt="Football field two">
 				</div>
 
 				<div class="item">
-					<img src="assets/img/futsal3.jpg" alt="Football field three">
+					<img src="<?= $this->assetUrl('img/futsal3.jpg')?>" alt="Football field three">
 				</div>
 			</div> <!-- End carousel inner-->
 		</div> <!-- End  carousel slide-->
@@ -86,18 +86,22 @@
 		
 		<!-- Affichage des erreurs -->
 		<?php if (!empty($erreurs)): ?>
-			<ul class="alert alert-danger">
-				<?php foreach ($erreurs as $erreur): ?>
-					<li> <?= $erreur ?> </li>
-				<? endforeach; ?>
-			</ul>
+			<div class="col-sm-6 col-sm-offset-3">
+				<ul class="alert alert-danger">
+					<?php foreach ($erreurs as $erreur): ?>
+						<li> <?= $erreur ?> </li>
+					<? endforeach; ?>
+				</ul>
+			</div>
 		<? endif; ?>
 
 		<!-- Message de Validation  -->
 		<?php if (!empty($validation)): ?>
-			<ul class="alert alert-success">
-					<li> <?= $validation ?> </li>
-			</ul>
+			<div class="col-sm-6 col-sm-offset-3">
+				<ul class="alert alert-success">
+						<li> <?= $validation ?> </li>
+				</ul>
+			</div>
 		<? endif; ?>
 		
 		<!-- Formulaire -->

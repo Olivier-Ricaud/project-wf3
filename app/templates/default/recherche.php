@@ -25,16 +25,24 @@
 								<option value="<?= $_GET['departement'] ; ?>"> <?= $_GET['departement'] ; ?></option>
 							<?php 	endif; ?>
 							<option value="">Choisissez un département...</option>
+
 							<option value="Paris" selected>75 - Paris</option>
+
 							<option value="Val-d-Oise">95 - Val-d-Oise</option>
 						</select>
 					</div>	
 				</div>
 
 				<div class="form-group row">
-					<label for="date" class="col-sm-4 col-form-label">Dates de début et de fin </label>
+					<label for="date" class="col-sm-4 col-form-label">Date de début</label>
 					<div class="col-sm-8">
 						<input type="date" class="form-control" name="date_debut" value="<?php if(isset($_GET['date_debut'])) echo $_GET['date_debut'] ; ?>">
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="date" class="col-sm-4 col-form-label">Date de fin</label>
+					<div class="col-sm-8">
 						<input type="date" class="form-control" name="date_fin" value="<?php if(isset($_GET['date_fin'])) echo $_GET['date_fin'] ; ?>">
 					</div>
 				</div>
@@ -82,7 +90,6 @@
 				</div>
 
 				<div class="form-group row">
-						<button type="reset" class="btn btn-default">Reset</button>
 						<button type="submit" name="search" class="btn btn-primary">Rechercher</button>
 				</div>
 			</form>
@@ -91,7 +98,7 @@
 		<!-- Asides -->
 		<aside class="col-md-5 col-md-offset-2">
 			<div id="aside">
-				<a href="index.php?page=creer" class="btn btn-primary">Créer Match</a>
+				<a href="<?= $this->url('creer')?>" class="btn btn-primary">Créer Match</a>
 				<!-- Premier Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -101,10 +108,16 @@
 					<table class="table table-striped table-hover">
 						<tbody>
 							<tr>
-								<td>28/12/2016</td>
-								<td>Paris</td>   
-								<td>3-2</td>
-					 			<td>Gagné</td> 
+							       <th>Date</th>
+							       <th>Ville</th>
+							       <th>Equipe 1</th>
+							       <th>Equipe 2</th>
+						   </tr>
+							<tr>
+								<td><?= $this->e($matchs_over['0']['date']) ?></td>
+								<td><?= $this->e($matchs_over['0']['ville']) ?></td>
+								<td><?= $this->e($matchs_over['0']['score_equipe_1']) ?></td>
+								<td><?= $this->e($matchs_over['0']['score_equipe_2']) ?></td>
 							</tr>
 						</tbody>
 					</table> 
@@ -119,9 +132,13 @@
 					<!-- Fonction JQuery pour faire réagir la ligne au clique -->
 					<?php foreach ($nextRdvs as $nextRdv): ?>
 						<table class="table table-striped table-hover">
-							<tbody data-link="row" class="rowlink">		
+							<tbody data-link="row" class="rowlink">	
+							<tr>
+								<td><a href="<?= $this->url('detail', ['id' => $nextRdv['event_id']])?>"><?= $this->e($nextRdv['titre']) ?></a></td>
 								<td><?= $this->e($nextRdv['date']) ?></td>
+								<td><?= $this->e($nextRdv['heure']) ?></td>
 								<td><?= $this->e($nextRdv['ville']) ?></td>
+							</tr>
 							</tbody>
 						</table> 
 					<?php endforeach; ?>
@@ -139,27 +156,30 @@
 				
 				<!-- Affichage par événement -->
 				<?php foreach ($events as $event): ?>	
-					<figure class="col-sm-10 col-sm-offset-1">
-						<div class="row">
-							<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
-								<div class="col-xs-6">
-									<img src="<?= $this->assetUrl('salle/'.$this->e($event['photo']).'.jpg') ?>">
+					<div class="row">
+						<figure class="col-sm-10 col-sm-offset-1">
+							<div class="col-xs-4">
+								<a href="<?= $this->url('detail', ['id' => $event['id']])?>">
+									<img class="img-circle img-responsive" src="<?= $this->assetUrl('salle/'.$this->e($event['salle_id']).'.jpg') ?>">
+								</a>
+								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank"><?= $this->e($event['nom'])?></a></p>
+							</div>
 
-								</div>
-							</a>
-							<div class="col-xs-6">
-								<p>Titre : <?= $this->e($event['titre']) ?></p>
-								<p>Date : <?= $this->e($event['date']) ?></p>
+							<div class="col-xs-8">
+								<h3><?= $this->e($event['titre']) ?></h3>
+							</div>
+
+							<div class="col-xs-4">
+								<p>Adresse : <?= $this->e($event['adresse']) ?> <?= $this->e($event['cp']) ?> - <?= $this->e($event['ville']) ?></p>
+								<p>Places : <span><?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'</span> / 10' ?></p>
+							</div>
+							<div class="col-xs-4">
+								<p>Le <?= $this->e($event['date']) ?></p>
 								<p>Catégorie : <?= $this->e($event['sexe']) ?></p>
 								<p>Niveau demandé : <?= $this->e($event['niveau']) ?></p>
-								<p>Adresse : <?= $this->e($event['adresse']) ?></p>
-								<p>Ville : <?= $this->e($event['ville']) ?></p>
-								<p>Code postal : <?= $this->e($event['cp']) ?></p>
-								<p><a href="<?= $this->e($event['site_web'])?>" target="_blank">Site internet de la salle</a></p>
-								<p>Joueurs inscrits : <?= ($this->e($event['nbrs_joueurs'] == 10))? 'FULL !' : $this->e($event['nbrs_joueurs']).'/ 10' ?></p>
 							</div> 
-						</div>
-					</figure>
+						</figure>
+					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</section>
