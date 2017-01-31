@@ -8,6 +8,7 @@ use \W\Security\AuthentificationManager;
 use \W\Manager\UserManager;
 use \Manager\JoueurManager;
 use \Manager\EventManager;
+use \Manager\HostManager;
 
 class UserController extends Controller
 {
@@ -336,13 +337,15 @@ class UserController extends Controller
 	 */
 	public function delete($id)
 	{		
-			$host_manager = new Hostmanager();
+			$host_manager = new HostManager();
 			$host_events_id = $host_manager->userEvents($id);
 
+
 			$joueurs_manager = new JoueurManager();
-			foreach ($host_events_id as $id) {
-				$joueurs_manager->deleteAlljoueurs($id);
-			}
+			foreach ($host_events_id as $event_id) {
+				$e = $joueurs_manager->deleteAllJoueur(intval($event_id));
+
+			} 
 
 			$manager = new UserManager();
 			$manager->delete($id);
@@ -353,6 +356,8 @@ class UserController extends Controller
 			// Instance + suppression user / joueur
 			$jm = new JoueurManager();
 			$jm->del_Uj($id);
+
+			session_destroy();
 
 			$this->redirectToRoute('home');
 	}

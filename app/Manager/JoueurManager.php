@@ -102,4 +102,17 @@ class JoueurManager extends \W\Manager\Manager {
 		return $sth->execute();
 	}
 
+	
+	/* (sous) JoueurManager.php 
+	-	Supprimer les données de l'utilisateur FROM table "joueurs" (via user_id)
+	- 	Uj = user / joueurs
+	*/
+	public function del_Uj($userId) {
+
+	$sql = "DELETE events, joueurs FROM events INNER JOIN joueurs WHERE events.host_id = joueurs.user_id AND events.host_id = $userId";
+	$sth = $this->dbh->prepare($sql);
+		$sth->bindValue(":userId", $userId);
+		return $sth->execute();
+	}
+
 }

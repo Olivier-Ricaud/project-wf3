@@ -91,7 +91,7 @@
 
 				<h2>Description</h2>
 				<p><?= $this->e($event['description']) ?></p>
-				<?php if( !isset($event['score_equipe_1']) && isset($event['score_equipe_2']) ): ?>
+				<?php if( !(date('Y-m-d') > $this->e($event['date'])) ): ?>
 					<?php if ($retirer == false):?>
 						<?php if($this->e($nbrsJoueurs) < 10): ?>
 							<a href="<?= $this->url('participer', ['id' => $event['id']]) ?>" class="btn btn-primary" >Participer à l'événement</a>
@@ -166,7 +166,7 @@
 
 			<!-- Boutton vers feuille-de-match.php -->
 			
-			<?php if ( ($host == true) && ($this->e($event['date']) >= $this->e($event['date'])) ): ?>
+			<?php if ( ($host == true) && (date('Y-m-d') >= $this->e($event['date'])) ): ?>
 				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
 			<?php else: ?>
 				<!-- Boutton suppression événement -->
