@@ -332,17 +332,28 @@ class UserController extends Controller
 
 	/**
 	 * Suppression d'utilisateur
+	 * PAS ENCORE TEST
 	 */
 	public function delete($id)
 	{		
+			$host_manager = new Hostmanager();
+			$host_events_id = $host_manager->userEvents($id);
+
+			$joueurs_manager = new JoueurManager();
+			foreach ($host_events_id as $id) {
+				$joueurs_manager->deleteAlljoueurs($id);
+			}
+
 			$manager = new UserManager();
 			$manager->delete($id);
 
 			$utilisateur = new UtilisateurManager();
 			$utilisateur->deleteUtil($id);
 
-			$this->redirectToRoute('home');
- 	
-	}
+			// Instance + suppression user / joueur
+			$jm = new JoueurManager();
+			$jm->del_Uj($id);
 
+			$this->redirectToRoute('home');
+	}
 }

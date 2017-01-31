@@ -54,4 +54,19 @@ class HostManager extends \W\Manager\Manager {
 		return $this->find($id);
 	}
 
+
+	// récupère event_id
+	public function userEvents($id)
+	{	
+		$sql = "SELECT id FROM events e WHERE host_id = $id";
+		
+		$sth = $this->dbh->prepare($sql);
+		$sth->execute();
+
+		return $sth->fetchAll();
+	}
+	/* 
+	mettre dans => $resultat 
+	puis boucle "delete alljoueurs" (step 3/3) 
+	*/
 }

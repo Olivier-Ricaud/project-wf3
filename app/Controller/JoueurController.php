@@ -40,5 +40,6 @@ class JoueurController extends Controller
 		$this->redirectToRoute('detail', [ 'id' => $id]);
 
 	}
-	
+
+
 }

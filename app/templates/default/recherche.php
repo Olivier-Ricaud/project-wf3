@@ -25,7 +25,9 @@
 								<option value="<?= $_GET['departement'] ; ?>"> <?= $_GET['departement'] ; ?></option>
 							<?php 	endif; ?>
 							<option value="">Choisissez un département...</option>
-							<option value="Paris">75 - Paris</option>
+
+							<option value="Paris" selected>75 - Paris</option>
+
 							<option value="Val-d-Oise">95 - Val-d-Oise</option>
 						</select>
 					</div>	
