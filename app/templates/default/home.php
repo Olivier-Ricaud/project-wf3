@@ -57,25 +57,25 @@
 		<h2>L'équipe</h2>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="<?= $this->assetUrl('img/bart.jpg') ?>" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/olivier.jpg') ?>" alt="photo de profil de l'equipe">
 			<p>Olivier Ricaud</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> Profil LinkedIn</a>
 		</div>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="<?= $this->assetUrl('img/naruto.png') ?>" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/alex.jpg') ?>" alt="photo de profil de l'equipe">
 			<p>Alexandre Hak</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> Profil LinkedIn</a>
 		</div>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="<?= $this->assetUrl('img/mario.png') ?>" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/julien.jpg') ?>" alt="photo de profil de l'equipe">
 			<p>Julien Lombard</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> Profil LinkedIn</a>
 		</div>
 
 		<div class="col-sm-6">
-			<img class="img-circle" src="<?= $this->assetUrl('img/fry.png') ?>" alt="photo de profil de l'equipe">
+			<img class="img-circle" src="<?= $this->assetUrl('img/thomas.jpg') ?>" alt="photo de profil de l'equipe">
 			<p>Thomas Piussan</p>
 			<a href=""><i class="fa fa-linkedin-square" aria-hidden="true"></i> ProfilLinkedIn</a>
 		</div>

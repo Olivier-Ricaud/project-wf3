@@ -255,6 +255,11 @@ section:nth-child(3) {
   padding-top: 2rem;
 }
 
+#equipe img.img-circle  {
+  width: 15rem;
+  height: 15rem;
+}
+
 section:nth-child(3), section:nth-child(3) p{
   color: #272b30;
 }
