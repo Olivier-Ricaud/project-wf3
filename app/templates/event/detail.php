@@ -166,7 +166,7 @@
 
 			<!-- Boutton vers feuille-de-match.php -->
 			
-			<?php if ( ($host == true) && (date('Y-m-d') >= $this->e($event['date'])) ): ?>
+			<?php if ( ($host == true) && (date('Y-m-d') > $this->e($event['date'])) ): ?>
 				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
 			<?php elseif ( ($host == true) && (date('Y-m-d') <= $this->e($event['date']))): ?>
 				<!-- Boutton suppression événement -->

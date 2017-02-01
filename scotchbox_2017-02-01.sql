@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.46-0ubuntu0.14.04.2)
 # Database: scotchbox
-# Generation Time: 2017-01-31 14:24:57 +0000
+# Generation Time: 2017-02-01 13:18:54 +0000
 # ************************************************************
 
 
@@ -69,7 +69,7 @@ CREATE TABLE `events` (
   `duree` time DEFAULT NULL,
   `description` text,
   `sexe` enum('Homme','Femme','Mixte') DEFAULT NULL,
-  `niveau` enum('Débutant','Intermédiaire','Confirmé','Tout niveaux') DEFAULT NULL,
+  `niveau` enum('Débutant','Intermédiaire','Confirmé','Tous niveaux') DEFAULT NULL,
   `nbrs_joueurs` tinyint(2) DEFAULT NULL,
   `score_equipe_1` int(11) DEFAULT NULL,
   `score_equipe_2` int(11) DEFAULT NULL,
@@ -82,7 +82,10 @@ LOCK TABLES `events` WRITE;
 
 INSERT INTO `events` (`id`, `host_id`, `salle_id`, `titre`, `date`, `heure`, `duree`, `description`, `sexe`, `niveau`, `nbrs_joueurs`, `score_equipe_1`, `score_equipe_2`, `match_over`)
 VALUES
-	(24,16,1,'Premier Evenement','2017-01-29','17:30:00','01:00:00','    Premier Evenement','Mixte','Débutant',9,2,1,1);
+	(24,16,1,'Premier Evenement','2017-02-01','17:30:00','01:00:00','    Premier Evenement','Homme','Débutant',10,NULL,NULL,0),
+	(25,17,2,'Deuxieme Event','2017-02-03','18:30:00','02:00:00','Deuxieme Evenement','Femme','Intermédiaire',2,NULL,NULL,0),
+	(27,18,4,'Quatrieme Event','2017-02-04','19:30:00','02:00:00','Quatrieme Event\n','Mixte','Débutant',1,NULL,NULL,0),
+	(28,16,3,'Troisieme Event','2017-02-04','19:30:00','02:00:00','Troisieme Event\n','Mixte','Tous niveaux',0,NULL,NULL,0);
 
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -107,35 +110,22 @@ LOCK TABLES `joueurs` WRITE;
 
 INSERT INTO `joueurs` (`id`, `user_id`, `event_id`, `equipe_id`, `statut_id`)
 VALUES
-	(43,16,24,2,2),
-	(44,17,24,1,2),
-	(47,16,25,2,1),
-	(48,19,24,1,2),
-	(49,19,25,1,1),
-	(50,20,24,1,2),
-	(51,21,24,NULL,1),
-	(52,22,24,2,1),
-	(53,23,24,2,1),
-	(54,24,24,NULL,1),
-	(55,25,24,2,1);
+	(44,17,24,NULL,2),
+	(48,19,24,NULL,2),
+	(49,19,25,NULL,1),
+	(50,20,24,NULL,2),
+	(51,21,24,NULL,2),
+	(52,22,24,NULL,2),
+	(53,23,24,NULL,2),
+	(54,24,24,NULL,2),
+	(55,25,24,NULL,2),
+	(56,16,24,NULL,2),
+	(58,16,27,NULL,1),
+	(59,16,25,NULL,1),
+	(60,18,24,NULL,2);
 
 /*!40000 ALTER TABLE `joueurs` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
-# Dump of table resultats
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `resultats`;
-
-CREATE TABLE `resultats` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `event_id` int(11) DEFAULT NULL,
-  `score_equipe_1` int(11) DEFAULT NULL,
-  `score_equipe_2` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 # Dump of table salles
@@ -216,17 +206,18 @@ LOCK TABLES `utilisateurs` WRITE;
 
 INSERT INTO `utilisateurs` (`id`, `user_id`, `nom`, `prenom`, `departement`, `sexe`, `niveau`)
 VALUES
-	(16,16,'testnom','testprenom','75 - Paris','Homme','Débutant'),
-	(17,17,'testnom','testprenom','95 - Val-d-Oise','Homme','Intermédiaire'),
-	(18,18,'testnom','testprenom','95 - Val-d-Oise','Homme','Débutant'),
-	(19,19,'testnom','testprenom','75 - Paris','Homme','Intermédiaire'),
-	(20,20,'testnom','testprenom','95 - Val-d-Oise','Homme','Intermédiaire'),
-	(21,21,'testnom','testprenom','75 - Paris','Femme',NULL),
-	(22,22,'testnom','testprenom','95 - Val-d-Oise','Femme',NULL),
-	(23,23,'testnom','testprenom','75 - Paris','Homme',NULL),
-	(24,24,'testnom','testprenom','75 - Paris','Femme',NULL),
-	(25,25,'testnom','testprenom','95 - Val-d-Oise','Homme',NULL),
-	(26,27,'testnom','testprenom','75 - Paris','Homme',NULL);
+	(16,16,'Jackie','Chan','75 - Paris','Homme','Débutant'),
+	(17,17,'Jet','Li','95 - Val-d-Oise','Homme','Intermédiaire'),
+	(18,18,'Mickael','Jordan','95 - Val-d-Oise','Homme','Débutant'),
+	(19,19,'Johny','Holiday','75 - Paris','Homme','Intermédiaire'),
+	(20,20,'Richard','Branson','95 - Val-d-Oise','Homme','Intermédiaire'),
+	(21,21,'Someone','WhoIs','75 - Paris','Femme','Débutant'),
+	(22,22,'Bienvenu','Lavérité','95 - Val-d-Oise','Femme','Intermédiaire'),
+	(23,23,'Chopin','chope','75 - Paris','Homme','Confirmé'),
+	(24,24,'Mozart','Amadeus','75 - Paris','Femme','Intermédiaire'),
+	(25,25,'Einstein','Albert','95 - Val-d-Oise','Homme','Débutant'),
+	(26,27,'Charlie','Chaplin','75 - Paris','Homme','Intermédiaire'),
+	(27,28,'Christophe','Maeee','95 - Val-d-Oise','Femme','Confirmé');
 
 /*!40000 ALTER TABLE `utilisateurs` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -260,7 +251,8 @@ VALUES
 	(23,'test08','$2y$10$VpOoT.tdTOVSyKB/.FntkOuF7ck9LZZYyYzIdzAWkdnSDDY/zXQg2','test08@gmail.com'),
 	(24,'test09','$2y$10$WVdEp7LzBnG58gYypz4KZ.hNCrYz0sYEPuPgPZwdxY4D98HqhROO6','test09@gmail.com'),
 	(25,'test10','$2y$10$tXu6dTJ2/NvxfEv5sOByBO5KFSBK68xj1CfcirpfSSEk6IeV03L2C','test10@gmail.com'),
-	(27,NULL,'$2y$10$lYyKTnEAV1amsK.p8T8vIuSm.5klXQWPhXZhwuMVhTDIAu8uRT.ZG','test11@gmail.com');
+	(27,NULL,'$2y$10$lYyKTnEAV1amsK.p8T8vIuSm.5klXQWPhXZhwuMVhTDIAu8uRT.ZG','test11@gmail.com'),
+	(28,NULL,'$2y$10$WCUuNFMOzWoZsSmgxrK73ebeJK9pZLLlifXVhJ1UULGZISam6CZG6','test12@gmail.com');
 
 /*!40000 ALTER TABLE `wusers` ENABLE KEYS */;
 UNLOCK TABLES;

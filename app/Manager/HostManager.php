@@ -65,8 +65,4 @@ class HostManager extends \W\Manager\Manager {
 
 		return $sth->fetchAll();
 	}
-	/* 
-	mettre dans => $resultat 
-	puis boucle "delete alljoueurs" (step 3/3) 
-	*/
 }
