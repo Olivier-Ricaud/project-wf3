@@ -56,7 +56,7 @@
 							<option value="Débutant">Débutant</option>
 							<option value="Intermédiaire">Intermédiaire</option>
 							<option value="Confirmé">Confirmé</option>
-							<option value="Tout niveaux">Tout niveaux</option>
+							<option value="Tous_niveaux">Tous niveaux</option>
 						</select>		  		 
 					</div>
 				</div>

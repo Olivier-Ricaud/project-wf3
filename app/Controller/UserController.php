@@ -266,6 +266,14 @@ class UserController extends Controller
 		        	$erreurs[] = 'Le champ "sexe" doit correspondre à homme ou femme.';
 		        }
 
+		        // Niveau
+    				if ( ! ($_POST['form_event']['niveau'] == 'Débutant' ||
+    					 $_POST['form_event']['niveau'] == 'Intermediaire' ||
+    					 $_POST['form_event']['niveau'] == 'Confirmé'
+    				 )) {
+    					$erreurs[] = 'Le champ "niveau" doit correspondre aux choix proposés.';
+    				}
+
 		        // Email
 		        if (empty($_POST['form_update_user']['email']) ||
 		        	 strlen($_POST['form_update_user']['email']) > 255 ||

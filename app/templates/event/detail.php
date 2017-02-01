@@ -168,7 +168,7 @@
 			
 			<?php if ( ($host == true) && (date('Y-m-d') >= $this->e($event['date'])) ): ?>
 				<a href="<?= $this->url('feuille_match', ['id' => $event['id'] ] ) ?>" class="btn btn-primary">FEUILLE DE MATCH</a>
-			<?php else: ?>
+			<?php elseif ( ($host == true) && (date('Y-m-d') <= $this->e($event['date']))): ?>
 				<!-- Boutton suppression événement -->
 				<a href="<?= $this->url('delete_event', ['id' => $event['id'] ] ) ?>" class="btn btn-danger">SUPPRIMER L'ÉVENEMENT</a>
 			<?php endif; ?>
