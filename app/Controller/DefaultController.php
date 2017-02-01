@@ -89,9 +89,6 @@ class DefaultController extends Controller
 			// tableau d'erreurs
 			$erreurs = [];
 
-			$nextRdvs_manager = new EventManager();
-			$nextRdvs = $nextRdvs_manager->userEvents($_SESSION['user']['id']);
-			
 			$matchs_manager = new EventManager();
 
 			//  Prochains rendez-vous 
