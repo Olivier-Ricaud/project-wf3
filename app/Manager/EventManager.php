@@ -33,7 +33,7 @@ class EventManager extends \W\Manager\Manager {
 		}
 
 
-		if (!empty($niveau) && preg_match('/^[a-zA-Z]+$/', $niveau)) {
+		if (!empty($niveau) && preg_match('/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s_-]+$/', $niveau)) {
 
 			$sql .= "AND e.niveau='$niveau' " ;
 
